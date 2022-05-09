@@ -5,7 +5,7 @@
 			<swiper-item><image src="https://t15.baidu.com/it/u=3254556675,1617290360&fm=55&app=54&fmt=auto?w=414&h=276" class="img"></image></swiper-item>
 			<swiper-item><image src="https://t15.baidu.com/it/u=3254556675,1617290360&fm=55&app=54&fmt=auto?w=414&h=276" class="img"></image></swiper-item>
 		</swiper>
-		<button class="button" type="primary">开始报价</button>
+		<button class="button" type="primary" size='middle'>开始报价</button>
 		<uni-section title="卡片+列表" type="line" style='width:100%'>
 				<uni-card padding="0" spacing="0">
 					<template v-slot:cover>
