@@ -1,0 +1,142 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      // uni-ui 规则如下配置
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  },
+  "pages": [{
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "enablePullDownRefresh": true,
+        "navigationStyle": "custom"
+      }
+    },
+	{
+	  "path":"pages/index/chooseAddress",
+	  "style":{
+				"navigationBarTitleText": "选择地址"
+	  }
+	},
+    {
+      "path": "pages/index/noticeDetail",
+      "style": {
+        "navigationBarTitleText": "公告详情"
+      }
+    },
+    {
+      "path": "pages/index/timeSelect",
+      "style": {
+        "navigationBarTitleText": "时间管理"
+      }
+    },
+    {
+      "path": "pages/index/score",
+      "style": {
+        "navigationBarTitleText": "业绩考核"
+      }
+    },
+    {
+      "path": "pages/index/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationStyle": "custom"
+
+      }
+    },
+    {
+      "path": "pages/order/index",
+      "style": {
+        "navigationBarTitleText": "订单管理",
+		 "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/order/rating",
+      "style": {
+        "navigationBarTitleText": "技师评价"
+      }
+    },
+    {
+      "path": "pages/order/orderDetail",
+      "style": {
+        "navigationBarTitleText": "订单详情",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/my/index",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "enablePullDownRefresh": true,
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/my/info",
+      "style": {
+        "navigationBarTitleText": "个人信息"
+      }
+    },
+    {
+      "path": "pages/my/payType",
+      "style": {
+        "navigationBarTitleText": "设置收款方式"
+      }
+    },
+    {
+      "path": "pages/my/record",
+      "style": {
+        "navigationBarTitleText": "收支变动记录"
+      }
+    },
+    {
+      "path": "pages/my/intoDetail",
+      "style": {
+        "navigationBarTitleText": "分成明细"
+      }
+    }, {
+      "path": "pages/index/weixinLogin",
+      "style": {
+        "navigationBarTitleText": "微信登录",
+        "enablePullDownRefresh": false
+      }
+	  
+
+    }
+
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#67BE41",
+    "borderStyle": "rgba(0, 0, 0, 0.1)",
+    "backgroundColor": "#ffffff",
+    "list": [{
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/images/tabbar/icon1.png",
+        "selectedIconPath": "/static/images/tabbar/aicon1.png"
+      },
+      {
+        "pagePath": "pages/order/index",
+        "text": "订单",
+        "iconPath": "/static/images/tabbar/icon3.png",
+        "selectedIconPath": "/static/images/tabbar/aicon3.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "/static/images/tabbar/icon4.png",
+        "selectedIconPath": "/static/images/tabbar/aicon4.png"
+      }
+    ]
+  }
+}
