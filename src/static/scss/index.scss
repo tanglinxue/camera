@@ -30,19 +30,19 @@ input {
 	box-sizing: border-box;
 }
 
-button,
-input {
-	background: transparent;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	padding: 0 !important;
-	margin-left: 0;
-	margin-right: 0;
-	overflow: visible;
-	border-radius: 0;
-	border: none;
-	font-weight: normal !important;
-	min-height: 0 !important;
-}
+// button,
+// input {
+// 	background: transparent;
+// 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+// 	padding: 0 !important;
+// 	margin-left: 0;
+// 	margin-right: 0;
+// 	overflow: visible;
+// 	border-radius: 0;
+// 	border: none;
+// 	font-weight: normal !important;
+// 	min-height: 0 !important;
+// }
 // hover透明
 .opacity {
 	opacity: 0.8;

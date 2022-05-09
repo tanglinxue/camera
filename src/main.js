@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-import VConsole from 'vconsole/dist/vconsole.min.js' //import vconsole
-let vConsole = new VConsole() 
+
 //引入插件
 import plugins from './utils/plugins'
 //应用（使用）插件
