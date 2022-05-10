@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const GulpSSH = require('gulp-ssh');
 const { exec } = require('child_process');
-const ecsPath = '/www/wwwroot/115.239.209.120/0305-anmo/public/h5';
+const ecsPath = '/www/wwwroot/techh5.diandiantn.com/0305-anmo/public/h5';
 
 const gulpSSH = new GulpSSH({
   ignoreErrors: false,

@@ -140,9 +140,10 @@
     /* 快应用特有相关 */
     "mp-weixin" : {
         /* 微信小程序特有相关 */
-        "appid" : "",
+        "appid" : "wx521a1ab834141b85",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : true,
+            "minified" : true
         },
         "usingComponents" : true
     },
