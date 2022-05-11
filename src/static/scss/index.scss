@@ -1,5 +1,6 @@
-$backColor: #f7f7f7;
-$maiBlack: #111111;
+$backColor: #f7f7f7;//背景色
+$maiBlack: #111111;//主色
+
 $black: #333333;
 $greenColor: #67be41;
 $gray: #919191;
@@ -233,11 +234,16 @@ input {
 
 .boxOuter {
 	width: 100%;
-	background: #ffffff;
+	background: $white;
 	box-shadow: 0px 0px 8rpx 0px rgba(218, 218, 218, 0.5);
 	border-radius: 12rpx;
 	margin-bottom: 20rpx;
 	padding: 30rpx;
+}
+.boxInner {
+	width: 100%;
+	background: $white;
+	margin-bottom: 20rpx;
 }
 .animation-img {
 	animation-name: scaleDraw; /*关键帧名称*/
