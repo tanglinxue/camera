@@ -50,10 +50,11 @@
 		}
 		.main-btn{
 			width:300rpx;
+			background: $greenColor;
 		}
 		.bottom-txt{
 			color:$gray;
-			font-size:26rpx
+			font-size:24rpx
 		}
 	}
 </style>
