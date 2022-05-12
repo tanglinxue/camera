@@ -179,7 +179,7 @@
 				},
 				isLocal:true,
 				styles: {
-					selectedColor: '#2979ff',
+					selectedColor: '#f66745',
 					selectedTextColor: '#666',
 				},
 				isTop:0
@@ -383,7 +383,7 @@
 			 */
 			setStyleBackgroud(item) {
 				let styles = {}
-				let selectedColor = this.selectedColor?this.selectedColor:'#2979ff'
+				let selectedColor = this.selectedColor?this.selectedColor:'#f66745'
 				if (this.mode !== 'list') {
 					styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
 				}
@@ -399,7 +399,7 @@
 			setStyleIcon(item) {
 				let styles = {}
 				let classles = ''
-				let selectedColor = this.selectedColor?this.selectedColor:'#2979ff'
+				let selectedColor = this.selectedColor?this.selectedColor:'#f66745'
 				styles['background-color'] = item.selected?selectedColor:'#fff'
 				styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
 
@@ -416,7 +416,7 @@
 			setStyleIconText(item) {
 				let styles = {}
 				let classles = ''
-				let selectedColor = this.selectedColor?this.selectedColor:'#2979ff'
+				let selectedColor = this.selectedColor?this.selectedColor:'#f66745'
 				if (this.mode === 'tag') {
 					styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:'#fff'):'#666'
 				} else {
@@ -448,7 +448,7 @@
 </script>
 
 <style lang="scss">
-	$checked-color: #2979ff;
+	$checked-color: #f66745;
 	$border-color: #DCDFE6;
 	$disable:0.4;
 
@@ -511,10 +511,10 @@
 
 					.checkobx__list {
 						border-right-width: 1px;
-						border-right-color: #007aff;
+						border-right-color: #f66745;
 						border-right-style: solid;
 						border-bottom-width:1px;
-						border-bottom-color: #007aff;
+						border-bottom-color: #f66745;
 						border-bottom-style: solid;
 						height: 12px;
 						width: 6px;

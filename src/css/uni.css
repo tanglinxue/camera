@@ -113,7 +113,7 @@ form {
 	background:#09BB07; color:#FFF;
 }
 .uni-bg-blue{
-	background:#007AFF; color:#FFF;
+	background:#f66745; color:#FFF;
 }
 /* 标题 */
 .uni-h1 {font-size: 80upx; font-weight:700;}
@@ -200,11 +200,11 @@ radio-group label, checkbox-group label{
 }
 .uni-badge-primary {
 	color: #fff;
-	background-color: #007aff
+	background-color: #f66745
 }
 .uni-badge-blue.uni-badge-inverted,
 .uni-badge-primary.uni-badge-inverted {
-	color: #007aff;
+	color: #f66745;
 	background-color: transparent
 }
 .uni-badge-green,
@@ -346,7 +346,7 @@ radio-group label, checkbox-group label{
 	color: #8f8f94;
 }
 .uni-card-link {
-	color: #007AFF;
+	color: #f66745;
 }
 
 /* 列表 */
@@ -774,7 +774,7 @@ radio-group label, checkbox-group label{
 	content: '\e438';
 }
 .feedback-submit {
-	background: #007AFF;
+	background: #f66745;
 	color: #FFFFFF;
 	margin: 20upx;
 }
@@ -877,7 +877,7 @@ radio-group label, checkbox-group label{
 }
 
 .uni-tab-bar .active {
-	color: #007AFF;
+	color: #f66745;
 }
 
 .uni-tab-bar .swiper-box {
@@ -1082,7 +1082,7 @@ radio-group label, checkbox-group label{
 }
 
 .uni-icon.uni-active {
-	color: #007aff;
+	color: #f66745;
 }
 
 .uni-icon-contact:before {

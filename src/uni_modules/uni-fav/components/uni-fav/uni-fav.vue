@@ -57,7 +57,7 @@
 			},
 			bgColorChecked: {
 				type: String,
-				default: "#007aff"
+				default: "#f66745"
 			},
 			fgColorChecked: {
 				type: String,

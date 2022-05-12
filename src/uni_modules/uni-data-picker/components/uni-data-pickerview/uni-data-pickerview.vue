@@ -265,11 +265,11 @@
 	}
 
 	.selected-item-active {
-		border-bottom: 2px solid #007aff;
+		border-bottom: 2px solid #f66745;
 	}
 
 	.selected-item-text {
-		color: #007aff;
+		color: #f66745;
 	}
 
 	.tab-c {
@@ -319,7 +319,7 @@
 
 	.check {
 		margin-right: 5px;
-		border: 2px solid #007aff;
+		border: 2px solid #f66745;
 		border-left: 0;
 		border-top: 0;
 		height: 12px;

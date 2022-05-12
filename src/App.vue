@@ -30,11 +30,12 @@
 	/* #endif */
 	@import './static/scss/index.scss';
 	@import './css/uni.css';
+	
 
 	/*每个页面公共css */
 	page {
 		background: $backColor;
 		font-size: 30rpx;
-		color: $maiBlack;
+		color: $mainBlack;
 	}
 </style>

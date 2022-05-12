@@ -1,24 +1,22 @@
-$backColor: #f7f7f7;//背景色
-$maiBlack: #111111;//主色
-
+$backColor: #f7f7f7; //背景色
+$mainBlack: #111111; //主色
+$red: #f66745; //主红色
 $black: #333333;
-$greenColor: #67be41;
+$green: #67be41;
 $gray: #919191;
 $orange: #ff7800;
 $border: #f0f0f0;
-
-$red:#f66745;
-$white:#ffffff;
+$white: #ffffff;
 
 // 颜色
 .green {
-	color: $greenColor !important;
+	color: $green !important;
 }
 .orange {
 	color: $orange !important;
 }
 .black {
-	color: $maiBlack !important;
+	color: $mainBlack !important;
 }
 .gray {
 	color: $gray;
@@ -34,19 +32,19 @@ input {
 	box-sizing: border-box;
 }
 
-// button,
-// input {
-// 	background: transparent;
-// 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-// 	padding: 0 !important;
-// 	margin-left: 0;
-// 	margin-right: 0;
-// 	overflow: visible;
-// 	border-radius: 0;
-// 	border: none;
-// 	font-weight: normal !important;
-// 	min-height: 0 !important;
-// }
+button,
+input {
+	background: transparent;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	padding: 0 !important;
+	margin-left: 0;
+	margin-right: 0;
+	overflow: visible;
+	border-radius: 0;
+	border: none;
+	font-weight: normal !important;
+	min-height: 0 !important;
+}
 // hover透明
 .opacity {
 	opacity: 0.8;
@@ -190,13 +188,13 @@ input {
 }
 // 下划线
 .borderbottom {
-	border-bottom: 1px solid #f0f0f0;
+	border-bottom: 1px solid $border;
 }
 .bordertop {
-	border-top: 1px solid #2a2a2a;
+	border-top: 1px solid $border;
 }
 .hover:hover {
-	opacity: 0.75
+	opacity: 0.75;
 }
 
 // 字体大小
@@ -228,7 +226,7 @@ input {
 	font-size: 30rpx;
 	letter-spacing: 2rpx;
 }
-.red-shadow{
+.red-shadow {
 	box-shadow: 0px 0px 12rpx 0px $red;
 }
 
@@ -267,16 +265,11 @@ input {
 	}
 }
 
-
-.tagName{
-		padding:0 40rpx;
-		height: 40rpx;
-		line-height:40rpx;
-		background: $orange;
-		border-radius: 21rpx;
-		font-size:24rpx;
-		margin-left:20rpx;
-		color:#fff;
-		position:relative;
-		top:3rpx;
-	}
+.bottom-point {
+	width: 0;
+	height: 0;
+	border: 12rpx solid;
+	border-color: $mainBlack transparent transparent transparent;
+	position: relative;
+	top: 5rpx;
+}

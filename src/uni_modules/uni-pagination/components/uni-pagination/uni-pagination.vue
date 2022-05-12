@@ -257,7 +257,7 @@
 </script>
 
 <style lang="scss" scoped>
-	$uni-primary: #2979ff;
+	$uni-primary: #f66745;
 	.uni-pagination {
 		/* #ifndef APP-NVUE */
 		display: flex;

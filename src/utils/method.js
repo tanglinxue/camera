@@ -1,8 +1,8 @@
 import store from '@/store'
 
 export function jump(url, type = 1) {
-	let canJump = toLogin(url)
-	if (!canJump) return
+	// let canJump = toLogin(url)
+	// if (!canJump) return
 	if (type === 1) {
 		uni.navigateTo({
 			url

@@ -3,7 +3,7 @@
 		<view class='boxOuter'>
 			<view class="row borderbottom row-between">
 				<text class="tit">公司名称</text>
-				<input type="text" placeholder="请输入公司名称" class='input' :inputBorder='false' />
+				<input type="text" placeholder="请输入公司名称" class='input'  />
 			</view>
 			<view class="row borderbottom row-between">
 				<text class="tit">LOGO</text>
@@ -11,11 +11,11 @@
 			</view>
 			<view class="row borderbottom row-between">
 				<text class="tit">公司solgan</text>
-				<input type="text" placeholder="请输入公司solgan" class='input' :inputBorder='false' />
+				<input type="text" placeholder="请输入公司solgan" class='input'  />
 			</view>
 			<view class="row borderbottom row-between">
 				<text class="tit">联系电话</text>
-				<input type="number" placeholder="请输入手机号" class='input' :inputBorder='false' v-model="mobile"
+				<input type="number" placeholder="请输入手机号" class='input'  v-model="mobile"
 					maxlength="11" />
 			</view>
 			<view class="row borderbottom row-between">

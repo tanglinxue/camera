@@ -11,7 +11,7 @@
 		<view class="btn-box mgb20"><view class="main-btn red-shadow">开始报价</view></view>
 		<view class="boxOuter-box">
 			<view class="boxOuter">
-				<view class="title row-between"><text class='txt1'>最新报价:</text><text>更多...</text></view>
+				<view class="title row-between"><text class='txt1'>最新报价:</text><text @click='jump(1)'>更多...</text></view>
 				<view class="list">
 					<view class="item">旅程新品发布会2022-04-06 13:20</view>
 					<view class="item">旅程新品发布会2022-04-06 13:20</view>
@@ -21,7 +21,7 @@
 				</view>
 			</view>
 			<view class="boxOuter">
-				<view class="title row-between"><text class='txt1'>报价模板:</text><text>更多...</text></view>
+				<view class="title row-between"><text class='txt1'>报价模板:</text><text @click='jump(2)'>更多...</text></view>
 				<view class="list">
 					<view class="item">双机位+直播+包装</view>
 					<view class="item">双机位+直播+包装</view>
@@ -50,6 +50,15 @@ export default {
 			],
 			swiperCurrent: 0
 		};
+	},
+	methods:{
+		jump(type) {
+			if (type == 1) {
+				this.$jump(`/pages/my/historyRecord`);
+			} else if (type == 2) {
+				this.$jump(`/pages/index/templateRecord`);
+			}
+		}
 	}
 };
 </script>

@@ -50,7 +50,7 @@
 		}
 		.main-btn{
 			width:300rpx;
-			background: $greenColor;
+			background: $green;
 		}
 		.bottom-txt{
 			color:$gray;

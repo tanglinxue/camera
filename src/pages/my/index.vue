@@ -13,22 +13,22 @@
 		<view class="boxOuter-box">
 			<view class="boxOuter">
 				<view class="row-between num-box">
-					<view class="item column-center">
+					<view class="item column-center" @click='jump(1)'>
 						<view class="text1">报价数</view>
 						<view class="text2">333</view>
 					</view>
-					<view class="item column-center">
+					<view class="item column-center" @click='jump(1)'>
 						<view class="text1">预定数</view>
 						<view class="text2">333</view>
 					</view>
-					<view class="item column-center">
+					<view class="item column-center" @click='jump(1)'>
 						<view class="text1">成交数</view>
 						<view class="text2">333</view>
 					</view>
 				</view>
 			</view>
 			<view class="boxOuter">
-				<view class="row row-between borderbottom">
+				<view class="row row-between borderbottom" @click='jump(4)'>
 					<view class="row-start">
 						<uni-icons type="person" size="26" class="icon"></uni-icons>
 						<text class="tit">我的信息</text>
@@ -74,6 +74,20 @@
 		</view>
 	</view>
 </template>
+
+<script>
+export default {
+	methods: {
+		jump(type) {
+			if (type == 1) {
+				this.$jump(`/pages/my/historyRecord`);
+			} else if (type == 4) {
+				this.$jump(`/pages/my/info`);
+			}
+		}
+	}
+};
+</script>
 
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
