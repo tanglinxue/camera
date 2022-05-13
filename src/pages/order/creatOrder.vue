@@ -2,40 +2,45 @@
 	<view class="main column-center">
 		<view class="boxOuter">
 			<view class="main-title  font32">绿城新品发布会 影像服务</view>
-			<view class="mgb30 total-fee row-start">
-				<view>
-					费用总计 36000（
-					<text>36500</text>
-					）元
+			<view class="mgb30 total-fee row-between">
+				<view class='row-start'>
+					费用
+					<view class='row-start mgl15 font24'>
+						 36000(
+						<text>36500</text>
+						)元
+					</view>
+					<view class="red row-start fee font24">
+						明细
+						<uni-icons type="forward" size="18" color="#f66745" class="icon"></uni-icons>
+					</view>
 				</view>
-				<view class="red row-start fee">
-					明细
-					<uni-icons type="forward" size="20" color="#f66745" class="icon"></uni-icons>
+				<view class="row-start">
+					<view class="">
+						预付款
+						<text class="red">*</text>
+					</view>
+					<view class="input-box row-center mgl15" style='width:160rpx'><input type="number" placeholder="预付款" class="input" :maxlength="11" /></view>
 				</view>
 			</view>
-			<view class="mgb30">
-				<view class="mgb20">
-					预付款
-					<text class="red">*</text>
-				</view>
-				<view class="input-box row-center"><input type="number" placeholder="请填写预付款" class="input" :maxlength="11" /></view>
-			</view>
+			
 			<view class="mgb30">
 				<view class="mgb20">
 					预定单位
 					<text class="red">*</text>
 				</view>
-				<view class="row-between">
-					<view class="input-box row-center flex1"><input type="number" placeholder="请填写预定单位" class="input" :maxlength="11" /></view>
-					<uni-icons type="map" size="30" class="mgl20" @click="toMap"></uni-icons>
-				</view>
+				<view class="input-box row-center"><input type="number" placeholder="请填写预定单位" class="input" :maxlength="11" /></view>
 			</view>
 			<view class="mgb30">
 				<view class="mgb20">
 					活动地址
 					<text class="red">*</text>
 				</view>
-				<view class="input-box row-center"><input type="number" placeholder="请填写详细地址" class="input" :maxlength="11" /></view>
+				<view class="row-between">
+					<view class="input-box row-center flex1"><input type="number" placeholder="请填写详细地址" class="input" :maxlength="11" /></view>
+					<uni-icons type="map" size="30" class="mgl20" @click="toMap"></uni-icons>
+				</view>
+				
 			</view>
 			<view class="mgb30">
 				<view class="mgb20">
@@ -151,12 +156,13 @@ export default {
 			color: $gray;
 		}
 		.fee {
-			margin-left: 50rpx;
+			margin-left: 20rpx;
 			.icon {
 				position: relative;
-				top: 5rpx;
+				top: 2rpx;
 			}
 		}
 	}
+
 }
 </style>
