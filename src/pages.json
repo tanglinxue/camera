@@ -34,6 +34,12 @@
 			}
 		},
 		{
+			"path": "pages/index/priceTemplate",
+			"style": {
+				"navigationBarTitleText": "报价模板"
+			}
+		},
+		{
 			"path": "pages/order/index",
 			"style": {
 				"navigationBarTitleText": "我的订单",
@@ -48,9 +54,15 @@
 			}
 		},
 		{
-			"path": "pages/order/edit",
+			"path": "pages/order/creatOrder",
 			"style": {
-				"navigationBarTitleText": "编辑"
+				"navigationBarTitleText": "预定下单"
+			}
+		},
+		{
+			"path": "pages/order/success",
+			"style": {
+				"navigationBarTitleText": "提交成功"
 			}
 		},
 		{
@@ -72,9 +84,19 @@
 				"navigationBarBackgroundColor": "#f66745",
 				"navigationBarTextStyle": "white"
 			}
+		},
+		{
+			"path": "pages/my/priceSheet",
+			"style": {
+				"navigationBarTitleText": "报价单"
+			}
+		},
+		{
+			"path": "pages/my/editPriceSheet",
+			"style": {
+				"navigationBarTitleText": "编辑报价单"
+			}
 		}
-
-
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
