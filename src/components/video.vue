@@ -29,8 +29,8 @@
 
 <script>
 import mCustomTab from '../../../compoments/common/mCustomTab.vue'
-import meet from './video/meet.vue'
-import live from './video/live.vue'
+import meet from './meet.vue'
+import live from './live.vue'
 import cloudMeet from '@/pagessub/reserve/compoments/video/cloudMeet'
 export default {
   components: { mCustomTab, meet, live, cloudMeet },
