@@ -100,9 +100,9 @@
 </template>
 
 <script>
-import pInput from '@/compoments/common/pInput'
-import pCheckbox from '@/compoments/common/pCheckbox'
-import pGroupButton from '@/compoments/common/pGroupButton'
+import pInput from './pInput'
+import pCheckbox from './pCheckbox'
+import pGroupButton from './pGroupButton'
 export default {
   components: { pInput, pCheckbox, pGroupButton },
   data () {

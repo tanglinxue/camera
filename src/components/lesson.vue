@@ -123,9 +123,9 @@
 </template>
 
 <script>
-import pInput from '@/compoments/common/pInput'
-import pRadio from '@/compoments/common/pRadio'
-import PCheckbox from '../../../compoments/common/pCheckbox.vue'
+import pInput from './pInput'
+import pRadio from './pRadio'
+import PCheckbox from './pCheckbox.vue'
 export default {
   components: { pInput, pRadio, PCheckbox },
   data () {

@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import mCustomTab from '../../../compoments/common/mCustomTab.vue'
-import SingleShot from './shot/singleShot.vue'
-import GroupShot from './shot/groupShot.vue'
+import mCustomTab from './mCustomTab.vue'
+import SingleShot from './singleShot.vue'
+import GroupShot from './groupShot.vue'
 export default {
   components: { mCustomTab, SingleShot, GroupShot },
   data () {

@@ -54,8 +54,8 @@
 </template>
 
 <script>
-import pInput from '@/compoments/common/pInput'
-import pRadio from '@/compoments/common/pRadio'
+import pInput from './pInput'
+import pRadio from './pRadio'
 export default {
   components: { pInput, pRadio },
   data () {
