@@ -57,6 +57,7 @@
 	.top-title{
 		width:100%;
 		padding-bottom: 30rpx;
+		font-size: 32rpx;
 	}
 	.title {
 		width: 100%;
@@ -80,7 +81,7 @@
 		width: 100%;
 		padding: 10rpx 0;
 		text-align: right;
-		font-size: 32rpx;
+		font-size:28rpx;
 	}
 }
 .btn-box{

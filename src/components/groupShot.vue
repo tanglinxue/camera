@@ -62,10 +62,10 @@
 </template>
 
 <script>
-import PInput from '../../../../compoments/common/pInput.vue'
-import pRadio from '@/compoments/common/pRadio'
-import pSelect from '@/compoments/common/pSelect'
-import pGroupButton from '../../../../compoments/common/pGroupButton.vue'
+import PInput from './pInput.vue'
+import pRadio from './pRadio'
+import pSelect from './pSelect'
+import pGroupButton from './pGroupButton.vue'
 export default {
   components: { PInput, pRadio, pSelect, pGroupButton },
   data () {

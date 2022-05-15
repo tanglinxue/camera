@@ -1,63 +1,64 @@
 <template>
 	<view class="main column-center">
 		<view class="boxOuter">
-			<view class="main-title  font32">绿城新品发布会 影像服务</view>
+			<view class="main-title  font36 mgb30">绿城新品发布会 影像服务</view>
 			<view class="mgb30 total-fee row-between">
 				<view class='row-start'>
-					费用
-					<view class='row-start mgl15 font24'>
+					<view class='left-text'>
+						费用总计
+					</view>
+					<view class='row-start'>
 						 36000(
 						<text>36500</text>
 						)元
 					</view>
-					<view class="red row-start fee font24">
+					<view class="red row-start fee">
 						明细
-						<uni-icons type="forward" size="18" color="#f66745" class="icon"></uni-icons>
+						<uni-icons type="forward" size="16" color="#f66745" class="icon"></uni-icons>
 					</view>
 				</view>
-				<view class="row-start">
-					<view class="">
-						预付款
-						<text class="red">*</text>
-					</view>
-					<view class="input-box row-center mgl15" style='width:160rpx'><input type="number" placeholder="预付款" class="input" :maxlength="11" /></view>
-				</view>
+
 			</view>
-			
-			<view class="mgb30">
-				<view class="mgb20">
+			<view class="mgb30 row-start">
+				<view class='left-text'>
+					预付款
+				</view>
+				<view class="input-box row-center width200" ><input type="number" placeholder="预付款" class="input" :maxlength="11" /></view>
+			</view>
+			<view class="mgb30 row-start">
+				<view class='left-text'>
 					预定单位
 					<text class="red">*</text>
 				</view>
 				<view class="input-box row-center"><input type="number" placeholder="请填写预定单位" class="input" :maxlength="11" /></view>
 			</view>
-			<view class="mgb30">
-				<view class="mgb20">
+			<view class="mgb30 row-start">
+				<view class='left-text'>
 					活动地址
 					<text class="red">*</text>
 				</view>
-				<view class="row-between">
+				<view class="row-between flex1">
 					<view class="input-box row-center flex1"><input type="number" placeholder="请填写详细地址" class="input" :maxlength="11" /></view>
 					<uni-icons type="map" size="30" class="mgl20" @click="toMap"></uni-icons>
 				</view>
 				
 			</view>
-			<view class="mgb30">
-				<view class="mgb20">
-					现场人数（预计）
-					<text class="red">*</text>
+			<view class="mgb30 row-start">
+				<view class='left-text'>
+					现场人数
 				</view>
-				<view class="input-box row-center"><input type="number" placeholder="请填写人数" class="input" :maxlength="11" /></view>
+				<view class="input-box row-center width200"><input type="number" placeholder="请填写人数" class="input" :maxlength="11" /></view>
+				<view class='gray'>（预计）</view>
 			</view>
-			<view class="mgb30">
-				<view class="mgb20">
+			<view class="mgb30 row-start">
+				<view class='big-left-text'>
 					开始（日期时间）
 					<text class="red">*</text>
 				</view>
-				<view class="time"><uni-datetime-picker type="datetime" return-type="timestamp" /></view>
+				<view class="time"><uni-datetime-picker type="datetime" return-type="timestamp"  /></view>
 			</view>
-			<view class="mgb30">
-				<view class="mgb20">
+			<view class="mgb30 row-start">
+				<view class='big-left-text'>
 					结束（日期时间）
 					<text class="red">*</text>
 				</view>
@@ -66,27 +67,25 @@
 			<view class="mgb20">
 				<view class="mgb20">
 					工作餐（摄影师）：
-					<text class="red">*</text>
+					<text class="font24 gray">为避免影响拍摄，请提供工作餐</text>
 				</view>
-				<view class="font24 gray mgb20">为避免影响拍摄，请提供工作餐</view>
-				<view class="input-box row-start"><uni-data-checkbox multiple :localdata="hobbys" /></view>
+				
+				<view class="row-start"><uni-data-checkbox multiple :localdata="hobbys" /></view>
 			</view>
-			<view class="mgb30">
-				<view class="mgb20">
+			<view class="mgb30 row-start">
+				<view class='left-text'>
 					联系人
-					<text class="red">*</text>
 				</view>
-				<view class="input-box row-center"><input type="number" placeholder="请填写联系人" class="input" :maxlength="11" /></view>
+				<view class="input-box row-center width300"><input type="number" placeholder="请填写联系人" class="input" :maxlength="11" /></view>
 			</view>
-			<view class="mgb30">
-				<view class="mgb20">
+			<view class="mgb30 row-start">
+				<view class='left-text'>
 					联系电话
-					<text class="red">*</text>
 				</view>
-				<view class="input-box row-center"><input type="number" placeholder="请填写联系电话" class="input" :maxlength="11" /></view>
+				<view class="input-box row-center width300"><input type="number" placeholder="请填写联系电话" class="input" :maxlength="11" /></view>
 			</view>
-			<view class="mgb30">
-				<view class="mgb20">备注</view>
+			<view class="mgb30 row-start-a">
+				<view class='left-text'>备注</view>
 				<uni-easyinput type="textarea" placeholder="请填写备注" class="textarea" :clearable="false" maxlength="200" />
 			</view>
 		</view>
@@ -124,17 +123,48 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
+::v-deep .uni-date__x-input {
+	height: 80rpx;
+	line-height: 80rpx;
+	font-size: 28rpx;
+}
+
+::v-deep .uni-date-editor--x .uni-date__icon-clear {
+	border-width: 18rpx;
+}
+::v-deep .uni-input-placeholder {
+	font-size: 26rpx;
+	text-align: center;
+}
+
+::v-deep .uni-date-x--border {
+	border-color: $border;
+}
+::v-deep .checklist-text{
+	font-size: 32rpx !important;
+	line-height: 32rpx !important;
+}
+
 .main {
+	.left-text{
+		width:150rpx;
+	}
+	.big-left-text{
+		width:260rpx;
+	}
 	.input-box {
 		font-size: 28rpx;
 		padding: 10rpx 30rpx;
 		border: 1px solid $border;
 		border-radius: 12rpx;
 		height: 80rpx;
-
+		flex:1;
 		.input {
 			flex: 1;
 		}
+	}
+	.textarea{
+		flex:1;
 	}
 	.time {
 		width: 400rpx;
@@ -156,7 +186,7 @@ export default {
 			color: $gray;
 		}
 		.fee {
-			margin-left: 20rpx;
+			margin-left: 50rpx;
 			.icon {
 				position: relative;
 				top: 2rpx;
