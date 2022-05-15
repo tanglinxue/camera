@@ -5,7 +5,7 @@
 			<view class="time row-between">
 				<view class="row-start search">
 					<view class="name">关键词</view>
-					<view class="input"><input type="text" placeholder="活动方,合作方" /></view>
+					<view class="input row-start"><input type="text" placeholder="活动方,合作方" /></view>
 					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange" class="date" fields="month">
 						<view class="date-input row-between">
 							<text>全部</text>
@@ -142,6 +142,9 @@ export default {
 ::v-deep .uni-date-editor--x .uni-date__icon-clear {
 	border-width: 14rpx;
 }
+::v-deep .checklist-text{
+	font-size: 24rpx !important;
+}
 ::v-deep .uni-input-placeholder {
 	font-size: 26rpx;
 	text-align: center;
@@ -163,15 +166,13 @@ export default {
 		font-size: 28rpx;
 		.input {
 			width: 200rpx;
-			padding: 10rpx 15rpx;
+			padding: 0 15rpx;
 			height: 60rpx;
 			border-radius: 8rpx;
 			font-size: 26rpx;
 			border: 1px solid $border;
 			margin-left: 20rpx;
-			input {
-				line-height: 40rpx;
-			}
+			
 		}
 		.date {
 			.date-input {

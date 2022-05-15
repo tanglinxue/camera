@@ -6,7 +6,7 @@
 				<view>合作方：经度文化</view>
 				<view>联系人：余强</view>
 			</view>
-			<view class='top-title borderbottom mgb20'>活动主题：绿城新品发布会</view>
+			<view class='top-title borderbottom mgb20'>项目收费：</view>
 			<view class="title">照片</view>
 			<view class="row row-between">
 				<view class="left-txt">照片直播：</view>

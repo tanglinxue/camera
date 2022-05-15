@@ -130,7 +130,7 @@ export default {
 }
 
 ::v-deep .uni-date-editor--x .uni-date__icon-clear {
-	border-width: 18rpx;
+	border-width: 20rpx;
 }
 ::v-deep .uni-input-placeholder {
 	font-size: 26rpx;

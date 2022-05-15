@@ -1,12 +1,21 @@
 <template>
 	<view class="main column-center">
 		<view class="boxInner box column-center mgb50">
-			<view class='top-title'>活动主题：绿城新品发布会</view>
-			<view class="row-between top-title">
-				<view>合作方：经度文化</view>
-				<view>联系人：余强</view>
+			<view class='top-title row-start'>
+				<view class='label'>活动主题：</view>
+				<view class="input-box row-center"><input type="number" placeholder="请填写预定单位" class="input" /></view>
 			</view>
-			<view class='top-title borderbottom mgb20'>活动主题：绿城新品发布会</view>
+			<view class="row-between top-title">
+				<view class='row-start'>
+					<view class='label'>合作方：</view>
+					<view class="input-box row-center width200"><input type="number" placeholder="请填写预定单位" class="input" /></view>
+				</view>
+				<view class='row-start mgl20'>
+					<view class='label'>联系人：</view>
+					<view class="input-box row-center width160"><input type="number" placeholder="请填写预定单位" class="input" /></view>
+				</view>
+			</view>
+			<view class='top-title borderbottom mgb20 row-start'>项目收费：<view class="middle-btn">增减项目</view></view>
 			<view class="title">照片</view>
 			<view class="row row-between">
 				<view class="left-txt">照片直播：</view>
@@ -32,14 +41,18 @@
 				<view class="right-txt red weight">￥2000</view>
 			</view>
 			<view class='total-price black weight'>总计：￥1500</view>
-			<view class='total-price red weight'>结算价：￥1500</view>
-			<view class='total-price gray'>浙江小米影视传媒有限公司</view>
-			<view class='total-price gray'>报价日期   2022-4-7</view>
+			<view class='total-price red weight row-end'>结算价：<view class="input-box row-center width160"><input type="number" placeholder="请填写预定单位" class="input" /></view></view>
+		<view class="mgb30 row">
+			<view class='left-text mgb20'>备注</view>
+			<uni-easyinput type="textarea" placeholder="请填写备注" class="textarea" :clearable="false" maxlength="200" />
 		</view>
-		<view class="row-between btn-box">
-			<view class="middle-btn">生成图片</view>
-			<view class="middle-btn">编辑</view>
-			<view class="middle-btn">预定</view>
+		<view class=" row">
+			<view class='left-text mgb20'>备注</view>
+			<uni-easyinput type="textarea" placeholder="请填写备注" class="textarea" :clearable="false" maxlength="200" />
+		</view>
+		</view>
+		<view class="row-center btn-box">
+			<view class="main-btn">保存</view>
 		</view>
 	</view>
 </template>
@@ -47,48 +60,84 @@
 <script></script>
 
 <style lang="scss" scoped>
-@import '@/static/scss/index.scss';
-.main{
-	padding-bottom: 100rpx;
-}
-.box {
-	padding: 30rpx;
-	font-size: 28rpx;
-	.top-title{
-		width:100%;
-		padding-bottom: 30rpx;
-	}
-	.title {
-		width: 100%;
-		padding: 10rpx 0;
-		text-align: left;
-	}
-	.row {
-		width: 100%;
-		padding: 10rpx 0;
-		color: $gray;
-		font-size: 26rpx;
-	}
-	.price {
-		width: 100%;
-		padding: 10rpx 0;
-		text-align: right;
-		padding-bottom: 30rpx;
-		margin-bottom: 20rpx;
-	}
-	.total-price {
-		width: 100%;
-		padding: 10rpx 0;
-		text-align: right;
-		font-size: 32rpx;
-	}
-}
-.btn-box{
-	width:100%;
-	padding:0 30rpx;
-	.middle-btn {
-		width: 200rpx;
-	}
-}
+	@import '@/static/scss/index.scss';
 
+	.main {
+		padding-bottom: 100rpx;
+	}
+
+	.box {
+		padding: 30rpx;
+		font-size: 28rpx;
+
+		.top-title {
+			width: 100%;
+			padding-bottom: 30rpx;
+			font-size: 28rpx;
+		}
+
+		.title {
+			width: 100%;
+			padding: 10rpx 0;
+			text-align: left;
+		}
+
+		.row {
+			width: 100%;
+			padding: 10rpx 0;
+			color: $gray;
+			font-size: 26rpx;
+		}
+
+		.price {
+			width: 100%;
+			padding: 10rpx 0;
+			text-align: right;
+			padding-bottom: 30rpx;
+			margin-bottom: 20rpx;
+		}
+
+		.total-price {
+			width: 100%;
+			padding: 10rpx 0;
+			text-align: right;
+			font-size: 28rpx;
+		}
+	}
+
+	.input-box {
+		font-size: 28rpx;
+		padding: 10rpx 30rpx;
+		border: 1px solid $border;
+		border-radius: 12rpx;
+		height: 70rpx;
+		flex: 1;
+
+		.input {
+			flex: 1;
+		}
+	}
+
+	.label {
+		width: 140rpx;
+	}
+
+	.btn-box {
+		width: 100%;
+		padding: 0 30rpx;
+
+		.middle-btn {
+			width: 200rpx;
+		}
+	}
+	.row{
+		width:100%;
+	}
+	.width160{
+		width:160rpx;
+		flex:none
+	}
+	.textarea{
+		flex:1;
+	}
 </style>

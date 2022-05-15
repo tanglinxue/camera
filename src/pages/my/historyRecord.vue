@@ -3,7 +3,7 @@
 		<view class="boxOuter">
 			<view class="row-start mgb20 search">
 				关键词
-				<view class="input"><input type="text" placeholder="活动方,合作方" /></view>
+				<view class="input row-start"><input type="text" placeholder="活动方,合作方" /></view>
 			</view>
 			<view class="time row-between">
 				<view class="example-body row-start">
