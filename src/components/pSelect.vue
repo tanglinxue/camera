@@ -16,7 +16,7 @@
               v-show="value">
           <slot>{{value}}{{unit}}</slot>
         </view>
-        <image :src="!isCol ? '../../static/common/icon-arrow-down.png' : '../../static/common/icon-arrow-up.png'"
+        <image :src="!isCol ? '/static/common/icon-arrow-down.png' : '/static/common/icon-arrow-up.png'"
                mode="scaleToFill"
                class="arrow-down" />
       </view>

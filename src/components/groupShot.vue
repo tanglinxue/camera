@@ -10,7 +10,7 @@
   <view class="group-shot">
     <view class="group">
       <view class="tips-content">
-        <image src="../../../../static/common/icon-tips.png"
+        <image src="/static/common/icon-tips.png"
                mode="heightFix"
                class="icon" />
         <view class="font-11">【服务包含】站架、运输、搭建、拍摄、修图</view>

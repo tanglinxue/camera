@@ -117,7 +117,7 @@
         <view class="toggle"
               @click="isCol = !isCol">
           <view class="font-12 color-gray">{{!isCol ? '展开' : '收起'}}</view>
-          <image :src="!isCol ? '../../../../static/common/icon-arrow-down.png' : '../../../../static/common/icon-arrow-up.png'"
+          <image :src="!isCol ? '/static/common/icon-arrow-down.png' : '/static/common/icon-arrow-up.png'"
                  mode="scaleToFill"
                  class="arrow" />
         </view>

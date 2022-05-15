@@ -10,7 +10,7 @@
   <view class="cloud-meet">
     <view class="group">
       <view class="tips-content">
-        <image src="../../../../static/common/icon-tips.png"
+        <image src="/static/common/icon-tips.png"
                mode="heightFix"
                class="icon" />
         <view class="font-11">如有线下场地拍摄请到【活动会议】板块提交查询</view>
@@ -67,7 +67,7 @@
         <view class="toggle"
               @click="isCol = !isCol">
           <view class="font-12 color-gray">{{!isCol ? '展开' : '收起'}}</view>
-          <image :src="!isCol ? '../../../../static/common/icon-arrow-down.png' : '../../../../static/common/icon-arrow-up.png'"
+          <image :src="!isCol ? '/static/common/icon-arrow-down.png' : '/static/common/icon-arrow-up.png'"
                  mode="scaleToFill"
                  class="arrow" />
         </view>

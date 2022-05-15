@@ -14,7 +14,7 @@
         <view class="option"
               v-if="isRadio"
               @click="onClickRadio(true)">
-          <image :src="value === true ? '../../static/common/icon-radio-sel.png' : '../../static/common/icon-radio.png'"
+          <image :src="value === true ? '/static/common/icon-radio-sel.png' : '/static/common/icon-radio.png'"
                  mode="scaleToFill"
                  class="radio" />
           <view class="font-14 color-black bold">{{yesOption}}</view>

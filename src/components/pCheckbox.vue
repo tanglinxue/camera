@@ -10,7 +10,7 @@
   <view>
     <view class="p-checkbox"
           @click="onClick">
-      <image :src="value ? '../../static/common/icon-checkbox-sel.png' : '../../static/common/icon-checkbox.png'"
+      <image :src="value ? '/static/common/icon-checkbox-sel.png' : '/static/common/icon-checkbox.png'"
              class="checkbox"
              v-if="isCheckbox"></image>
       <view class="font-15 bold color-black name">{{name}}</view>
