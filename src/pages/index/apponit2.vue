@@ -1,65 +1,51 @@
 <template>
 	<view class="content">
-		<view class="navbar row-between">
+		<view class="navbar row-center">
 			<view v-for="(item, index) in navList" :key="index" class="nav-item row-center" :class="{ current: tabCurrentIndex === index }" @click="tabClick(index)">
-				{{ item.text }}
+				<view class='label'>{{ item.text }}</view>
 			</view>
 		</view>
 		<swiper :current="tabCurrentIndex" class="swiper-box" duration="300" @change="changeTab">
-			<swiper-item class="tab-content" v-for="(tabItem, tabIndex) in navList" :key="tabIndex">
-
-			</swiper-item>
+			<swiper-item class="tab-content" v-for="(tabItem, tabIndex) in navList" :key="tabIndex"><scroll-view class="list-scroll-content" scroll-y></scroll-view></swiper-item>
 		</swiper>
 	</view>
 </template>
 
 <script>
-	// ok
-
+// ok
 
 export default {
-	components: {
-		uniLoadMore,
-		empty,
-		Item
-	},
 	data() {
 		return {
 			tabCurrentIndex: 0,
 			navList: [
 				{
 					state: 0,
-					text: '全部订单',
+					text: '摄影',
 					loadingType: 'more',
 					orderList: []
 				},
 				{
 					state: 1,
-					text: '待支付',
+					text: '视频',
 					loadingType: 'more',
 					orderList: []
 				},
 				{
 					state: 2,
-					text: '进行中',
+					text: '快剪',
 					loadingType: 'more',
 					orderList: []
 				},
 				{
 					state: 3,
-					text: '已完成',
+					text: '特效制作',
 					loadingType: 'more',
 					orderList: []
 				},
 				{
 					state: 4,
-					text: '待评价',
-					loadingType: 'more',
-					orderList: []
-				},
-				{
-					state: 5,
-					text: '待评价',
+					text: '课程录制',
 					loadingType: 'more',
 					orderList: []
 				}
@@ -145,43 +131,39 @@ export default {
 .content {
 	height: 100%;
 	.navbar {
-		width:100%;
-		height: 120rpx;
-		padding: 0 15rpx;
-		background: #fff;
-		padding-top: 20rpx;
-		padding-bottom: 20rpx;
-		position: fixed;
-		left:0;
-		top:0;
+		width: 100%;
+		height: 86rpx;
+		background: $red;
+		padding: 0 10rpx;
 		.nav-item {
-			flex: 1;
 			height: 100%;
-			font-size: 28rpx;
 			position: relative;
-			&.current {
-				color: $greenColor;
-				&:after {
-					content: '';
-					position: absolute;
-					left: 50%;
-					bottom: 0;
-					transform: translateX(-50%);
-					width: 60rpx;
-					height: 0;
-					border-bottom: 6rpx solid $greenColor;
-				}
+			color: #fff;
+			padding-right:20rpx;
+			.label{
+				padding:8rpx 20rpx;
+				
 			}
+			&.current {
+				.label{
+					color: $red;
+					font-weight: 600;
+					background: white;
+					border-radius: 30rpx;
+				}
+				
+			}
+			
 		}
 	}
 }
 .swiper-box {
 	position: fixed;
-	top:140rpx;
-	bottom:56px;
-	left:0;
-	height:auto;
-	width:100%;
+	top: 140rpx;
+	bottom: 56px;
+	left: 0;
+	height: auto;
+	width: 100%;
 }
 .list-scroll-content {
 	height: 100%;

@@ -26,6 +26,13 @@
 			}
 		},
 		{
+			"path": "pages/index/apponit2",
+			"style": {
+				"navigationBarTitleText": "测试",
+				"navigationBarBackgroundColor": "#f66745"
+			}
+		},
+		{
 			"path": "pages/index/templateRecord",
 			"style": {
 				"navigationBarTitleText": "报价模板",
