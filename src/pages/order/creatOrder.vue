@@ -124,13 +124,13 @@ export default {
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
 ::v-deep .uni-date__x-input {
-	height: 80rpx;
-	line-height: 80rpx;
+	height: 70rpx;
+	line-height:70rpx;
 	font-size: 28rpx;
 }
 
 ::v-deep .uni-date-editor--x .uni-date__icon-clear {
-	border-width: 20rpx;
+	border-width: 18rpx;
 }
 ::v-deep .uni-input-placeholder {
 	font-size: 26rpx;
@@ -140,11 +140,13 @@ export default {
 ::v-deep .uni-date-x--border {
 	border-color: $border;
 }
+// ::v-deep .checklist-text{
+// 	font-size: 32rpx !important;
+// 	line-height: 32rpx !important;
+// }
 ::v-deep .checklist-text{
-	font-size: 32rpx !important;
-	line-height: 32rpx !important;
+	font-size: 26rpx !important;
 }
-
 .main {
 	.left-text{
 		width:150rpx;
@@ -157,7 +159,7 @@ export default {
 		padding: 10rpx 30rpx;
 		border: 1px solid $border;
 		border-radius: 12rpx;
-		height: 80rpx;
+		height: 70rpx;
 		flex:1;
 		.input {
 			flex: 1;

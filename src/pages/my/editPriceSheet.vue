@@ -3,19 +3,19 @@
 		<view class="boxInner box column-center mgb50">
 			<view class='top-title row-start'>
 				<view class='label'>活动主题：</view>
-				<view class="input-box row-center"><input type="number" placeholder="请填写预定单位" class="input" /></view>
+				<view class="input-box row-center"><input type="number" placeholder="活动主题" class="input" /></view>
 			</view>
 			<view class="row-between top-title">
 				<view class='row-start'>
 					<view class='label'>合作方：</view>
-					<view class="input-box row-center width200"><input type="number" placeholder="请填写预定单位" class="input" /></view>
+					<view class="input-box row-center width200"><input type="number" placeholder="合作方" class="input" /></view>
 				</view>
 				<view class='row-start mgl20'>
 					<view class='label'>联系人：</view>
-					<view class="input-box row-center width160"><input type="number" placeholder="请填写预定单位" class="input" /></view>
+					<view class="input-box row-center width160"><input type="number" placeholder="联系人" class="input" /></view>
 				</view>
 			</view>
-			<view class='top-title borderbottom mgb20 row-start'>项目收费：<view class="middle-btn">增减项目</view></view>
+			<view class='top-title borderbottom mgb20 row-start'><view class='label'>项目收费：</view><view class="small-btn">增减项目</view></view>
 			<view class="title">照片</view>
 			<view class="row row-between">
 				<view class="left-txt">照片直播：</view>
@@ -37,18 +37,17 @@
 			</view>
 			<view class="price red borderbottom">小计：￥1500</view>
 			<view class="row row-between borderbottom pdb30 mgb20">
-				<view class="left-txt font30 black">其他自定义临时项目</view>
-				<view class="right-txt red weight">￥2000</view>
+				<view class="left-txt font30 black">其他项目</view>
 			</view>
 			<view class='total-price black weight'>总计：￥1500</view>
-			<view class='total-price red weight row-end'>结算价：<view class="input-box row-center width160"><input type="number" placeholder="请填写预定单位" class="input" /></view></view>
+			<view class='total-price red weight row-end'>结算价：<view class="input-box row-center width160"><input type="number" class="input" /></view></view>
 		<view class="mgb30 row">
-			<view class='left-text mgb20'>备注</view>
-			<uni-easyinput type="textarea" placeholder="请填写备注" class="textarea" :clearable="false" maxlength="200" />
+			<view class='left-text mgb20'>备注说明：</view>
+			<uni-easyinput type="textarea" placeholder="请填写" class="textarea" :clearable="false" maxlength="200" />
 		</view>
 		<view class=" row">
-			<view class='left-text mgb20'>备注</view>
-			<uni-easyinput type="textarea" placeholder="请填写备注" class="textarea" :clearable="false" maxlength="200" />
+			<view class='left-text mgb20'>报价方\报价日期：</view>
+			<uni-easyinput type="textarea" placeholder="请填写" class="textarea" :clearable="false" maxlength="200" />
 		</view>
 		</view>
 		<view class="row-center btn-box">

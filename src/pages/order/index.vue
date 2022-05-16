@@ -167,7 +167,7 @@ export default {
 		.input {
 			width: 200rpx;
 			padding: 0 15rpx;
-			height: 60rpx;
+			height:70rpx;
 			border-radius: 8rpx;
 			font-size: 26rpx;
 			border: 1px solid $border;
@@ -179,7 +179,7 @@ export default {
 				margin-left: 20rpx;
 				border: 1px solid $border;
 				width: 180rpx;
-				height: 60rpx;
+				height: 70rpx;
 				border-radius: 8rpx;
 				padding: 15rpx;
 				font-size: 26rpx;

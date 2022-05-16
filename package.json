@@ -65,6 +65,7 @@
     "@dcloudio/uni-stat": "^2.0.1-33920220314002",
     "@vue/shared": "^3.0.0",
     "core-js": "^3.6.5",
+    "expr-eval": "^2.0.2",
     "flyio": "^0.6.2",
     "jweixin-module": "^1.6.0",
     "node-sass": "^4.0.0",

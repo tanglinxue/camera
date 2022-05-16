@@ -22,7 +22,7 @@
         <view class="option"
               v-if="isRadio"
               @click="onClickRadio(false)">
-          <image :src="value === false ? '../../static/common/icon-radio-sel.png' : '../../static/common/icon-radio.png'"
+          <image :src="value === false ? '/static/common/icon-radio-sel.png' : '/static/common/icon-radio.png'"
                  mode="scaleToFill"
                  class="radio" />
           <view class="font-14 color-black bold">{{noOption}}</view>
