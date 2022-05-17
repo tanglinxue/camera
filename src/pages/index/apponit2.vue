@@ -2,19 +2,36 @@
 	<view class="content">
 		<view class="navbar row-center">
 			<view v-for="(item, index) in navList" :key="index" class="nav-item row-center" :class="{ current: tabCurrentIndex === index }" @click="tabClick(index)">
-				<view class='label'>{{ item.text }}</view>
+				<view class="label">{{ item.text }}</view>
 			</view>
 		</view>
 		<swiper :current="tabCurrentIndex" class="swiper-box" duration="300" @change="changeTab">
-			<swiper-item class="tab-content" v-for="(tabItem, tabIndex) in navList" :key="tabIndex"><scroll-view class="list-scroll-content" scroll-y></scroll-view></swiper-item>
+			<swiper-item class="tab-content" v-for="(tabItem, tabIndex) in navList" :key="tabIndex">
+				<scroll-view class="list-scroll-content" scroll-y>
+			<Step1/>
+			</scroll-view></swiper-item>
 		</swiper>
+		<view class="foot-detail row-between">
+			<view class="txt row-start">
+				<text class="red">￥</text>
+				<text class="red weight font36">3200</text>
+				<text class="mgl15">(累计总价)</text>
+			</view>
+			<view class="foot-btn row-end">
+				<view class="middle-btn white-middle-btn">重置</view>
+				<view class="middle-btn mgl20">下一步</view>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
 // ok
-
+import Step1 from './components/step1.vue'
 export default {
+	components:{
+		Step1
+	},
 	data() {
 		return {
 			tabCurrentIndex: 0,
@@ -139,33 +156,39 @@ export default {
 			height: 100%;
 			position: relative;
 			color: #fff;
-			padding-right:20rpx;
-			.label{
-				padding:8rpx 20rpx;
-				
+			padding-right: 20rpx;
+			.label {
+				padding: 8rpx 20rpx;
 			}
 			&.current {
-				.label{
+				.label {
 					color: $red;
 					font-weight: 600;
 					background: white;
 					border-radius: 30rpx;
 				}
-				
 			}
-			
 		}
 	}
 }
 .swiper-box {
-	position: fixed;
-	top: 140rpx;
-	bottom: 56px;
-	left: 0;
-	height: auto;
+	height: calc(100vh - 226rpx);
 	width: 100%;
+	padding:20rpx 0;
+	box-sizing: border-box;
+	.list-scroll-content {
+		height: 100%;
+	}
 }
-.list-scroll-content {
-	height: 100%;
+.foot-detail {
+	padding: 30rpx;
+	background-color: #fff;
+	.txt {
+		font-size: 28rpx;
+		color: $gray;
+	}
+	.middle-btn {
+		width: 180rpx;
+	}
 }
 </style>
