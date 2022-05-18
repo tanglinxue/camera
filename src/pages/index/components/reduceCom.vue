@@ -1,14 +1,27 @@
 <template>
-	<view class="row-between info">
-		<view class="row-start left-text">
-			<text>游戏(机位数)：</text>
-			￥1500/个
+	<view>
+		<view class="row-between info">
+			<view class="row-start left-text">
+				<text>{{info.name}}</text>
+				<template v-if='info.placeholder'>{{info.placeholder}}</template>
+			</view>
+			<uni-number-box v-if='!info.hideBtn'/>
 		</view>
-		<uni-number-box />
+		<slot name="footer" ></slot>
 	</view>
+	
 </template>
 
-<script></script>
+<script>
+export default {
+	props: {
+		info: {
+			type: Object,
+			default: () => {}
+		}
+	}
+};
+</script>
 
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
@@ -19,6 +32,7 @@
 	.left-text {
 		font-size: 26rpx;
 		color: $gray;
+		height:70rpx;
 		text {
 			font-size: 28rpx;
 			font-weight: bold;

@@ -8,8 +8,13 @@
 		<swiper :current="tabCurrentIndex" class="swiper-box" duration="300" @change="changeTab">
 			<swiper-item class="tab-content" v-for="(tabItem, tabIndex) in navList" :key="tabIndex">
 				<scroll-view class="list-scroll-content" scroll-y>
-			<Step1/>
-			</scroll-view></swiper-item>
+					<Step1  v-show='tabCurrentIndex==0'/>
+					<Step2 v-show='tabCurrentIndex==1'/>
+					<Step3 v-show='tabCurrentIndex==2'/>
+					<Step4 v-show='tabCurrentIndex==3'/>
+					<Step5 v-show='tabCurrentIndex==4'/>
+				</scroll-view>
+			</swiper-item>
 		</swiper>
 		<view class="foot-detail row-between">
 			<view class="txt row-start">
@@ -27,14 +32,22 @@
 
 <script>
 // ok
-import Step1 from './components/step1.vue'
+import Step1 from './components/step1.vue';
+import Step2 from './components/step2.vue';
+import Step3 from './components/step3.vue';
+import Step4 from './components/step4.vue';
+import Step5 from './components/step5.vue';
 export default {
-	components:{
-		Step1
+	components: {
+		Step1,
+		Step2,
+		Step3,
+		Step4,
+		Step5
 	},
 	data() {
 		return {
-			tabCurrentIndex: 0,
+			tabCurrentIndex: 1,
 			navList: [
 				{
 					state: 0,
@@ -50,13 +63,13 @@ export default {
 				},
 				{
 					state: 2,
-					text: '快剪',
+					text: '剪辑',
 					loadingType: 'more',
 					orderList: []
 				},
 				{
 					state: 3,
-					text: '特效制作',
+					text: '视频制作',
 					loadingType: 'more',
 					orderList: []
 				},
@@ -71,50 +84,13 @@ export default {
 	},
 
 	mounted() {
-		this.loadData();
+		
 	},
 
 	methods: {
-		//获取订单列表
-		loadData(source) {
-			//这里是将订单挂载到tab列表下
-			let index = this.tabCurrentIndex;
-			let navItem = this.navList[index];
-			let state = navItem.state;
-			if (source === 'tabChange' && navItem.loaded === true) {
-				//tab切换只有第一次需要加载数据
-				return;
-			}
-			if (navItem.loadingType === 'loading') {
-				//防止重复加载
-				return;
-			}
-			navItem.loadingType = 'loading';
-			console.log('加载');
-			setTimeout(() => {
-				let orderList = Json.orderList.filter(item => {
-					//添加不同状态下订单的表现形式
-					item = Object.assign(item, this.orderStateExp(item.state));
-					//演示数据所以自己进行状态筛选
-					if (state === 0) {
-						//0为全部订单
-						return item;
-					}
-					return item.state === state;
-				});
-				orderList.forEach(item => {
-					navItem.orderList.push(item);
-				});
-				//loaded新字段用于表示数据加载完毕，如果为空可以显示空白页
-				this.$set(navItem, 'loaded', true);
-				//判断是否还有数据， 有改为 more， 没有改为noMore
-				navItem.loadingType = 'more';
-			}, 600);
-		},
 		//swiper 切换
 		changeTab(e) {
 			this.tabCurrentIndex = e.target.current;
-			this.loadData('tabChange');
 		},
 		//顶部tab点击
 		tabClick(index) {
@@ -174,7 +150,7 @@ export default {
 .swiper-box {
 	height: calc(100vh - 226rpx);
 	width: 100%;
-	padding:20rpx 0;
+	padding: 20rpx 0;
 	box-sizing: border-box;
 	.list-scroll-content {
 		height: 100%;
