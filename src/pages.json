@@ -1,11 +1,11 @@
 {
-	// "easycom": {
-	//   "autoscan": true,
-	//   "custom": {
-	//     // uni-ui 规则如下配置
-	//     "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
-	//   }
-	// },
+		// "easycom": {
+		//   "autoscan": true,
+		//   "custom": {
+		//     // uni-ui 规则如下配置
+		//     "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		//   }
+		// },
 	"pages": [{
 			"path": "pages/index/index",
 			"style": {
@@ -21,14 +21,7 @@
 		{
 			"path": "pages/index/apponit",
 			"style": {
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#f66745"
-			}
-		},
-		{
-			"path": "pages/index/apponit2",
-			"style": {
-				"navigationBarTitleText": "测试",
+        "navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#f66745"
 			}
 		},

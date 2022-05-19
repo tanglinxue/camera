@@ -164,68 +164,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/static/scss/index.scss';
+@import '../style/common.scss';
 
-.main {
-	.content {
-		background: $white;
-		padding: 30rpx;
-		margin-bottom: 20rpx;
-	}
-
-	.title {
-		font-weight: bold;
-		margin-bottom: 20rpx;
-		text {
-			font-weight: normal;
-			color: $gray;
-			font-size: 26rpx;
-		}
-	}
-	.footer {
-		font-size: 22rpx;
-		color: $gray;
-		margin-top: 10rpx;
-		padding-left: 20rpx;
-	}
-	.time{
-		margin-bottom: 20rpx;
-		font-size:28rpx;
-		color:$mainBlack;
-		font-weight: bold;
-		padding-left: 20rpx;
-		.radio{
-			margin-right: 30rpx;
-			.icon{
-				    width: 26rpx;
-				    height: 26rpx;
-				    margin-right: 8rpx;
-			}
-		}
-	}
-	.listItem {
-		&:last-child {
-			margin-bottom: 0 !important;
-		}
-	}
-	.time {
-		margin-bottom: 20rpx;
-		font-size: 28rpx;
-		color: $mainBlack;
-		font-weight: bold;
-		padding-left: 20rpx;
-		.radio {
-			margin-right: 30rpx;
-			.icon {
-				width: 26rpx;
-				height: 26rpx;
-				margin-right: 8rpx;
-			}
-		}
-	}
-	.pd30 {
-		padding: 30rpx 0;
-	}
-	
-}
 </style>

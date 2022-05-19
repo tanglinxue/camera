@@ -7,7 +7,7 @@ $gray: #919191;
 $orange: #ff7800;
 $border: #f0f0f0;
 $white: #ffffff;
-$grayS:#f8f9fa;
+$grayS: #f8f9fa;
 
 // 颜色
 .green {
@@ -117,7 +117,9 @@ input {
 .wrap {
 	flex-wrap: wrap;
 }
-
+.mgauto{
+	margin: auto;
+}
 // 省略号
 .textElis {
 	width: 100%;
@@ -148,7 +150,7 @@ input {
 .mgl10 {
 	margin-left: 10rpx;
 }
-.mgb0{
+.mgb0 {
 	margin-bottom: 0rpx !important;
 }
 .mgb10 {
@@ -187,7 +189,7 @@ input {
 .mgr30 {
 	margin-right: 30rpx;
 }
-.pdb30{
+.pdb30 {
 	padding-bottom: 30rpx !important;
 }
 .flex1 {
@@ -196,7 +198,9 @@ input {
 .flex2 {
 	flex: 2 !important;
 }
-
+.pd30 {
+	padding: 30rpx 0;
+}
 // 下划线
 .borderbottom {
 	border-bottom: 1px solid $border;
@@ -242,7 +246,7 @@ input {
 	font-size: 30rpx;
 	letter-spacing: 2rpx;
 }
-.middle-btn{
+.middle-btn {
 	width: 40%;
 	height: 80rpx;
 	color: #fff;
@@ -255,8 +259,8 @@ input {
 	letter-spacing: 2rpx;
 }
 
-.small-btn{
-	padding:0 20rpx;
+.small-btn {
+	padding: 0 20rpx;
 	height: 60rpx;
 	color: #fff;
 	display: flex;
@@ -267,10 +271,10 @@ input {
 	font-size: 26rpx;
 	letter-spacing: 2rpx;
 }
-.white-middle-btn{
+.white-middle-btn {
 	background: none;
-	border:1px solid $red;
-	color:$red;
+	border: 1px solid $red;
+	color: $red;
 }
 .red-shadow {
 	box-shadow: 0px 0px 12rpx 0px $red;
@@ -319,11 +323,11 @@ input {
 	position: relative;
 	top: 5rpx;
 }
-.width200{
+.width200 {
 	width: 200rpx !important;
 	flex: none !important;
 }
-.width300{
+.width300 {
 	width: 300rpx !important;
 	flex: none !important;
 }

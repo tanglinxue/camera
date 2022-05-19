@@ -1,0 +1,85 @@
+@import '@/static/scss/index.scss';
+.main{
+	padding:20rpx 0;
+}
+.content {
+	background: #fff;
+	padding: 30rpx;
+	margin-bottom: 20rpx;
+	.title {
+		font-weight: bold;
+		margin-bottom: 20rpx;
+		text {
+			font-weight: normal;
+			color: $gray;
+			font-size: 26rpx;
+		}
+	}
+	.footer {
+		font-size: 24rpx;
+		color: $gray;
+		margin-top: 10rpx;
+		padding-left: 20rpx;
+	}
+	.box {
+		grid-gap: 24rpx;
+		.item {
+			border: 1px solid $border;
+			width: 180rpx;
+			padding: 16rpx 0;
+			border-radius: 8rpx;
+		}
+	}
+	.warning {
+		font-size: 22rpx;
+	}
+	.tips-content {
+		padding: 20rpx 32rpx;
+		display: flex;
+		background: #f8f4dc;
+		color: #855d2e;
+		border-radius: 8rpx;
+		font-size: 22rpx;
+		margin-bottom: 30rpx;
+		.icon {
+			width: 60rpx;
+			height: 30rpx;
+			margin-top: 3rpx;
+		}
+	}
+	
+	.time{
+		margin-bottom: 20rpx;
+		font-size:28rpx;
+		color:$mainBlack;
+		font-weight: bold;
+		padding-left: 20rpx;
+		.radio{
+			margin-right: 30rpx;
+			.icon{
+				    width: 26rpx;
+				    height: 26rpx;
+				    margin-right: 8rpx;
+			}
+		}
+	}
+	
+	.listItem {
+		&:last-child {
+			margin-bottom: 0 !important;
+		}
+	}
+	.fee {
+		font-size: 24rpx;
+		margin-bottom: 20rpx;
+	}
+	
+	.checkbox {
+		font-weight: bold;
+		.icon {
+			width: 26rpx;
+			height: 26rpx;
+			margin-right: 16rpx;
+		}
+	}
+}

@@ -8,7 +8,7 @@
 				<block v-for="(item, index) in list" :key="index"><view class="dot" :class="index == swiperCurrent ? 'active' : ''"></view></block>
 			</view>
 		</view>
-		<view class="btn-box mgb20"><view class="main-btn red-shadow">开始报价</view></view>
+		<view class="btn-box mgb20"><view class="main-btn red-shadow" @click="jump(3)">开始报价</view></view>
 		<view class="boxOuter-box">
 			<view class="boxOuter">
 				<view class="title row-between"><text class='txt1'>最新报价:</text><text @click='jump(1)'>更多...</text></view>
@@ -57,6 +57,8 @@ export default {
 				this.$jump(`/pages/my/historyRecord`);
 			} else if (type == 2) {
 				this.$jump(`/pages/index/templateRecord`);
+			}else if (type == 3) {
+				this.$jump(`/pages/index/apponit`);
 			}
 		}
 	}

@@ -88,36 +88,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/static/scss/index.scss';
-
-.main {
-	.content{
-		background:$white;
-		padding: 30rpx;
-		margin-bottom: 20rpx;
-	}
-	
-	.title {
-		font-weight: bold;
-		margin-bottom: 20rpx;
-		text{
-			font-weight: normal;
-			color:$gray;
-			font-size:26rpx
-		}
-	}
-	.footer {
-		font-size: 24rpx;
-		color: $gray;
-		margin-top: 10rpx;
-		padding-left:20rpx;
-	}
-	.listItem{
-		&:last-child{
-			margin-bottom: 0 !important;
-		}
-	}
+@import '../style/common.scss';
 
 
-}
 </style>

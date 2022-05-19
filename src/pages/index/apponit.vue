@@ -1,180 +1,112 @@
 <template>
-	<view class="detail">
-		<view class="top">
-			<m-custom-round-tab :init-tab="curTab" :tabs="['摄影', '视频', '快剪', '特效制作', '课程录制']" :badges="badges" @onClickTab="onClickTab"></m-custom-round-tab>
-		</view>
-		<view class="middle">
-			<swiper class="swiper" :current="curTab" @change="swiperChange">
-				<swiper-item class="tab-list"><shot class="tab-c"></shot></swiper-item>
-				<swiper-item class="tab-list"><video-c></video-c></swiper-item>
-				<swiper-item class="tab-list"><cut></cut></swiper-item>
-				<swiper-item class="tab-list"><effect></effect></swiper-item>
-				<swiper-item class="tab-list"><lesson></lesson></swiper-item>
-			</swiper>
-		</view>
-		<view class="footer">
-			<view class="footer-tips">
-				<image src="/static/common/icon-vip-tips.png" mode="scaleToFill" class="icon" />
-				<view class="tips font-11">根据需求价格浮动在20%左右，具体报价以人工确认单为准</view>
-			</view>
-			<view class="footer-detail bold">
-				<view class="left">
-					<view class="left-top" @click="isDlg = true">
-						<view class="font-13 bold color-black">明细</view>
-						<image src="/static/common/icon-arrow-down.png" mode="scaleToFill" class="arrow-down" />
-						<view class="price-info color-primary bold">
-							<view class="font-12 flag">￥</view>
-							<view class="font-18">{{ totalPrice }}</view>
-						</view>
-						<view class="color-gray font-14">（累计总价）</view>
-					</view>
-					<view class="left-bottom font-10 color-gray">
-						有疑惑请
-						<navigator url="/pagessub/my/help" open-type="navigate" hover-class="navigator-hover" class="alink color-black">《联系客服》</navigator>
-					</view>
-				</view>
-				<p-button text="立即预订" size="80" textSize="30" minWidth="226rpx" shadow="0px 4rpx 20rpx 0px rgba(253, 61, 60, 0.38);" @onClick="onClickOrder"></p-button>
+	<view class="content">
+		<view class="navbar row-center">
+			<view v-for="(item, index) in navList" :key="index" class="nav-item row-center" :class="{ current: tabCurrentIndex === index }" @click="tabClick(index)">
+				<view class="label">{{ item.text }}</view>
+				<!-- <view class='badge'>11</view> -->
 			</view>
 		</view>
-		<z-dialog v-model="isDlg">
-			<view class="dlg-container">
-				<view class="header">
-					<view class="font-15 color-black bold count">共选{{ totalCount }}项</view>
-					<image src="/static/common/icon-close.png" mode="scaleToFill" class="close" @click="isDlg = false" />
-				</view>
-				<view class="container">
-					<view class="group" v-for="(group, index) in groupList" :key="index">
-						<view class="font-15 color-black bold group-title">{{ group.name }}</view>
-						<view class="child" v-for="(child, childIndex) in group.children" :key="childIndex" :style="{ display: child.name !== '天数：' ? 'flex' : 'none' }">
-							<view class="font-14 color-gray">{{ child.name }}{{ child.value }}{{ child.unit }}</view>
-							<view class="font-14 color-gray" v-if="child.total_price !== 0">{{ child.price === '费用另计' ? '费用另计' : child.total_price + '元' }}</view>
-						</view>
-						<view class="price">
-							<text class="font-14 color-primary bold">总计：￥{{ group.total_price }}</text>
-						</view>
-					</view>
-				</view>
-				<view class="footer">
-					<view class="footer-tips">
-						<image src="/static/common/icon-vip-tips.png" mode="scaleToFill" class="icon" />
-						<view class="tips font-11">根据需求价格浮动在20%左右，具体报价以人工确认单为准</view>
-					</view>
-					<view class="footer-detail bold">
-						<view class="left">
-							<view class="left-top" @click="isDlg = false">
-								<view class="font-13 bold color-black">明细</view>
-								<image src="/static/common/icon-arrow-down.png" mode="scaleToFill" class="arrow-down" />
-								<view class="price-info color-primary bold">
-									<view class="font-12 flag">￥</view>
-									<view class="font-18">{{ totalPrice }}</view>
-								</view>
-							</view>
-						</view>
-						<p-button
-							text="立即预订"
-							size="80"
-							textSize="30"
-							class="btn"
-							minWidth="226rpx"
-							shadow="0px 4rpx 20rpx 0px rgba(253, 61, 60, 0.38);"
-							@onClick="onClickOrder"
-						></p-button>
-					</view>
-				</view>
+		<swiper :current="tabCurrentIndex" class="swiper-box" duration="300" @change="changeTab">
+			<swiper-item class="tab-content" v-for="(tabItem, tabIndex) in navList" :key="tabIndex">
+				<scroll-view class="list-scroll-content column-center" scroll-y>
+					<Step1 v-show='tabCurrentIndex==0'/>
+					<Step2 v-show='tabCurrentIndex==1'/>
+					<Step3 v-show='tabCurrentIndex==2'/>
+					<Step4 v-show='tabCurrentIndex==3'/>
+					<Step5 v-show='tabCurrentIndex==4'/>
+					<view class='middle-btn mgauto'>新增服务项目</view>
+				</scroll-view>
+			</swiper-item>
+		</swiper>
+		<view class='row-start dayCompute'>
+			<text class='txt1'>服务天数：</text>
+			<uni-number-box class='num'/>
+			<text class='txt2'>单个项目的天数可在下一步修改</text>
+		</view>
+		<view class="foot-detail row-between">
+			<view class="txt row-start">
+				<text class="red">￥</text>
+				<text class="red weight font36">3200</text>
+				<text class="mgl15">(累计总价)</text>
 			</view>
-		</z-dialog>
+			<view class="foot-btn row-end">
+				<view class="middle-btn white-middle-btn">重置</view>
+				<view class="middle-btn mgl20" @click='nextStep'>下一步</view>
+			</view>
+		</view>
+		
 	</view>
 </template>
 
 <script>
-import MCustomRoundTab from '@/components/mCustomRoundTab.vue';
-import PButton from '@/components/pButton.vue';
-import shot from '@/components/shot.vue';
-import videoC from '@/components/video.vue';
-import cut from '@/components/cut.vue';
-import effect from '@/components/effect';
-import lesson from '@/components/lesson';
-import ZDialog from '@/components/ZDialog.vue';
+// ok
+import Step1 from './components/step1.vue';
+import Step2 from './components/step2.vue';
+import Step3 from './components/step3.vue';
+import Step4 from './components/step4.vue';
+import Step5 from './components/step5.vue';
 export default {
-	components: { MCustomRoundTab, PButton, shot, videoC, cut, effect, lesson, ZDialog },
+	components: {
+		Step1,
+		Step2,
+		Step3,
+		Step4,
+		Step5
+	},
 	data() {
 		return {
-			curTab: 1,
-			isDlg: false
+			tabCurrentIndex: 0,
+			navList: [
+				{
+					state: 0,
+					text: '摄影',
+					loadingType: 'more',
+					orderList: []
+				},
+				{
+					state: 1,
+					text: '视频',
+					loadingType: 'more',
+					orderList: []
+				},
+				{
+					state: 2,
+					text: '剪辑',
+					loadingType: 'more',
+					orderList: []
+				},
+				{
+					state: 3,
+					text: '视频制作',
+					loadingType: 'more',
+					orderList: []
+				},
+				{
+					state: 4,
+					text: '课程录制',
+					loadingType: 'more',
+					orderList: []
+				}
+			]
 		};
 	},
-	onLoad() {
+
+	mounted() {
+	
 	},
-	computed: {
-		badges() {
-			const shotList = [...this.$store.state.shot.singleGroupList, ...this.$store.state.shot.groupGroupList];
-			let shotCount = 0;
-			shotList.forEach(group => {
-				shotCount += group.total_count;
-			});
-			const videoList = [...this.$store.state.video.meetGroupList, ...this.$store.state.video.liveGroupList, ...this.$store.state.video.cloudMeetGroupList];
-			let videoCount = 0;
-			videoList.forEach(group => {
-				videoCount += group.total_count;
-			});
-			const cutList = [...this.$store.state.cut.cutGroupList];
-			let cutCount = 0;
-			cutList.forEach(group => {
-				cutCount += group.total_count;
-			});
-			const effectList = [...this.$store.state.effect.effectGroupList];
-			let effectCount = 0;
-			effectList.forEach(group => {
-				effectCount += group.total_count;
-			});
-			const lessonList = [...this.$store.state.lesson.lessonGroupList];
-			let lessonCount = 0;
-			lessonList.forEach(group => {
-				lessonCount += group.total_count;
-			});
-			return [shotCount, videoCount, cutCount, effectCount, lessonCount];
-			// return this.$store.state.shot.singleList;
-		},
-		groupList() {
-			const list = [
-				...this.$store.state.shot.singleGroupList,
-				...this.$store.state.shot.groupGroupList,
-				...this.$store.state.video.meetGroupList,
-				...this.$store.state.video.liveGroupList,
-				...this.$store.state.video.cloudMeetGroupList,
-				...this.$store.state.cut.cutGroupList,
-				...this.$store.state.effect.effectGroupList,
-				...this.$store.state.lesson.lessonGroupList
-			];
-			return list;
-		},
-		totalPrice() {
-			let totalPrice = 0;
-			this.groupList.forEach(group => {
-				totalPrice += group.total_price;
-			});
-			return totalPrice;
-		},
-		totalCount() {
-			let count = 0;
-			this.groupList.forEach(group => {
-				count += group.total_count;
-			});
-			return count;
-		}
-	},
+
 	methods: {
-		onClickTab(tab) {
-			this.curTab = tab;
+
+		//swiper 切换
+		changeTab(e) {
+			this.tabCurrentIndex = e.target.current;
 		},
-		swiperChange(e) {
-			this.curTab = e.detail.current;
+		//顶部tab点击
+		tabClick(index) {
+			this.tabCurrentIndex = index;
 		},
-		onClickOrder() {
-			const order = this.$store.state.order.order;
-			order.total_price = this.totalPrice;
-			order.groups = this.groupList;
-			uni.navigateTo({ url: '/pagessub/reserve/index' });
+		nextStep(){
+			this.$jump(`/pages/my/editPriceSheet`);
 		}
 	}
 };
@@ -182,203 +114,78 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
-.detail {
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-	.top {
-		background: linear-gradient(90deg, #fa663d 0%, #fd3d3c 100%);
-		.nav {
-			display: flex;
-			align-items: center;
-			.back {
-				padding-left: 32rpx;
-				width: 20rpx;
-				height: 34rpx;
-			}
-		}
+.content {
+	height: 100%;
+	.mgauto{
+		margin:50rpx auto
 	}
-	.middle {
-		flex: 1;
-		height: 0;
-		overflow-y: auto;
-		display: flex;
-		flex-direction: column;
-		height: 100vh;
-		.swiper {
-			flex: 1 0 auto;
-			height: 0;
-			.tab-c {
-				display: block;
-				height: 100%;
+	.navbar {
+		width: 100%;
+		height: 86rpx;
+		background: $red;
+		padding: 0 10rpx;
+		.nav-item {
+			height: 100%;
+			position: relative;
+			color: #fff;
+			padding-right: 20rpx;
+			.label {
+				padding: 8rpx 20rpx;
 			}
-		}
-	}
-	.footer {
-		&-tips {
-			background: #f8f4dc;
-			padding: 16rpx 32rpx;
-			display: flex;
-			align-items: center;
-			.icon {
-				width: 24rpx;
-				height: 18rpx;
+			.badge{
+				    position: absolute;
+				    top: 0;
+				    right: -4rpx;
+				    padding: 0 10rpx;
+				    height: 30rpx;
+				    text-align: center;
+				    background: #856c2e;
+				    border-radius: 24rpx;
+					font-size: 22rpx;
 			}
-			.tips {
-				color: #855d2e;
-				margin-left: 8rpx;
-				display: flex;
-				.alink {
-					margin-left: 16rpx;
-					text-decoration: underline;
+			&.current {
+				.label {
+					color: $red;
+					font-weight: 600;
+					background: white;
+					border-radius: 30rpx;
 				}
-			}
-		}
-		&-detail {
-			padding: 36rpx 32rpx;
-			background: white;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			.left {
-				&-top {
-					display: flex;
-					align-items: center;
-					.arrow-down {
-						width: 14rpx;
-						height: 8rpx;
-						margin-left: 4rpx;
-						margin-right: 16rpx;
-					}
-					.price-info {
-						display: flex;
-						align-items: flex-end;
-						.flag {
-							margin-bottom: 4rpx;
-						}
-					}
-				}
-				&-bottom {
-					display: flex;
-					margin-top: 16rpx;
-					.alink {
-						text-decoration: underline;
-					}
-				}
-			}
-			.btn {
-				display: block;
-				width: 226rpx;
 			}
 		}
 	}
 }
-.dlg-container {
+.dayCompute{
+	height:100rpx;
+	font-size:22rpx;
+	border-bottom: 1px solid $border;
+	padding-left:30rpx;
+	background:#fff;
+	.txt1{
+		font-size:26rpx
+	}
+	.num{
+		scale: 0.8;
+	}
+}
+.swiper-box {
+	height: calc(100vh - 326rpx);
 	width: 100%;
-	height: 85%;
-	position: fixed;
-	background: white;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	.header {
-		display: flex;
-		justify-content: space-between;
-		// padding: 32rpx 48rpx;
-		align-items: center;
-		border-bottom: 1px solid #eeeeee;
-		.count {
-			padding: 32rpx 48rpx;
-		}
-		.close {
-			width: 28rpx;
-			height: 28rpx;
-			padding: 32rpx 48rpx;
-		}
+	// padding: 20rpx 0;
+	box-sizing: border-box;
+	.list-scroll-content {
+		height: 100%;
+		width: 100%;
 	}
-	.container {
-		flex: 1;
-		height: 0;
-		padding: 32rpx 48rpx;
-		overflow-y: auto;
-		.group {
-			margin-top: 32rpx;
-			border-bottom: 1px solid #eeeeee;
-			padding-bottom: 32rpx;
-			.child {
-				margin-top: 24rpx;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-			}
-			.price {
-				display: flex;
-				align-items: center;
-				justify-content: flex-end;
-				margin-top: 24rpx;
-			}
-		}
-		.group:first-child {
-			margin-top: 0;
-		}
+}
+.foot-detail {
+	padding: 30rpx;
+	background-color: #fff;
+	.txt {
+		font-size: 28rpx;
+		color: $gray;
 	}
-	.footer {
-		&-tips {
-			background: #f8f4dc;
-			padding: 16rpx 32rpx;
-			display: flex;
-			align-items: center;
-			.icon {
-				width: 24rpx;
-				height: 18rpx;
-			}
-			.tips {
-				color: #855d2e;
-				margin-left: 8rpx;
-				display: flex;
-				.alink {
-					margin-left: 16rpx;
-					text-decoration: underline;
-				}
-			}
-		}
-		&-detail {
-			padding: 36rpx 32rpx;
-			background: white;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			.left {
-				&-top {
-					display: flex;
-					align-items: center;
-					.arrow-down {
-						width: 14rpx;
-						height: 8rpx;
-						margin-left: 4rpx;
-						margin-right: 16rpx;
-					}
-					.price-info {
-						display: flex;
-						align-items: flex-end;
-						.flag {
-							margin-bottom: 4rpx;
-						}
-					}
-				}
-				&-bottom {
-					display: flex;
-					margin-top: 16rpx;
-					.alink {
-						text-decoration: underline;
-					}
-				}
-			}
-			.btn {
-				display: block;
-				width: 226rpx;
-			}
-		}
+	.middle-btn {
+		width: 180rpx;
 	}
 }
 </style>
