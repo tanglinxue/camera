@@ -51,12 +51,20 @@
 		</view>
 		</view>
 		<view class="row-center btn-box">
-			<view class="main-btn">保存</view>
+			<view class="main-btn" @click='jump'>保存</view>
 		</view>
 	</view>
 </template>
 
-<script></script>
+<script>
+	export default {
+		methods:{
+			jump(){
+				this.$jump(`/pages/my/priceSheet`);
+			}
+		}
+	}
+</script>
 
 <style lang="scss" scoped>
 	@import '@/static/scss/index.scss';

@@ -89,7 +89,7 @@
 				<uni-easyinput type="textarea" placeholder="请填写备注" class="textarea" :clearable="false" maxlength="200" />
 			</view>
 		</view>
-		<view class="btn-box"><view class="main-btn">提交</view></view>
+		<view class="btn-box"><view class="main-btn" @click='jump'>提交</view></view>
 	</view>
 </template>
 
@@ -117,6 +117,9 @@ export default {
 					console.log('res', res);
 				}
 			});
+		},
+		jump(){
+			this.$jump(`/pages/order/success`);
 		}
 	}
 };

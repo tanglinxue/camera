@@ -39,12 +39,21 @@
 		<view class="row-between btn-box">
 			<view class="middle-btn">生成图片</view>
 			<view class="middle-btn">编辑</view>
-			<view class="middle-btn">预定</view>
+			<view class="middle-btn" @click='jump'>预定</view>
 		</view>
 	</view>
 </template>
 
-<script></script>
+<script>
+	
+	export default {
+		methods:{
+			jump(){
+				this.$jump(`/pages/order/creatOrder`);
+			}
+		}
+	}
+</script>
 
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
