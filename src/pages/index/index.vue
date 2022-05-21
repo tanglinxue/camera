@@ -13,7 +13,7 @@
 			<view class="boxOuter">
 				<view class="title row-between"><text class='txt1'>最新报价:</text><text @click='jump(1)'>更多...</text></view>
 				<view class="list">
-					<view class="item">旅程新品发布会2022-04-06 13:20</view>
+					<view class="item"><view>旅程新品发布会</view>2022-04-06 13:20</view>
 					<view class="item">旅程新品发布会2022-04-06 13:20</view>
 					<view class="item">旅程新品发布会2022-04-06 13:20</view>
 					<view class="item">旅程新品发布会2022-04-06 13:20</view>

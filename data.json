@@ -1,0 +1,50 @@
+[{
+  "id": 1,
+  "name": "摄影",
+  "children": [{
+    "id": 11,
+    "name": "摄影",
+    "parentId": 1,
+    "children": [
+      {
+        "name": "照片直播：",
+        "type": "input",
+        "price": 2500,
+        "unit": "机位",
+        "parentId": 11,
+        "dayNum": 1
+      },
+      {
+        "name": "传统摄影：",
+        "type": "input",
+        "price": 1500,
+        "unit": "机位",
+        "parentId": 11,
+        "dayNum": 1
+      }
+    ]
+  },{
+    "id": 12,
+    "name": "站架合影",
+    "parentId": 1,
+    "children": [
+      {
+        "name": "拍摄：",
+        "type": "input",
+        "price": 2500,
+        "unit": "机位",
+        "parentId": 11,
+        "dayNum": 1
+      },
+      {
+        "name": "冲印：",
+        "type": "input",
+        "price": 1500,
+        "unit": "机位",
+        "parentId": 11,
+		 "tips": "注：50张起步，不足按50张计费，400人以上合影冲印另计",
+        "dayNum": 1
+      }
+    ]
+  }]
+}]
