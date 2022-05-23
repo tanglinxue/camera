@@ -13,16 +13,17 @@
 			<view class="boxOuter">
 				<view class="title row-between"><text class='txt1'>最新报价:</text><text @click='jump(1)'>更多...</text></view>
 				<view class="list">
-					<view class="item"><view>旅程新品发布会</view>2022-04-06 13:20</view>
-					<view class="item">旅程新品发布会2022-04-06 13:20</view>
-					<view class="item">旅程新品发布会2022-04-06 13:20</view>
-					<view class="item">旅程新品发布会2022-04-06 13:20</view>
-					<view class="item">旅程新品发布会2022-04-06 13:20</view>
+					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
+					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
+					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
+					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
+					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
 				</view>
 			</view>
 			<view class="boxOuter">
 				<view class="title row-between"><text class='txt1'>报价模板:</text><text @click='jump(2)'>更多...</text></view>
 				<view class="list">
+					<view class="item">双机位+直播+包装</view>
 					<view class="item">双机位+直播+包装</view>
 					<view class="item">双机位+直播+包装</view>
 					<view class="item">双机位+直播+包装</view>
@@ -123,10 +124,15 @@ export default {
 			}
 		}
 		.list {
-			padding: 0 20rpx;
+			padding: 0 0 0 20rpx;
 			.item {
 				padding: 10rpx 0;
 				font-size: 26rpx;
+				width:100%;
+				.date{
+					width:220rpx;
+					text-align: right;
+				}
 			}
 		}
 	}

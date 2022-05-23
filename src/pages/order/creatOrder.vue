@@ -51,19 +51,22 @@
 				<view class='gray'>（预计）</view>
 			</view>
 			<view class="mgb30 row-start">
-				<view class='big-left-text'>
-					开始（日期时间）
-					<text class="red">*</text>
+				<view >
+					<view class='big-left-text mgb10'>
+						开始（日期时间）
+						<text class="red">*</text>
+					</view>
+					<view class="time"><uni-datetime-picker type="date" return-type="timestamp"  /></view>
 				</view>
-				<view class="time"><uni-datetime-picker type="datetime" return-type="timestamp"  /></view>
-			</view>
-			<view class="mgb30 row-start">
-				<view class='big-left-text'>
-					结束（日期时间）
-					<text class="red">*</text>
+				<view class='mgl20'>
+					<view class='big-left-text mgb10'>
+						结束（日期时间）
+						<text class="red">*</text>
+					</view>
+					<view class="time"><uni-datetime-picker type="date" return-type="timestamp" /></view>
 				</view>
-				<view class="time"><uni-datetime-picker type="datetime" return-type="timestamp" /></view>
 			</view>
+
 			<view class="mgb20">
 				<view class="mgb20">
 					工作餐（摄影师）：
@@ -172,7 +175,7 @@ export default {
 		flex:1;
 	}
 	.time {
-		width: 400rpx;
+		width: 320rpx;
 	}
 
 	.main-title {
