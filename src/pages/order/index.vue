@@ -49,45 +49,24 @@ export default {
 		return {
 			tabCurrentIndex: 0,
 			date: currentDate,
-			start_time: '',
-			end_time: '',
-			income_sum: {},
-			hobby: [],
+			hobby: [0,1,2,3],
 			// 多选数据源
 			hobbys: [
 				{
 					text: '已预定',
-					value: 2
+					value: 0
 				},
 				{
 					text: '已完成(待结算)',
-					value: 3
+					value: 1
 				},
 				{
 					text: '已结算',
-					value: 4
+					value: 2
 				},
 				{
 					text: '取消',
-					value: 5
-				}
-			],
-			navList: [
-				{
-					state: 0,
-					text: '本周'
-				},
-				{
-					state: 1,
-					text: '上周'
-				},
-				{
-					state: 2,
-					text: '本月'
-				},
-				{
-					state: 3,
-					text: '上月'
+					value: 3
 				}
 			],
 			status: 'more',
@@ -112,11 +91,11 @@ export default {
 		Item
 	},
 	methods: {
+		// 获取日期
 		getDate(type) {
 			const date = new Date();
 			let year = date.getFullYear();
 			let month = date.getMonth() + 1;
-
 			if (type === 'start') {
 				year = year - 60;
 			} else if (type === 'end') {

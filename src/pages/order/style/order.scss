@@ -1,0 +1,71 @@
+@import '@/static/scss/index.scss';
+::v-deep .uni-date__x-input {
+	height: 70rpx;
+	line-height:70rpx;
+	font-size: 28rpx;
+}
+
+::v-deep .uni-date-editor--x .uni-date__icon-clear {
+	border-width: 18rpx;
+}
+::v-deep .uni-input-placeholder {
+	font-size: 26rpx;
+	text-align: center;
+}
+
+::v-deep .uni-date-x--border {
+	border-color: $border;
+}
+::v-deep .checklist-text{
+	font-size: 26rpx !important;
+}
+.main {
+	.left-text{
+		width:150rpx;
+	}
+	.big-left-text{
+		width:260rpx;
+	}
+	.input-box {
+		font-size: 28rpx;
+		padding: 10rpx 30rpx;
+		border: 1px solid $border;
+		border-radius: 12rpx;
+		height: 70rpx;
+		flex:1;
+		.input {
+			flex: 1;
+		}
+	}
+	.textarea{
+		flex:1;
+	}
+	.time {
+		width: 320rpx;
+	}
+
+	.main-title {
+		width: 100%;
+		padding-bottom: 30rpx;
+		text-align: center;
+	}
+	.btn-box {
+		width: 100%;
+		padding: 30rpx;
+		background: $white;
+	}
+	.total-fee {
+		text {
+			text-decoration: line-through;
+			color: $gray;
+		}
+		.fee {
+			margin-left: 50rpx;
+			.icon {
+				position: relative;
+				top: 2rpx;
+			}
+		}
+	}
+}
+

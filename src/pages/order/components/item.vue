@@ -1,5 +1,5 @@
 <template>
-	<view class="boxOuter">
+	<view class="boxOuter" @click='jump'>
 		<view class='txt borderbottom row-between'><view>活动名称：<text>亚运美食街</text></view><view class='green'>已预定</view></view>
 		<view class='txt'>主办方：<text>四库文化</text></view>
 		<view class='txt'>金额：<text>3800元</text></view>
@@ -15,6 +15,11 @@ export default {
 		info: {
 			type: Object,
 			default: () => {}
+		}
+	},
+	methods:{
+		jump(){
+			this.$jump(`/pages/order/detail`);
 		}
 	}
 };

@@ -23,11 +23,11 @@
 			<view class="boxOuter">
 				<view class="title row-between"><text class='txt1'>报价模板:</text><text @click='jump(2)'>更多...</text></view>
 				<view class="list">
-					<view class="item">双机位+直播+包装</view>
-					<view class="item">双机位+直播+包装</view>
-					<view class="item">双机位+直播+包装</view>
-					<view class="item">双机位+直播+包装</view>
-					<view class="item">双机位+直播+包装</view>
+					<view class="item textElis">双机位+直播+包装双机位+直播+包装双机位+直播+包装双机位+直播+包装</view>
+					<view class="item textElis">双机位+直播+包装</view>
+					<view class="item textElis">双机位+直播+包装</view>
+					<view class="item textElis">双机位+直播+包装</view>
+					<view class="item textElis">双机位+直播+包装</view>
 				</view>
 			</view>
 		</view>
