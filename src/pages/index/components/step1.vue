@@ -50,11 +50,13 @@ export default {
 				{
 					name: '人数：',
 					placeholder: '¥10/人',
-					footer: '注：200人以内，按200人计费'
+					footer: '注：200人以内，按200人计费',
+          type:'input'
 				},
 				{
 					name: '冲印：（张数）',
-					footer: '注：50张起步，不足按50张计费，400人以上合影冲印另计'
+					footer: '注：50张起步，不足按50张计费，400人以上合影冲印另计',
+          type:'input'
 				}
 			],
 			options: [

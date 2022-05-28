@@ -55,7 +55,7 @@ export default {
 	},
 	data() {
 		return {
-			tabCurrentIndex: 0,
+			tabCurrentIndex: 3,
 			navList: [
 				{
 					state: 0,

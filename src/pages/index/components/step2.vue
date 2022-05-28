@@ -2,7 +2,8 @@
 	<view class="main">
 		<view class="content">
 			<view class="mgb20 listItem" v-for="(item, index) in list" :key="index"><reduceCom :info="item">
-			<view slot="footer" class="footer">{{ item.footer }}</view></reduceCom></view>
+			<view slot="footer" class="footer">{{ item.footer }}</view><view slot="warn" class="red footer">{{ item.warn }}</view></reduceCom></view>
+      
 		</view>
 		
 		<view class="content">
@@ -26,8 +27,12 @@
 		
 		<view class="content">
 			<view class="title">增选项</view>
-			<view class="mgb20 listItem" v-for="(item, index) in list3" :key="index"><reduceCom :info="item">
-			<view slot="footer" class="footer">{{ item.footer }}</view></reduceCom></view>
+			<view class="mgb20 listItem" v-for="(item, index) in list3" :key="index">
+      <reduceCom :info="item">
+			  <view slot="footer" class="footer">{{ item.footer }}</view>
+        <view slot="warn" class="red">{{ item.footer }}</view>
+      </reduceCom>
+      </view>
 			<view class="row-start time mgb0">
 				<view class="txt1 mgr15">实时字幕：</view>
 				<view class="radio row-start">
@@ -68,24 +73,29 @@ export default {
 				}
 			],
 			list: [
+        {
+					name: '摄像：',
+					placeholder: '¥3500/个'
+				},
 				{
 					name: '导播：',
 					placeholder: '¥3500/个',
-					footer:'注：多画面视频信号切换（含导播台、录机、通话系统、导播师）'
+					footer:'注：多画面视频信号切换(含导播台、录机、通话系统、导播师)'
 				},
 				{
 					name: '直播服务：',
 					placeholder: '￥3500/场',
-					footer:'服务包含：直播设备、技术服务、并发200人直播间1个；'
+					footer:'服务包含：直播设备、技术服务、并发200人直播间1个；',
+          warn:'并发:直播间同时在线观看最高人数(如需扩容，另计费)'
 				}
 			],
 			list2:[
 				{
-					name: '连线服务：（基础版）',
+					name: '连线服务(基础版)',
 					placeholder: '￥3500/场',
 				},
 				{
-					name: '连线服务：（定制版）',
+					name: '连线服务(定制版)',
 					placeholder: '￥8500/场'
 				}
 			],

@@ -6,11 +6,13 @@
 				<template v-if="info.placeholder">
 					{{ info.placeholder }}
 				</template>
-				<uni-icons type="compose" size="22" color="#919191" class="mgl15" @click="open"></uni-icons>
+				<uni-icons type="compose" size="22" color="#919191" class="mgl15" @click="open" v-if="info.placeholder"></uni-icons>
 			</view>
-			<uni-number-box v-if="!info.hideBtn" />
+      <input v-if="info.type=='input'" style="background:#fff;width:200rpx;margin-right: 100rpx;padding-left: 20rpx;">
+			<uni-number-box v-else-if="!info.hideBtn" style='scale: 0.9;'/>
 		</view>
 		<slot name="footer"></slot>
+    <slot name="warn"></slot>
 		<uni-popup ref="popup" type="center" background-color="#fff">
 			<view class="popup column-center">
 				<view class="title">修改项目设置</view>

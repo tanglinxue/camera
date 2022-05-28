@@ -1,11 +1,12 @@
 <template>
 	<view class="main">
 		<view class="content">
-			<view class="red fee">费用组成：技术服务费+录课人数费</view>
-			<view class="tips-content row-start">
-				<image class="icon" src="/static/common/icon-tips.png"></image>
+      <view class="tips-content row-start">
+				<image class="icon mgr10" src="/static/common/icon-tips.png"></image>
 				服务包含：固定摄像1个、灯光1组、素材拼剪
 			</view>
+			<view class="red fee">费用组成：技术服务费+录课人数费</view>
+			
 			<view class="mgb20 listItem" v-for="(item, index) in list" :key="index"><reduceCom :info="item" /></view>
 			<view class="row-start checkbox pd30">
 				<image src="/static/common/icon-checkbox-sel.png" class="icon"></image>

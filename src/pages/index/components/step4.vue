@@ -9,6 +9,8 @@
 				<view class='radio row-start'>
 					<image src='/static/common/icon-radio.png' class='icon'></image>
 					<text class='txt'>通用</text>
+					￥500/条
+				  <uni-icons type="compose" size="22" color="#919191" class="mgl15" ></uni-icons>
 				</view>
 				<view class='radio row-start'>
 					<image src='/static/common/icon-radio-sel.png' class='icon'></image>
@@ -49,49 +51,28 @@ export default {
 			],
 			list: [
 				{
-					name: '动态主KV（条数）：',
+					name: '动态主KV(条数)：',
 					placeholder: '¥600/条'
 				},
 				{
-					name: '启动视频（条数）：',
+					name: '启动视频(条数)：',
 					placeholder: '¥2000/条'
 				}
 			],
 			list2: [
 				{
-					name: '数量：',
-					placeholder: '¥500/条'
+					name: '数量：'
 				}
 			],
 			list3: [
 				{
-					name: '舞美视频（条数）：',
-					placeholder: '按需报价'
+					name: '舞美视频(条数)：',
+					placeholder: '¥0/条'
 				},
 				{
-					name: '宣传视频（条数）：',
-					placeholder: '按需报价',
+					name: '宣传视频(条数)：',
+					placeholder: '¥0/条',
 					footer: '注：访谈视频、素材剪辑、特效视频、短片拍摄等'
-				}
-			],
-			options: [
-				{
-					value: '1',
-					name: '塑封',
-					tips: '¥25/张',
-					price: '25'
-				},
-				{
-					value: '2',
-					name: '盒装',
-					tips: '¥25/张',
-					price: '25'
-				},
-				{
-					value: '3',
-					name: '其他',
-					tips: '费用另计',
-					price: '费用另计'
 				}
 			]
 		};
