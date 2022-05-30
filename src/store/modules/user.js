@@ -3,22 +3,22 @@ import storage from '@/utils/storage';
 const user = {
 	namespaced: true,
 	state: {
-		useInfo: {
-		
+		userInfo: {
 		},
 		token: storage.getItem('token'),
 	},
 	mutations: {
-		updateUseInfo(state, useInfo) {
-			state.useInfo = useInfo
+		updateuserInfo(state, userInfo) {
+			state.userInfo = userInfo
 		},
 		updateToken(state, token) {
 			state.token = token
 		},
 	},
 	actions: {
-		updateUseInfo({commit}, useInfo) {
-			commit('updateUseInfo', useInfo)
+		updateuserInfo({commit}, userInfo) {
+			commit('updateuserInfo', userInfo)
+			storage.setObjItem('userInfo',userInfo)
 		},
 		updateToken({commit}, token) {
 			commit('updateToken', token)

@@ -8,10 +8,7 @@ export default function service(options) {
 		const res =  methods.toLogin()
 		if(!res) return
 	}
-	// options.data.token = 'XfNcOofWrvnilA'
-	
-	 options.url =config.baseApi + options.url
-	//options.url = (options.weixin ? config.weixinLogin : config.baseApi) + options.url
+	options.url =config.baseApi + options.url
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: options.url,
@@ -25,9 +22,6 @@ export default function service(options) {
 			},
 			dataType: 'json',
 			success: res => {
-				// setTimeout(()=>{
-				// 	uni.hideLoading()
-				// },2000)
 				if (res.statusCode === 200 && res.data.code === 1) {
 					// 请求成功
 					const data = res.data.data
@@ -36,10 +30,8 @@ export default function service(options) {
 				} else {
 					if (res.data.code === 4011) {
 						//登录失败
-						//uni.showToast({title:res.data.msg,icon:'none'})
 						uni.hideLoading()
 						methods.toLogin()
-
 					} else if (res.data.code === 2) {
 						//其他报错
 						console.log(res.data.data)
@@ -92,9 +84,6 @@ export function Upload(options) {
 			fileType: 'image',
 			name: "imgfile",
 			success: res => {
-				// setTimeout(()=>{
-				// 	uni.hideLoading()
-				// },2000)
 				let data = JSON.parse(res.data);
 				if (res.statusCode === 200 && data.code === 1) {
 					// 请求成功
@@ -103,7 +92,6 @@ export function Upload(options) {
 				} else {
 					if (data.code === 4011) {
 						//登录失败
-						//uni.showToast({title:res.data.msg,icon:'none'})
 						uni.hideLoading()
 						methods.toLogin()
 

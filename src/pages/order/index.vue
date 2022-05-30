@@ -1,11 +1,10 @@
 <template>
 	<view class="main column-center">
 		<view class="boxOuter">
-			
 			<view class="time row-between">
 				<view class="row-start search">
 					<view class="name">关键词</view>
-					<view class="input row-start"><input type="text" placeholder="活动方,合作方" /></view>
+					<view class="input row-start"><input type="text" placeholder="活动方,合作方" v-model="query.keywords"/></view>
 					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange" class="date" fields="month">
 						<view class="date-input row-between">
 							<text>全部</text>
@@ -49,7 +48,7 @@ export default {
 		return {
 			tabCurrentIndex: 0,
 			date: currentDate,
-			hobby: [0,1,2,3],
+			hobby: [0, 1, 2, 3],
 			// 多选数据源
 			hobbys: [
 				{
@@ -74,6 +73,9 @@ export default {
 			loading: true,
 			list: [1, 2, 3, 45, 5],
 			query: {
+				status:[0, 1, 2, 3],
+				month_time:'',
+				keywords:'',
 				page: 1,
 				pagesize: 20
 			}
@@ -103,6 +105,32 @@ export default {
 			}
 			month = month > 9 ? month : '0' + month;
 			return `${year}-${month}`;
+		},
+		// 获取列表
+		async getList() {
+			const { loading, list, query, navList, tabCurrentIndex } = this;
+			this.status = 'loading';
+			let { tech_order } = await this.$API.order.getList({
+				...query,
+				order_type: navList[tabCurrentIndex].state
+			});
+			uni.hideLoading();
+			let { data: clist, total } = tech_order;
+			if (loading) {
+				this.loading = false;
+			}
+			const { page } = query;
+			if (page !== 1) {
+				this.list = [...list, ...clist];
+			} else {
+				this.list = clist;
+			}
+			this.total = total;
+			if (total > this.list.length) {
+				this.status = 'more';
+			} else {
+				this.status = 'noMore';
+			}
 		}
 	}
 };
@@ -121,7 +149,7 @@ export default {
 ::v-deep .uni-date-editor--x .uni-date__icon-clear {
 	border-width: 14rpx;
 }
-::v-deep .checklist-text{
+::v-deep .checklist-text {
 	font-size: 24rpx !important;
 }
 ::v-deep .uni-input-placeholder {
@@ -134,8 +162,8 @@ export default {
 ::v-deep .uni-date-x--border {
 	border-color: $border;
 }
-::v-deep .uni-data-checklist .checklist-group .checklist-box{
-	margin-right:0
+::v-deep .uni-data-checklist .checklist-group .checklist-box {
+	margin-right: 0;
 }
 
 .main {
@@ -146,12 +174,11 @@ export default {
 		.input {
 			width: 200rpx;
 			padding: 0 15rpx;
-			height:70rpx;
+			height: 70rpx;
 			border-radius: 8rpx;
 			font-size: 26rpx;
 			border: 1px solid $border;
 			margin-left: 20rpx;
-			
 		}
 		.date {
 			.date-input {

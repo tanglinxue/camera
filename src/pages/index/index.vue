@@ -10,24 +10,41 @@
 		</view>
 		<view class="btn-box mgb20"><view class="main-btn red-shadow" @click="jump(3)">开始报价</view></view>
 		<view class="boxOuter-box">
-			<view class="boxOuter">
-				<view class="title row-between"><text class='txt1'>最新报价:</text><text @click='jump(1)'>更多...</text></view>
+			<view class="boxOuter" v-if='price_info.length'>
+				<view class="title row-between">
+					<text class="txt1">最新报价:</text>
+					<text @click="jump(1)">更多...</text>
+				</view>
 				<view class="list">
-					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
-					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
-					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
-					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
-					<view class="item row-between"><view class='textElis flex1'>旅程新品发布会旅程新品发布会旅程新品发布会</view><view class='date'>2022-04-06 13:20</view></view>
+					<view class="item row-between">
+						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
+						<view class="date">2022-04-06 13:20</view>
+					</view>
+					<view class="item row-between">
+						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
+						<view class="date">2022-04-06 13:20</view>
+					</view>
+					<view class="item row-between">
+						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
+						<view class="date">2022-04-06 13:20</view>
+					</view>
+					<view class="item row-between">
+						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
+						<view class="date">2022-04-06 13:20</view>
+					</view>
+					<view class="item row-between">
+						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
+						<view class="date">2022-04-06 13:20</view>
+					</view>
 				</view>
 			</view>
-			<view class="boxOuter">
-				<view class="title row-between"><text class='txt1'>报价模板:</text><text @click='jump(2)'>更多...</text></view>
+			<view class="boxOuter" v-if='temlate_info.length'>
+				<view class="title row-between">
+					<text class="txt1">报价模板:</text>
+					<text @click="jump(2)">更多...</text>
+				</view>
 				<view class="list">
-					<view class="item textElis">双机位+直播+包装双机位+直播+包装双机位+直播+包装双机位+直播+包装</view>
-					<view class="item textElis">双机位+直播+包装</view>
-					<view class="item textElis">双机位+直播+包装</view>
-					<view class="item textElis">双机位+直播+包装</view>
-					<view class="item textElis">双机位+直播+包装</view>
+					<view class="item textElis" v-for="item in temlate_info" :key='item.id'>{{item.template_name}}</view>
 				</view>
 			</view>
 		</view>
@@ -36,6 +53,7 @@
 
 <script>
 export default {
+	onShow() {},
 	data() {
 		return {
 			list: [
@@ -49,19 +67,47 @@ export default {
 					img: 'https://baikebcs.bdimg.com/解淑萍右侧轮播.png'
 				}
 			],
-			swiperCurrent: 0
+			swiperCurrent: 0,
+			price_info: [],
+			temlate_info: [],
+			fristEnter: true
 		};
 	},
-	methods:{
+	onShow() {
+		if (this.fristEnter) {
+			this.$methods.showLoading();
+			this.fristEnter = false;
+			this.getData();
+		} else {
+			this.getData();
+		}
+	},
+	methods: {
+		async getData(time = 300) {
+			const {price_info,temlate_info} = await this.$API.home.get_index_price();
+			this.price_info = price_info;
+			this.temlate_info = temlate_info
+			setTimeout(() => {
+				uni.hideLoading();
+			}, time);
+		},
 		jump(type) {
 			if (type == 1) {
 				this.$jump(`/pages/my/historyRecord`);
 			} else if (type == 2) {
 				this.$jump(`/pages/index/templateRecord`);
-			}else if (type == 3) {
+			} else if (type == 3) {
 				this.$jump(`/pages/index/apponit`);
 			}
 		}
+	},
+	onPullDownRefresh() {
+		this.$methods.showLoading('刷新中...');
+		this.getData(1000);
+		// 上拉刷新
+		setTimeout(function() {
+			uni.stopPullDownRefresh();
+		}, 1000);
 	}
 };
 </script>
@@ -116,9 +162,9 @@ export default {
 		width: 100%;
 		padding: 0 30rpx;
 		.title {
-			font-size:26rpx;
+			font-size: 26rpx;
 			margin-bottom: 20rpx;
-			.txt1{
+			.txt1 {
 				font-size: 30rpx;
 				font-weight: bold;
 			}
@@ -128,9 +174,9 @@ export default {
 			.item {
 				padding: 10rpx 0;
 				font-size: 26rpx;
-				width:100%;
-				.date{
-					width:220rpx;
+				width: 100%;
+				.date {
+					width: 220rpx;
 					text-align: right;
 				}
 			}

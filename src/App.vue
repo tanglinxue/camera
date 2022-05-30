@@ -8,7 +8,6 @@
 </template> -->
 <script>
 	export default {
-
 		onLaunch() {
 			console.log('App Launch');
 			console.log(this.$route)
@@ -30,8 +29,6 @@
 	/* #endif */
 	@import './static/scss/index.scss';
 	@import './css/uni.css';
-	
-
 	/*每个页面公共css */
 	page {
 		background: $backColor;

@@ -45,6 +45,9 @@ input {
 	border: none;
 	font-weight: normal !important;
 	min-height: 0 !important;
+  &::after{
+    border:none !important
+  }
 }
 // hover透明
 .opacity {
