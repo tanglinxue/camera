@@ -15,7 +15,7 @@
 				<view class="main-btn" @click="search">查询</view>
 			</view>
 		</view>
-		<view class="boxOuter row-center"><uni-data-checkbox v-model="hobby" multiple :localdata="hobbys" /></view>
+		<view class="boxOuter row-center"><uni-data-checkbox v-model="query.status" multiple :localdata="hobbys" /></view>
 		<view class="boxOuter price">
 			<view class="row-center mgb10">
 				订单数：
@@ -48,7 +48,6 @@ export default {
 		return {
 			tabCurrentIndex: 0,
 			date: currentDate,
-			hobby: [0, 1, 2, 3],
 			// 多选数据源
 			hobbys: [
 				{
@@ -74,7 +73,7 @@ export default {
 			list: [1, 2, 3, 45, 5],
 			query: {
 				status:[0, 1, 2, 3],
-				month_time:'',
+				month_time:1,
 				keywords:'',
 				page: 1,
 				pagesize: 20
@@ -91,6 +90,9 @@ export default {
 	},
 	components: {
 		Item
+	},
+	onLoad(){
+		this.getList()
 	},
 	methods: {
 		// 获取日期
@@ -110,27 +112,27 @@ export default {
 		async getList() {
 			const { loading, list, query, navList, tabCurrentIndex } = this;
 			this.status = 'loading';
-			let { tech_order } = await this.$API.order.getList({
-				...query,
-				order_type: navList[tabCurrentIndex].state
+			let res = await this.$API.order.getList({
+				...query
 			});
 			uni.hideLoading();
-			let { data: clist, total } = tech_order;
-			if (loading) {
-				this.loading = false;
-			}
-			const { page } = query;
-			if (page !== 1) {
-				this.list = [...list, ...clist];
-			} else {
-				this.list = clist;
-			}
-			this.total = total;
-			if (total > this.list.length) {
-				this.status = 'more';
-			} else {
-				this.status = 'noMore';
-			}
+			console.log(res)
+			// let { data: clist, total } = tech_order;
+			// if (loading) {
+			// 	this.loading = false;
+			// }
+			// const { page } = query;
+			// if (page !== 1) {
+			// 	this.list = [...list, ...clist];
+			// } else {
+			// 	this.list = clist;
+			// }
+			// this.total = total;
+			// if (total > this.list.length) {
+			// 	this.status = 'more';
+			// } else {
+			// 	this.status = 'noMore';
+			// }
 		}
 	}
 };
