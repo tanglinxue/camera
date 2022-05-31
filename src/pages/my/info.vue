@@ -41,7 +41,20 @@
 				myInfo:{}
 			}
 		},
-		
+		methods:{
+			async getData(time = 300) {
+				const { userinfo, price_count, reserve_count, settled_count, essay_gzh, essay_kefu } = await await this.$API.my.mypage();
+				this.userinfo = userinfo;
+				this.price_count = price_count;
+				this.reserve_count = reserve_count;
+				this.settled_count = settled_count;
+				this.essay_gzh = essay_gzh;
+				this.essay_kefu = essay_kefu;
+				setTimeout(() => {
+					uni.hideLoading();
+				}, time);
+			},
+		}
 	}
 </script>
 
