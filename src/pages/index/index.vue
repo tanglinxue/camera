@@ -44,7 +44,7 @@
 					<text @click="jump(2)">更多...</text>
 				</view>
 				<view class="list">
-					<view class="item textElis" v-for="item in temlate_info" :key='item.id'>{{item.template_name}}</view>
+					<view class="item textElis" v-for="item in temlate_info" :key='item.id' @click='jump(4,item.id)'>{{item.template_name}}</view>
 				</view>
 			</view>
 		</view>
@@ -91,13 +91,17 @@ export default {
 				uni.hideLoading();
 			}, time);
 		},
-		jump(type) {
+		jump(type,id) {
 			if (type == 1) {
 				this.$jump(`/pages/my/historyRecord`);
 			} else if (type == 2) {
 				this.$jump(`/pages/index/templateRecord`);
 			} else if (type == 3) {
+				// 开始报价
 				this.$jump(`/pages/index/apponit`);
+			} else if (type == 4) {
+				// 报价模板
+				this.$jump(`/pages/index/priceTemplate?id=${id}`);
 			}
 		}
 	},

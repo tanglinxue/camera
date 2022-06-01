@@ -66,9 +66,9 @@ export default function service(options) {
 				reject(err)
 			},
 			complete: (res) => {
-				console.log("请求的地址为：" + options.url);
-				console.log("请求的body参数为：" +  JSON.stringify(options.data));
-				console.log("返回结果为：" + JSON.stringify(res));
+				// console.log("请求的地址为：" + options.url);
+				// console.log("请求的body参数为：" +  JSON.stringify(options.data));
+				// console.log("返回结果为：" + JSON.stringify(res));
 			},
 		})
 	})
@@ -82,7 +82,7 @@ export function Upload(options) {
 			url: options.url,
 			filePath: options.data.imgfile,
 			fileType: 'image',
-			name: "imgfile",
+			name: "image",
 			success: res => {
 				let data = JSON.parse(res.data);
 				if (res.statusCode === 200 && data.code === 1) {

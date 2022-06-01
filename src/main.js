@@ -3,6 +3,7 @@ import App from './App'
 
 //引入插件
 import plugins from './utils/plugins'
+
 //应用（使用）插件
 Vue.use(plugins)
 // 如此配置即可
@@ -13,13 +14,12 @@ App.mpType = 'app'
 
 //关闭Vue的生产提示
 Vue.config.productionTip = false
+Vue.prototype.$bus = new Vue()
 const app = new Vue({
   ...App,
   // router,
   store,
-  beforeCreate() {
-  	Vue.prototype.$bus = this
-  }
+  
 })
 app.$mount()
 export default app

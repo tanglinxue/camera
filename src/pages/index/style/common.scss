@@ -1,6 +1,6 @@
 @import '@/static/scss/index.scss';
-.main{
-	padding:20rpx 0;
+.main {
+	padding: 20rpx 0;
 }
 .content {
 	background: #fff;
@@ -47,23 +47,23 @@
 			margin-top: 3rpx;
 		}
 	}
-	
-	.time{
+
+	.time {
 		margin-bottom: 20rpx;
-		font-size:26rpx;
-		color:$mainBlack;
+		font-size: 26rpx;
+		color: $mainBlack;
 		font-weight: bold;
 		padding-left: 20rpx;
-		.radio{
+		.radio {
 			margin-right: 30rpx;
-			.icon{
-				    width: 26rpx;
-				    height: 26rpx;
-				    margin-right: 8rpx;
+			.icon {
+				width: 26rpx;
+				height: 26rpx;
+				margin-right: 8rpx;
 			}
 		}
 	}
-	
+
 	.listItem {
 		&:last-child {
 			margin-bottom: 0 !important;
@@ -73,7 +73,7 @@
 		font-size: 24rpx;
 		margin-bottom: 20rpx;
 	}
-	
+
 	.checkbox {
 		font-weight: bold;
 		.icon {
@@ -82,4 +82,5 @@
 			margin-right: 16rpx;
 		}
 	}
+	
 }

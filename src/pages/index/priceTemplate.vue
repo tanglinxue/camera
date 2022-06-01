@@ -1,7 +1,7 @@
 <template>
 	<view class="main column-center">
 		<view class="boxInner box column-center mgb50">
-			<view class="main-title mgb20 borderbottom font32">双机位直播</view>
+			<view class="main-title mgb20 borderbottom font32">{{title}}</view>
 			<view class="title">照片</view>
 			<view class="row row-between">
 				<view class="left-txt">照片直播：</view>
@@ -22,13 +22,37 @@
 				<view class="right-txt">￥1500*1个*1天=2000元</view>
 			</view>
 			<view class='price red'>小计：￥1500</view>
-			<view class='total-price red'>总计：￥1500</view>
+			<view class='total-price red'>总计：￥{{total_money}}</view>
 		</view>
 		<view class="middle-btn">使用模板</view>
 	</view>
 </template>
 
-<script></script>
+<script>
+// ok
+export default {
+	data() {
+		return {
+			template_id:'',
+			title:'',
+			total_money:''
+		};
+	},
+	onLoad(options) {
+		this.template_id = options.id;
+		this.$methods.showLoading();
+		this.getData();
+	},
+	methods: {
+		async getData() {
+			const {template_name,total_money} = await this.$API.home.getTemplateById({template_id:this.template_id});
+			this.title = template_name
+			this.total_money = total_money
+			uni.hideLoading();
+		},
+	}
+};
+</script>
 
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';

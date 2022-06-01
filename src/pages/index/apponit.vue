@@ -9,19 +9,19 @@
 		<swiper :current="tabCurrentIndex" class="swiper-box" duration="300" @change="changeTab">
 			<swiper-item class="tab-content" v-for="(tabItem, tabIndex) in navList" :key="tabIndex">
 				<scroll-view class="list-scroll-content column-center" scroll-y>
-					<Step1 v-show='tabCurrentIndex==0'/>
-					<Step2 v-show='tabCurrentIndex==1'/>
-					<Step3 v-show='tabCurrentIndex==2'/>
-					<Step4 v-show='tabCurrentIndex==3'/>
-					<Step5 v-show='tabCurrentIndex==4'/>
-					<view class='middle-btn mgauto'>新增服务项目</view>
+					<Step1 v-show="tabCurrentIndex == 0" />
+					<Step2 v-show="tabCurrentIndex == 1" />
+					<Step3 v-show="tabCurrentIndex == 2" />
+					<Step4 v-show="tabCurrentIndex == 3" />
+					<Step5 v-show="tabCurrentIndex == 4" />
+					<view class="middle-btn mgauto">新增服务项目</view>
 				</scroll-view>
 			</swiper-item>
 		</swiper>
-		<view class='row-start dayCompute'>
-			<text class='txt1'>服务天数：</text>
-			<uni-number-box class='num'/>
-			<text class='txt2'>单个项目的天数可在下一步修改</text>
+		<view class="row-start dayCompute">
+			<text class="txt1">服务天数：</text>
+			<uni-number-box class="num" />
+			<text class="txt2">单个项目的天数可在下一步修改</text>
 		</view>
 		<view class="foot-detail row-between">
 			<view class="txt row-start">
@@ -31,11 +31,12 @@
 			</view>
 			<view class="foot-btn row-end">
 				<view class="middle-btn white-middle-btn">重置</view>
-				<view class="middle-btn mgl20" @click='nextStep'>下一步</view>
+				<view class="middle-btn mgl20" @click="nextStep">下一步</view>
 			</view>
 		</view>
-		
+		<ChangePopup />
 	</view>
+	
 </template>
 
 <script>
@@ -45,58 +46,67 @@ import Step2 from './components/step2.vue';
 import Step3 from './components/step3.vue';
 import Step4 from './components/step4.vue';
 import Step5 from './components/step5.vue';
+import ChangePopup from './components/changePopup.vue';
+import { mapActions } from 'vuex';
 export default {
 	components: {
 		Step1,
 		Step2,
 		Step3,
 		Step4,
-		Step5
+		Step5,
+		ChangePopup
 	},
 	data() {
 		return {
-			tabCurrentIndex: 3,
+			tabCurrentIndex: 4,
 			navList: [
 				{
 					state: 0,
 					text: '摄影',
-					loadingType: 'more',
-					orderList: []
+					loadingType: 'more'
 				},
 				{
 					state: 1,
 					text: '视频',
-					loadingType: 'more',
-					orderList: []
+					loadingType: 'more'
 				},
 				{
 					state: 2,
 					text: '剪辑',
-					loadingType: 'more',
-					orderList: []
+					loadingType: 'more'
 				},
 				{
 					state: 3,
 					text: '视频制作',
-					loadingType: 'more',
-					orderList: []
+					loadingType: 'more'
 				},
 				{
 					state: 4,
 					text: '课程录制',
-					loadingType: 'more',
-					orderList: []
+					loadingType: 'more'
 				}
 			]
 		};
 	},
 
-	mounted() {
-	
+	onLoad() {
+		this.$methods.showLoading();
+		this.getData();
+		this.$bus.$on('openPopup',this.popupCallBack)
 	},
 
 	methods: {
-
+		...mapActions('service', ['updateServiceInfo']),
+		async getData() {
+			const { item_info } = await this.$API.home.getPriceByUser();
+			let case_item = JSON.parse(item_info.case_item);
+			this.updateServiceInfo(case_item);
+			uni.hideLoading();
+		},
+		popupCallBack(res){
+			console.log(res)
+		},
 		//swiper 切换
 		changeTab(e) {
 			this.tabCurrentIndex = e.target.current;
@@ -105,7 +115,7 @@ export default {
 		tabClick(index) {
 			this.tabCurrentIndex = index;
 		},
-		nextStep(){
+		nextStep() {
 			this.$jump(`/pages/my/editPriceSheet`);
 		}
 	}
@@ -116,8 +126,8 @@ export default {
 @import '@/static/scss/index.scss';
 .content {
 	height: 100%;
-	.mgauto{
-		margin:50rpx auto
+	.mgauto {
+		margin: 50rpx auto 80rpx;
 	}
 	.navbar {
 		width: 100%;
@@ -132,16 +142,16 @@ export default {
 			.label {
 				padding: 8rpx 20rpx;
 			}
-			.badge{
-				    position: absolute;
-				    top: 0;
-				    right: -4rpx;
-				    padding: 0 10rpx;
-				    height: 30rpx;
-				    text-align: center;
-				    background: #856c2e;
-				    border-radius: 24rpx;
-					font-size: 22rpx;
+			.badge {
+				position: absolute;
+				top: 0;
+				right: -4rpx;
+				padding: 0 10rpx;
+				height: 30rpx;
+				text-align: center;
+				background: #856c2e;
+				border-radius: 24rpx;
+				font-size: 22rpx;
 			}
 			&.current {
 				.label {
@@ -154,16 +164,16 @@ export default {
 		}
 	}
 }
-.dayCompute{
-	height:100rpx;
-	font-size:22rpx;
+.dayCompute {
+	height: 100rpx;
+	font-size: 22rpx;
 	border-bottom: 1px solid $border;
-	padding-left:30rpx;
-	background:#fff;
-	.txt1{
-		font-size:26rpx
+	padding-left: 30rpx;
+	background: #fff;
+	.txt1 {
+		font-size: 26rpx;
 	}
-	.num{
+	.num {
 		scale: 0.8;
 	}
 }

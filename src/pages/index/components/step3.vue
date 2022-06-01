@@ -24,66 +24,36 @@
 
 <script>
 import reduceCom from './reduceCom';
+import { mapState } from 'vuex';
 export default {
 	components: {
 		reduceCom
 	},
-	data() {
-		return {
-			list: [
-				{
-					name: '游机：',
-					placeholder: '¥2500/个'
-				},
-				{
-					name: '延时：',
-					placeholder: '¥1500/个'
-				}
-			],
-			list2: [
-				{
-					name: '15秒（条数）：',
-					placeholder: '¥600/条'
-				},
-				{
-					name: '30秒（条数）：',
-					placeholder: '¥800/条'
-				}
-			],
-			list3: [
-				{
-					name: '粗剪：',
-					placeholder: '¥800/条',
-					footer: '注：流程素材，简单拼接（含背景音乐）'
-				},
-				{
-					name: '精剪：',
-					placeholder: '¥1600/条',
-					footer: '注：流程素材，简单拼接（含背景音乐）'
-				}
-			],
-			options: [
-				{
-					value: '1',
-					name: '塑封',
-					tips: '¥25/张',
-					price: '25'
-				},
-				{
-					value: '2',
-					name: '盒装',
-					tips: '¥25/张',
-					price: '25'
-				},
-				{
-					value: '3',
-					name: '其他',
-					tips: '费用另计',
-					price: '费用另计'
-				}
-			]
-		};
-	}
+	computed: {
+		...mapState('service', ['serviceInfo']),
+		list() {
+			const serviceInfo = this.serviceInfo;
+			return [
+				{ ...serviceInfo['301'], id: 301 },
+				{ ...serviceInfo['302'], id: 302 },		
+			];
+		},
+		list2() {
+			const serviceInfo = this.serviceInfo;
+			return [
+				{ ...serviceInfo['311'], id: 311 },
+				{ ...serviceInfo['312'], id: 312 },		
+			];
+		},
+		list3() {
+			const serviceInfo = this.serviceInfo;
+			return [
+				{ ...serviceInfo['321'], id: 321,footer: '注：流程素材，简单拼接（含背景音乐）' },
+				{ ...serviceInfo['322'], id: 322,footer: '注：流程素材，特效拼接（含背景音乐）' },		
+			];
+		}
+	},
+
 };
 </script>
 

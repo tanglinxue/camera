@@ -19,9 +19,9 @@
 				</reduceCom>
 			</view>
 			<view class="row-start box">
-				<view class="column-center item" v-for="(item, index) in options" :key="index">
+				<view class="column-center item" v-for="(item, index) in list3" :key="index">
 					<view class="name font24">{{ item.name }}</view>
-					<view class="tips font20 gray">{{ item.tips }}</view>
+					<view class="tips font20 gray">¥{{ item.unit_price }}/{{ item.unit }}</view>
 				</view>
 			</view>
 		</view>
@@ -30,61 +30,56 @@
 
 <script>
 import reduceCom from './reduceCom';
+import { mapState } from 'vuex';
 export default {
 	components: {
 		reduceCom
 	},
-	data() {
-		return {
-			list: [
+	computed: {
+		...mapState('service', ['serviceInfo']),
+		list() {
+			const serviceInfo = this.serviceInfo;
+			return [{...serviceInfo['101'],id:101}, {...serviceInfo['102'],id:102}];
+		},
+		list2() {
+			const serviceInfo = this.serviceInfo;
+			return [
 				{
-					name: '照片直播：',
-					placeholder: '¥2500/机位'
-				},
-				{
-					name: '传统摄影：',
-					placeholder: '¥1500/机位'
-				}
-			],
-			list2: [
-				{
-					name: '人数：',
-					placeholder: '¥10/人',
+					id:111,
+					...serviceInfo['111'],
 					footer: '注：200人以内，按200人计费',
-          type:'input'
+					type: 'input'
 				},
 				{
 					name: '冲印：（张数）',
 					footer: '注：50张起步，不足按50张计费，400人以上合影冲印另计',
-          type:'input'
+					type: 'input',
+					hidePrice:true,
 				}
-			],
-			options: [
+				
+			];
+		},
+		list3(){
+			const serviceInfo = this.serviceInfo;
+			return [
 				{
-					value: '1',
-					name: '塑封',
-					tips: '¥25/张',
-					price: '25'
+					id:112,
+					...serviceInfo['112'],
 				},
 				{
-					value: '2',
-					name: '盒装',
-					tips: '¥25/张',
-					price: '25'
+					id:113,
+					...serviceInfo['113'],
 				},
 				{
-					value: '3',
-					name: '其他',
-					tips: '费用另计',
-					price: '费用另计'
+					id:114,
+					...serviceInfo['114'],
 				}
-			]
-		};
+			];
+		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
 @import '../style/common.scss';
-
 </style>

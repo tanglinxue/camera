@@ -3,8 +3,7 @@ import storage from '@/utils/storage';
 const user = {
 	namespaced: true,
 	state: {
-		userInfo: {
-		},
+		userInfo: {},
 		token: storage.getItem('token'),
 	},
 	mutations: {

@@ -22,8 +22,10 @@
 		{
 			"path": "pages/index/apponit",
 			"style": {
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#f66745"
+				"navigationBarTitleText": "选择服务项目",
+				"navigationBarBackgroundColor": "#f66745",
+				"navigationBarTextStyle": "white"
+				
 			}
 		},
 		{

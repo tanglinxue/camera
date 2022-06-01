@@ -2,46 +2,19 @@
 	<view>
 		<view class="row-between info">
 			<view class="row-start left-text">
-				<text>{{ info.name }}</text>
-				<template v-if="info.placeholder">
-					{{ info.placeholder }}
+				<text class='name'>{{ info.name }}：</text>
+				<template v-if='!info.hidePrice'>
+					<text>{{ '¥' + info.unit_price }}<template v-if='info.unit && info.unit_price'>/</template>{{ info.unit }}</text>
+					<uni-icons type="compose" size="22" color="#919191" class="mgl15" @click="open"></uni-icons>
 				</template>
-				<uni-icons type="compose" size="22" color="#919191" class="mgl15" @click="open" v-if="info.placeholder"></uni-icons>
-			</view>
-      <input v-if="info.type=='input'" style="background:#fff;width:200rpx;margin-right: 100rpx;padding-left: 20rpx;">
-			<uni-number-box v-else-if="!info.hideBtn" style='scale: 0.9;'/>
+			</view>	
+			<view v-if="info.type == 'input'" class='input-box'>
+				<input  v-model="info.num" type="number"/>
+			</view>	
+			<uni-number-box style="scale: 0.9;" :min="0" :max="99" :value="info.num * 1" v-else-if='info.type !== "noNum"'/>
 		</view>
-		<slot name="footer"></slot>
-    <slot name="warn"></slot>
-		<uni-popup ref="popup" type="center" background-color="#fff">
-			<view class="popup column-center">
-				<view class="title">修改项目设置</view>
-				<view class="row-start form-item">
-					<view class='label'>名称<text class='red'>*</text></view>
-					<view class='input-box'>
-						<input placeholder="请输入" class="input" />
-					</view>
-				</view>
-				<view class="row-start form-item">
-					<view class='label'>价格<text class='red'>*</text></view>
-					<view class='input-box'>
-						<input placeholder="请输入" class="input" />
-					</view>
-					
-				</view>
-				<view class="row-start form-item">
-					<view class='label'>计价单位</view>
-					<view class='input-box'>
-						<input placeholder="请输入" class="input" />
-					</view>
-				</view>
-				<view class='row-between btn-box'>
-					<view class="small-btn">确定</view>
-					<view class="small-btn">取消</view>
-				</view>
-				
-			</view>
-		</uni-popup>
+		<slot name="footer" v-if='info.footer'></slot>
+		<slot name="warn" v-if='info.warn'></slot>	
 	</view>
 </template>
 
@@ -50,12 +23,21 @@ export default {
 	props: {
 		info: {
 			type: Object,
-			default: () => {}
+			default: () => ({
+				name: '',
+				unit_price: 0,
+				unit: ''
+			})
+		}
+	},
+	data(){
+		return {
+			showPopup:false
 		}
 	},
 	methods: {
-		open() {
-			this.$refs.popup.open();
+		open(){
+			this.$bus.$emit('openPopup','你好')
 		}
 	}
 };
@@ -63,33 +45,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
-.popup{
-	padding:30rpx;
-	font-size: 26rpx;
-	width:500rpx;
-	.title{
-		margin-bottom: 20rpx;
-		font-size:30rpx;
-		
-	}
-	.form-item{
-		margin-bottom: 30rpx;
-		.label{
-			width: 150rpx;
-			text-align: right;
-			margin-right: 20rpx;
-		}
-		.input-box{
-			border: 1px solid $border;
-			flex:1;
-			padding:5rpx 10rpx
-		}
-	}
-	.btn-box{
-		width:60%
-	}
-}
-
 .info {
 	background: $grayS;
 	padding: 15rpx 20rpx;
@@ -97,10 +52,21 @@ export default {
 		font-size: 26rpx;
 		color: $gray;
 		height: 70rpx;
-		text {
+		.name {
 			font-size: 28rpx;
 			font-weight: bold;
 			color: $mainBlack;
+		}
+	}
+	.input-box {
+		background: #fff;
+		width: 200rpx;
+		padding: 10rpx 20rpx;
+		height: 100%;
+		margin-right: 100rpx;
+		input {
+			width: 100%;
+			height: 100%;
 		}
 	}
 }

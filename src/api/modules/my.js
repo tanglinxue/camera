@@ -18,6 +18,15 @@ export default {
 		})
 		return res
 	},
+	//更新我的信息
+	async myinfo(data={}) {
+		let res = await request({
+			url: '/api/orders/myinfo', 
+			method: 'POST',
+			data
+		})
+		return res
+	},
 }
 
 

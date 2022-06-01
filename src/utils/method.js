@@ -53,7 +53,6 @@ export function getCur() {
   }
   return routes[routes.length - 1].route //获取当前页面路由
 }
-let locationSuccess = true
 // finished(权限校验)
 // 获取地理位置
 export default {
@@ -216,5 +215,21 @@ export default {
         },
       })
     })
+  },
+  chooseImage(){
+	 return new Promise((resolve,reject)=>{
+	 	uni.chooseImage({
+	 		sourceType: ['album'],
+	 		sizeType: 'compressed ',
+	 		count: 1,
+	 		success: res => {
+	 			resolve(res)
+	 		},
+	 		fail: err => {
+	 			console.log('err: ', err);
+	 		}
+	 	});
+	 }) 
   }
+  	
 }

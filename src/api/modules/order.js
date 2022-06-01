@@ -18,15 +18,5 @@ export default {
 			data
 		})
 		return res
-	},
-	// 上传图片
-	async imgfile(data={}){
-		let res = await Upload({
-			url: '/api/orders/upload_qn', 
-			method: 'POST',
-			data,
-			type:'multipart/form-data'
-		})
-		return res
 	}
 }  

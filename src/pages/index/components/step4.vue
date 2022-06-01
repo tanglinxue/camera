@@ -5,17 +5,19 @@
 		</view>
 		<view class="content">
 			<view class="row-start time">
-				<view class='txt1 mgr15'>倒计时：</view>
-				<view class='radio row-start'>
-					<image src='/static/common/icon-radio.png' class='icon'></image>
-					<text class='txt'>通用</text>
-					￥500/条
-				  <uni-icons type="compose" size="22" color="#919191" class="mgl15" ></uni-icons>
+				<view class="txt1 mgr15">倒计时：</view>
+				<view class="radio row-start" v-for='(item) in options' :key='item.id'>
+					<image src="/static/common/icon-radio.png" class="icon"></image>
+					<text class="txt">{{item.name}}</text>
+					<view class='gray normal mgl10'>
+						¥{{ item.unit_price }}/{{ item.unit }}
+					</view>
+					<uni-icons type="compose" size="22" color="#919191" class="mgl15 normal"></uni-icons>
 				</view>
-				<view class='radio row-start'>
-					<image src='/static/common/icon-radio-sel.png' class='icon'></image>
-					<text class='txt'>定制</text>
-				</view>
+				<!-- <view class="radio row-start">
+					<image src="/static/common/icon-radio-sel.png" class="icon"></image>
+					<text class="txt">定制</text>
+				</view> -->
 			</view>
 			<view class="mgb20 listItem" v-for="(item, index) in list2" :key="index"><reduceCom :info="item"></reduceCom></view>
 		</view>
@@ -26,60 +28,45 @@
 				</reduceCom>
 			</view>
 		</view>
-		
 	</view>
 </template>
 
 <script>
 import reduceCom from './reduceCom';
+import { mapState } from 'vuex';
 export default {
 	components: {
 		reduceCom
 	},
-	data() {
-		return {
-			// 单选数据源
-			sexs: [
+	computed: {
+		...mapState('service', ['serviceInfo']),
+		list() {
+			const serviceInfo = this.serviceInfo;
+			return [{ ...serviceInfo['401'], id: 401 }, { ...serviceInfo['402'], id: 402 }];
+		},
+		list2() {
+			const serviceInfo = this.serviceInfo;
+			return [
 				{
-					text: '通用',
-					value: 0
-				},
-				{
-					text: '定制',
-					value: 1
+					name: '数量',
+					hidePrice: true,
+					num: 0
 				}
-			],
-			list: [
-				{
-					name: '动态主KV(条数)：',
-					placeholder: '¥600/条'
-				},
-				{
-					name: '启动视频(条数)：',
-					placeholder: '¥2000/条'
-				}
-			],
-			list2: [
-				{
-					name: '数量：'
-				}
-			],
-			list3: [
-				{
-					name: '舞美视频(条数)：',
-					placeholder: '¥0/条'
-				},
-				{
-					name: '宣传视频(条数)：',
-					placeholder: '¥0/条',
-					footer: '注：访谈视频、素材剪辑、特效视频、短片拍摄等'
-				}
-			]
-		};
+			];
+		},
+		list3() {
+			const serviceInfo = this.serviceInfo;
+			return [{ ...serviceInfo['405'], id: 405 }, { ...serviceInfo['406'], id: 406, footer: '注：访谈视频、素材剪辑、特效视频、短片拍摄等' }];
+		},
+		options(){
+			const serviceInfo = this.serviceInfo;
+			return [{ ...serviceInfo['403'], id: 403 }, { ...serviceInfo['404'], id: 404 }];
+		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
 @import '../style/common.scss';
+
 </style>
