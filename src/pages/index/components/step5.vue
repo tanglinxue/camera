@@ -16,6 +16,7 @@
 					<view slot="footer" class="footer">{{ item.footer }}</view>
 				</reduceCom>
 			</view>
+			<approachCom :info='info'/>
 		</view>
 		<view class="content">
 			<view class="row-start checkbox pd30">
@@ -45,11 +46,13 @@
 </template>
 
 <script>
+import approachCom from './approachCom';
 import reduceCom from './reduceCom';
 import { mapState } from 'vuex';
 export default {
 	components: {
-		reduceCom
+		reduceCom,
+		approachCom
 	},
 	computed: {
 		...mapState('service', ['serviceInfo']),
@@ -60,6 +63,10 @@ export default {
 		list2() {
 			const serviceInfo = this.serviceInfo;
 			return [{ ...serviceInfo['511'], id: 511,type:'noNum' }, { ...serviceInfo['512'], id: 512,footer: '注：正常每天可录制1-7人，具体以需求为准'}];
+		},
+		info(){
+			const serviceInfo = this.serviceInfo;
+			return { ...serviceInfo['208'], id: 208 }
 		}
 	}
 };

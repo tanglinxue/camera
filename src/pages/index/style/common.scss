@@ -28,6 +28,22 @@
 			width: 180rpx;
 			padding: 16rpx 0;
 			border-radius: 8rpx;
+			position: relative;
+			.edit-icon{
+				position: absolute;
+				right:5rpx;
+				top:3rpx
+			}
+			&.acitve{
+				border-color:$red;
+				color:$red;
+				.tips{
+					color:$red
+				}
+			}
+			.tips{
+				color:$gray
+			}
 		}
 	}
 	.warning {
@@ -48,21 +64,7 @@
 		}
 	}
 
-	.time {
-		margin-bottom: 20rpx;
-		font-size: 26rpx;
-		color: $mainBlack;
-		font-weight: bold;
-		padding-left: 20rpx;
-		.radio {
-			margin-right: 30rpx;
-			.icon {
-				width: 26rpx;
-				height: 26rpx;
-				margin-right: 8rpx;
-			}
-		}
-	}
+	
 
 	.listItem {
 		&:last-child {

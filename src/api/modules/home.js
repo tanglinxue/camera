@@ -53,6 +53,15 @@ export default {
 			data
 		})
 		return res
-	}
+	},
+	//编辑配置节点
+	async edit_item(data = {}) {
+		let res = await request({
+			url: '/api/orders/edit_item',
+			method: 'POST',
+			data
+		})
+		return res
+	},
 	
 }

@@ -5,7 +5,7 @@
 				<view class="row-start search">
 					<view class="name">关键词</view>
 					<view class="input row-start"><input type="text" placeholder="活动方,合作方" v-model="query.keywords"/></view>
-					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange" class="date" fields="month">
+					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange" :custom-item="customItem" class="date" fields="month">
 						<view class="date-input row-between">
 							<text>全部</text>
 							<view class="bottom-point"></view>
@@ -48,6 +48,7 @@ export default {
 		return {
 			tabCurrentIndex: 0,
 			date: currentDate,
+			customItem: '全部',
 			// 多选数据源
 			hobbys: [
 				{

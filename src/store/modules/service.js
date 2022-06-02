@@ -9,12 +9,12 @@ const service = {
 		changeServiceInfo(state,serviceInfo){
 			state.serviceInfo = serviceInfo
 			console.log(state.serviceInfo)
-		}
-	},
-	actions: {
-		updateServiceInfo({commit}, serviceInfo) {
-			commit('changeServiceInfo', serviceInfo)
 		},
+		changeServiceObj(state,obj){
+			console.log(obj)
+			const {name, unit_price, unit} = obj
+			state.serviceInfo[obj.item_id] = {...state.serviceInfo[obj.item_id],name, unit_price, unit}
+		}
 	}
 }
 export default service

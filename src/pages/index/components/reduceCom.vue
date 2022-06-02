@@ -2,9 +2,9 @@
 	<view>
 		<view class="row-between info">
 			<view class="row-start left-text">
-				<text class='name'>{{ info.name }}：</text>
+				<text class='name'>{{ info.name || '' }}：</text>
 				<template v-if='!info.hidePrice'>
-					<text>{{ '¥' + info.unit_price }}<template v-if='info.unit && info.unit_price'>/</template>{{ info.unit }}</text>
+					<text>{{ '¥' + (info.unit_price || '')}}<template v-if='info.unit'>/{{ info.unit || ''}}</template></text>
 					<uni-icons type="compose" size="22" color="#919191" class="mgl15" @click="open"></uni-icons>
 				</template>
 			</view>	
@@ -24,9 +24,6 @@ export default {
 		info: {
 			type: Object,
 			default: () => ({
-				name: '',
-				unit_price: 0,
-				unit: ''
 			})
 		}
 	},
@@ -37,7 +34,7 @@ export default {
 	},
 	methods: {
 		open(){
-			this.$bus.$emit('openPopup','你好')
+			this.$bus.$emit('openPopup',{...this.info,type:2})
 		}
 	}
 };
@@ -62,7 +59,7 @@ export default {
 		background: #fff;
 		width: 200rpx;
 		padding: 10rpx 20rpx;
-		height: 100%;
+		height:64rpx;
 		margin-right: 100rpx;
 		input {
 			width: 100%;

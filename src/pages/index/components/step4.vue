@@ -4,20 +4,8 @@
 			<view class="mgb20 listItem" v-for="(item, index) in list" :key="index"><reduceCom :info="item" /></view>
 		</view>
 		<view class="content">
-			<view class="row-start time">
-				<view class="txt1 mgr15">倒计时：</view>
-				<view class="radio row-start" v-for='(item) in options' :key='item.id'>
-					<image src="/static/common/icon-radio.png" class="icon"></image>
-					<text class="txt">{{item.name}}</text>
-					<view class='gray normal mgl10'>
-						¥{{ item.unit_price }}/{{ item.unit }}
-					</view>
-					<uni-icons type="compose" size="22" color="#919191" class="mgl15 normal"></uni-icons>
-				</view>
-				<!-- <view class="radio row-start">
-					<image src="/static/common/icon-radio-sel.png" class="icon"></image>
-					<text class="txt">定制</text>
-				</view> -->
+			<view class="mgb20">
+				<selectCom :options='options' name='倒计时：'/>
 			</view>
 			<view class="mgb20 listItem" v-for="(item, index) in list2" :key="index"><reduceCom :info="item"></reduceCom></view>
 		</view>
@@ -33,10 +21,12 @@
 
 <script>
 import reduceCom from './reduceCom';
+import selectCom from './selectCom';
 import { mapState } from 'vuex';
 export default {
 	components: {
-		reduceCom
+		reduceCom,
+		selectCom
 	},
 	computed: {
 		...mapState('service', ['serviceInfo']),

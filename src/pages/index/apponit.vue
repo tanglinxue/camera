@@ -14,7 +14,7 @@
 					<Step3 v-show="tabCurrentIndex == 2" />
 					<Step4 v-show="tabCurrentIndex == 3" />
 					<Step5 v-show="tabCurrentIndex == 4" />
-					<view class="middle-btn mgauto">新增服务项目</view>
+					<view class="middle-btn mgauto" @click='addItem'>新增服务项目</view>
 				</scroll-view>
 			</swiper-item>
 		</swiper>
@@ -36,7 +36,6 @@
 		</view>
 		<ChangePopup />
 	</view>
-	
 </template>
 
 <script>
@@ -47,7 +46,7 @@ import Step3 from './components/step3.vue';
 import Step4 from './components/step4.vue';
 import Step5 from './components/step5.vue';
 import ChangePopup from './components/changePopup.vue';
-import { mapActions } from 'vuex';
+import { mapMutations } from 'vuex';
 export default {
 	components: {
 		Step1,
@@ -59,11 +58,11 @@ export default {
 	},
 	data() {
 		return {
-			tabCurrentIndex: 4,
+			tabCurrentIndex:0,
 			navList: [
 				{
 					state: 0,
-					text: '摄影',
+					text: '照片',
 					loadingType: 'more'
 				},
 				{
@@ -93,19 +92,21 @@ export default {
 	onLoad() {
 		this.$methods.showLoading();
 		this.getData();
-		this.$bus.$on('openPopup',this.popupCallBack)
 	},
 
 	methods: {
-		...mapActions('service', ['updateServiceInfo']),
+		...mapMutations('service', ['changeServiceInfo']),
+		addItem(){
+			this.$bus.$emit('openPopup',{...this.info,type:1,nodeid:this.tabCurrentIndex+1})
+		},
 		async getData() {
 			const { item_info } = await this.$API.home.getPriceByUser();
 			let case_item = JSON.parse(item_info.case_item);
-			this.updateServiceInfo(case_item);
+			this.changeServiceInfo(case_item);
 			uni.hideLoading();
 		},
-		popupCallBack(res){
-			console.log(res)
+		popupCallBack(res) {
+			console.log(res);
 		},
 		//swiper 切换
 		changeTab(e) {

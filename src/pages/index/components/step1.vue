@@ -19,9 +19,10 @@
 				</reduceCom>
 			</view>
 			<view class="row-start box">
-				<view class="column-center item" v-for="(item, index) in list3" :key="index">
+				<view class="column-center item" :class='{"acitve":index===currentIndex}' v-for="(item, index) in list3" :key="index"  @click.stop='select(index)'>
 					<view class="name font24">{{ item.name }}</view>
-					<view class="tips font20 gray">¥{{ item.unit_price }}/{{ item.unit }}</view>
+					<view class="tips font20">¥{{ item.unit_price }}/{{ item.unit }}</view>
+					<uni-icons type="compose" size="20" color="#919191" class="mgl15 normal edit-icon" @click.stop.prevent="open(item)"></uni-icons>
 				</view>
 			</view>
 		</view>
@@ -34,6 +35,11 @@ import { mapState } from 'vuex';
 export default {
 	components: {
 		reduceCom
+	},
+	data(){
+		return {
+			currentIndex:-1
+		}
 	},
 	computed: {
 		...mapState('service', ['serviceInfo']),
@@ -75,6 +81,17 @@ export default {
 					...serviceInfo['114'],
 				}
 			];
+		}
+	},
+	methods:{
+		open(info){
+			this.$bus.$emit('openPopup',{...info,type:2})
+		},
+		select(index){
+			if(this.currentIndex == index){
+				return this.currentIndex =-1
+			}
+			this.currentIndex = index
 		}
 	}
 };
