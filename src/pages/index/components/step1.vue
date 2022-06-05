@@ -34,7 +34,7 @@
 
 <script>
 import reduceCom from './reduceCom';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
 	components: {
 		reduceCom
@@ -45,45 +45,47 @@ export default {
 		}
 	},
 	computed: {
-		...mapState('service', ['serviceInfo']),
+		...mapGetters('service', ['step1']),
 		list() {
-			const serviceInfo = this.serviceInfo;
-			return [{...serviceInfo['101'],id:101}, {...serviceInfo['102'],id:102}];
+			console.log(this.step1)
+			return this.step1.slice(0,2);
 		},
 		list2() {
-			const serviceInfo = this.serviceInfo;
-			return [
-				{
-					id:111,
-					...serviceInfo['111'],
-					footer: '注：200人以内，按200人计费',
-					type: 'input'
-				},
-				{
-					name: '冲印：（张数）',
-					footer: '注：50张起步，不足按50张计费，400人以上合影冲印另计',
-					type: 'input',
-					hidePrice:true,
-				}
+			return this.step1.slice(0,2);
+			// const serviceInfo = this.serviceInfo;
+			// return [
+			// 	{
+			// 		id:111,
+			// 		...serviceInfo['111'],
+			// 		footer: '注：200人以内，按200人计费',
+			// 		type: 'input'
+			// 	},
+			// 	{
+			// 		name: '冲印：（张数）',
+			// 		footer: '注：50张起步，不足按50张计费，400人以上合影冲印另计',
+			// 		type: 'input',
+			// 		hidePrice:true,
+			// 	}
 				
-			];
+			// ];
 		},
 		list3(){
-			const serviceInfo = this.serviceInfo;
-			return [
-				{
-					id:112,
-					...serviceInfo['112'],
-				},
-				{
-					id:113,
-					...serviceInfo['113'],
-				},
-				{
-					id:114,
-					...serviceInfo['114'],
-				}
-			];
+			return this.step1.slice(0,2);
+			// const serviceInfo = this.serviceInfo;
+			// return [
+			// 	{
+			// 		id:112,
+			// 		...serviceInfo['112'],
+			// 	},
+			// 	{
+			// 		id:113,
+			// 		...serviceInfo['113'],
+			// 	},
+			// 	{
+			// 		id:114,
+			// 		...serviceInfo['114'],
+			// 	}
+			// ];
 		}
 	},
 	methods:{

@@ -46,7 +46,7 @@ import Step3 from './components/step3.vue';
 import Step4 from './components/step4.vue';
 import Step5 from './components/step5.vue';
 import ChangePopup from './components/changePopup.vue';
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
 	components: {
 		Step1,
@@ -62,28 +62,23 @@ export default {
 			navList: [
 				{
 					state: 0,
-					text: '照片',
-					loadingType: 'more'
+					text: '照片'
 				},
 				{
 					state: 1,
-					text: '视频',
-					loadingType: 'more'
+					text: '视频'
 				},
 				{
 					state: 2,
-					text: '剪辑',
-					loadingType: 'more'
+					text: '剪辑'
 				},
 				{
 					state: 3,
-					text: '视频制作',
-					loadingType: 'more'
+					text: '视频制作'
 				},
 				{
 					state: 4,
-					text: '课程录制',
-					loadingType: 'more'
+					text: '课程录制'
 				}
 			]
 		};
@@ -95,16 +90,12 @@ export default {
 	},
 
 	methods: {
-		...mapMutations('service', ['changeServiceInfo']),
+		...mapActions('service', ['getInfo']),
 		addItem(){
 			this.$bus.$emit('openPopup',{...this.info,type:1,nodeid:this.tabCurrentIndex+1})
 		},
 		async getData() {
-			const { item_info } = await this.$API.home.getPriceByUser();
-			let case_item = JSON.parse(item_info.case_item);
-			let dynamic_item = JSON.parse(item_info.dynamic_item);
-			const {kclz_xxxslk,sp_sszm,sp_tcjr,spzz_djs,work_day,zp_cyzt} = item_info
-			this.changeServiceInfo(case_item);
+			await this.getInfo()
 			uni.hideLoading();
 		},
 		popupCallBack(res) {
