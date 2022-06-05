@@ -102,6 +102,8 @@ export default {
 		async getData() {
 			const { item_info } = await this.$API.home.getPriceByUser();
 			let case_item = JSON.parse(item_info.case_item);
+			let dynamic_item = JSON.parse(item_info.dynamic_item);
+			const {kclz_xxxslk,sp_sszm,sp_tcjr,spzz_djs,work_day,zp_cyzt} = item_info
 			this.changeServiceInfo(case_item);
 			uni.hideLoading();
 		},

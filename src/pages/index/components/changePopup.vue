@@ -7,18 +7,18 @@
 					名称
 					<text class="red">*</text>
 				</view>
-				<view class="input-box"><input placeholder="请输入" class="input" v-model="query.name" /></view>
+				<view class="input-box"><input type='text' placeholder="请输入" class="input" v-model="query.name" /></view>
 			</view>
 			<view class="row-start form-item">
 				<view class="label">
 					价格(元)
 					<text class="red">*</text>
 				</view>
-				<view class="input-box"><input placeholder="请输入" class="input" v-model="query.unit_price" /></view>
+				<view class="input-box"><input placeholder="请输入" class="input" v-model="query.unit_price" type="number" @input="inputTap" /></view>
 			</view>
 			<view class="row-start form-item">
 				<view class="label">计价单位</view>
-				<view class="input-box"><input placeholder="请输入" class="input" v-model="query.unit" /></view>
+				<view class="input-box"><input type='text' placeholder="请输入" class="input" v-model="query.unit" /></view>
 			</view>
 			<view class="row-between btn-box">
 				<view class="small-btn" @click="submit">确定</view>
@@ -63,6 +63,14 @@ export default {
 				this.$refs.popup.open();
 			});
 		},
+		inputTap(e){
+			console.log(e)
+			let val = e.detail.value;
+			val = val.replace(/^(0+)|[^\d]+/g,'')
+			this.$nextTick(()=>{
+				this.query.unit_price = val*1
+			})
+		},
 		async submit() {
 			const type = this.query.type;
 			let title = `更新中...`
@@ -70,7 +78,9 @@ export default {
 				title = `新增中...`
 			}
 			this.$methods.showLoading(title);
-			const data = await this.$API.home.edit_item(this.query,);
+			// const data = await this.$API.home.edit_item(this.query);
+			
+			const data = await this.$API.home.edit_dynamic(this.query);
 			let toast = `更新成功`
 			if(type==1){
 				toast = `新增成功`

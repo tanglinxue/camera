@@ -63,5 +63,15 @@ export default {
 		})
 		return res
 	},
+	//编辑动态配置节点
+	async edit_dynamic(data = {}) {
+		let res = await request({
+			url: '/api/orders/edit_dynamic',
+			method: 'POST',
+			data
+		})
+		return res
+	}
+	
 	
 }

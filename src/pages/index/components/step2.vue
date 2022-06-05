@@ -84,9 +84,6 @@ export default {
 			return [
 				{ ...serviceInfo['204'], id: 204 },
 				{ ...serviceInfo['205'], id: 205 }
-				// { ...serviceInfo['206'], id: 206 },
-				// { ...serviceInfo['207'], id: 207 },
-				// { ...serviceInfo['208'], id: 208 }
 			];
 		},
 		list3() {

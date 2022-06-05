@@ -22,7 +22,10 @@
 				<view class="column-center item" :class='{"acitve":index===currentIndex}' v-for="(item, index) in list3" :key="index"  @click.stop='select(index)'>
 					<view class="name font24">{{ item.name }}</view>
 					<view class="tips font20">¥{{ item.unit_price }}/{{ item.unit }}</view>
-					<uni-icons type="compose" size="20" color="#919191" class="mgl15 normal edit-icon" @click.stop.prevent="open(item)"></uni-icons>
+					<view @tap.stop="open(item)">
+						<uni-icons type="compose" size="20" :color="index===currentIndex?'#f66745':'#919191'" class="mgl15 normal edit-icon" ></uni-icons>
+					</view>
+					
 				</view>
 			</view>
 		</view>
