@@ -1,5 +1,14 @@
 import request,{Upload} from '../request.js'
 export default {
+	// 上传图片
+	async upLoadImg(data = {}) {
+		let res = await Upload({
+			url: '/api/orders/upload_qn',
+			method: 'POST',
+			data
+		})
+		return res
+	},
 	//登录接口
 	async minilogin(data = {}) {
 		let res = await request({
@@ -22,24 +31,6 @@ export default {
 	async get_index_price(data = {}) {
 		let res = await request({
 			url: '/api/orders/index_price',
-			method: 'POST',
-			data
-		})
-		return res
-	},
-	// 上传图片
-	async upLoadImg(data = {}) {
-		let res = await Upload({
-			url: '/api/orders/upload_qn',
-			method: 'POST',
-			data
-		})
-		return res
-	},
-	//通过模板id获取用户的模板信息
-	async getTemplateById(data = {}) {
-		let res = await request({
-			url: '/api/orders/getTemplateById',
 			method: 'POST',
 			data
 		})
@@ -71,7 +62,32 @@ export default {
 			data
 		})
 		return res
-	}
-	
-	
+	},
+	//发布报价
+	async publish_price(data = {}) {
+		let res = await request({
+			url: '/api/orders/publish_price',
+			method: 'POST',
+			data
+		})
+		return res
+	},
+	//通过报价id获取报价详情 
+	async getPriceById(data = {}) {
+		let res = await request({
+			url: '/api/orders/getPriceById',
+			method: 'POST',
+			data
+		})
+		return res
+	},
+	//通过模板id获取用户的模板信息
+	async getTemplateById(data = {}) {
+		let res = await request({
+			url: '/api/orders/getTemplateById',
+			method: 'POST',
+			data
+		})
+		return res
+	},
 }

@@ -16,25 +16,9 @@
 					<text @click="jump(1)">更多...</text>
 				</view>
 				<view class="list">
-					<view class="item row-between">
-						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
-						<view class="date">2022-04-06 13:20</view>
-					</view>
-					<view class="item row-between">
-						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
-						<view class="date">2022-04-06 13:20</view>
-					</view>
-					<view class="item row-between">
-						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
-						<view class="date">2022-04-06 13:20</view>
-					</view>
-					<view class="item row-between">
-						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
-						<view class="date">2022-04-06 13:20</view>
-					</view>
-					<view class="item row-between">
-						<view class="textElis flex1">旅程新品发布会旅程新品发布会旅程新品发布会</view>
-						<view class="date">2022-04-06 13:20</view>
+					<view class="item row-between"  v-for="item in price_info" :key='item.id' @click='jump(4,item.id)'>
+						<view class="textElis flex1">{{item.case_name}}</view>
+						<view class="date">{{item.create_time}}</view>
 					</view>
 				</view>
 			</view>
@@ -44,7 +28,7 @@
 					<text @click="jump(2)">更多...</text>
 				</view>
 				<view class="list">
-					<view class="item textElis" v-for="item in temlate_info" :key='item.id' @click='jump(4,item.id)'>{{item.template_name}}</view>
+					<view class="item textElis" v-for="item in temlate_info" :key='item.id' @click='jump(5,item.id)'>{{item.template_name}}</view>
 				</view>
 			</view>
 		</view>
@@ -98,8 +82,11 @@ export default {
 				this.$jump(`/pages/index/templateRecord`);
 			} else if (type == 3) {
 				// 开始报价
-				this.$jump(`/pages/index/apponit`);
-			} else if (type == 4) {
+				this.$jump(`/pages/index/offerPrice`);
+			}else if (type == 4) {
+				// 报价单
+				this.$jump(`/pages/index/priceSheet?id=${id}`);
+			} else if (type == 5) {
 				// 报价模板
 				this.$jump(`/pages/index/priceTemplate?id=${id}`);
 			}
@@ -180,7 +167,7 @@ export default {
 				font-size: 26rpx;
 				width: 100%;
 				.date {
-					width: 220rpx;
+					width: 250rpx;
 					text-align: right;
 				}
 			}

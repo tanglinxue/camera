@@ -19,14 +19,19 @@
 				</reduceCom>
 			</view>
 			<view class="row-start box">
-				<view class="column-center item" :class='{"acitve":index===currentIndex}' v-for="(item, index) in list3" :key="index"  @click.stop='select(index)'>
+				<view class="column-center item" :class="{ acitve: index === currentIndex }" v-for="(item, index) in list3" :key="index" @click.stop="select(index)">
 					<view class="name font24">{{ item.name }}</view>
 					<view class="tips font20">¥{{ item.unit_price }}/{{ item.unit }}</view>
 					<view @tap.stop="open(item)">
-						<uni-icons type="compose" size="20" :color="index===currentIndex?'#f66745':'#919191'" class="mgl15 normal edit-icon" ></uni-icons>
+						<uni-icons type="compose" size="20" :color="index === currentIndex ? '#f66745' : '#919191'" class="mgl15 normal edit-icon"></uni-icons>
 					</view>
-					
 				</view>
+			</view>
+		</view>
+		<view class="content" v-if='list4.length'>
+			<view class="mgb20 listItem" v-for="(item, index) in list4" :key="index">
+				<reduceCom :info="item" :deleteIcon='true' :nodeid='1'>
+				</reduceCom>
 			</view>
 		</view>
 	</view>
@@ -34,69 +39,53 @@
 
 <script>
 import reduceCom from './reduceCom';
-import { mapGetters } from 'vuex';
+import { mapGetters,mapState } from 'vuex';
 export default {
 	components: {
 		reduceCom
 	},
-	data(){
-		return {
-			currentIndex:-1
-		}
-	},
 	computed: {
-		...mapGetters('service', ['step1']),
+		...mapState('service', ['serviceData']),
+		...mapGetters('service', ['step1','staticStep1']),
 		list() {
-			console.log(this.step1)
-			return this.step1.slice(0,2);
+			return this.step1.slice(0, 2);
 		},
 		list2() {
-			return this.step1.slice(0,2);
-			// const serviceInfo = this.serviceInfo;
-			// return [
-			// 	{
-			// 		id:111,
-			// 		...serviceInfo['111'],
-			// 		footer: '注：200人以内，按200人计费',
-			// 		type: 'input'
-			// 	},
-			// 	{
-			// 		name: '冲印：（张数）',
-			// 		footer: '注：50张起步，不足按50张计费，400人以上合影冲印另计',
-			// 		type: 'input',
-			// 		hidePrice:true,
-			// 	}
-				
-			// ];
+			return [
+				...this.step1.slice(2, 4),
+			];
 		},
-		list3(){
-			return this.step1.slice(0,2);
-			// const serviceInfo = this.serviceInfo;
-			// return [
-			// 	{
-			// 		id:112,
-			// 		...serviceInfo['112'],
-			// 	},
-			// 	{
-			// 		id:113,
-			// 		...serviceInfo['113'],
-			// 	},
-			// 	{
-			// 		id:114,
-			// 		...serviceInfo['114'],
-			// 	}
-			// ];
+		list3() {
+			return this.step1.slice(4, 7);
+		},
+		list4(){
+			return this.staticStep1
+		},
+		currentIndex(){
+			 //"zp_cyzt": 4,照片-冲印状态: 1-无  2-塑封；3-盒装；4-其他  默认
+			const {zp_cyzt} = this.serviceData;
+			switch(zp_cyzt){
+				case 2:
+					return 0;
+				case 3:
+					return 1;
+				case 4:
+					return 2;
+				default:
+					return -1;
+			}
 		}
 	},
-	methods:{
-		open(info){
-			this.$bus.$emit('openPopup',{...info,type:2})
+	methods: {
+		open(info) {
+			this.$bus.$emit('openPopup', { ...info, type: 2 });
 		},
-		select(index){
-			if(this.currentIndex == index){
-				return this.currentIndex =-1
-			}
-			this.currentIndex = index
+		select(index) {
+			// if (this.currentIndex == index) {
+			// 	return (this.currentIndex = -1);
+			// }
+			// this.currentIndex = index;
+			this.$store.commit('service/changeStep1Index',{id:this.info.id,nodeid:this.nodeid})
 		}
 	}
 };

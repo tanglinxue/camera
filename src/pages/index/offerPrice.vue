@@ -3,7 +3,7 @@
 		<view class="navbar row-center">
 			<view v-for="(item, index) in navList" :key="index" class="nav-item row-center" :class="{ current: tabCurrentIndex === index }" @click="tabClick(index)">
 				<view class="label">{{ item.text }}</view>
-				<!-- <view class='badge'>11</view> -->
+				<view class='badge' v-if='item.num'>{{item.num}}</view>
 			</view>
 		</view>
 		<swiper :current="tabCurrentIndex" class="swiper-box" duration="300" @change="changeTab">
@@ -20,7 +20,7 @@
 		</swiper>
 		<view class="row-start dayCompute">
 			<text class="txt1">服务天数：</text>
-			<uni-number-box class="num" />
+			<uni-number-box class="num"  :min="0" :max="99" v-model="serviceData.work_day" />
 			<text class="txt2">单个项目的天数可在下一步修改</text>
 		</view>
 		<view class="foot-detail row-between">
@@ -46,7 +46,7 @@ import Step3 from './components/step3.vue';
 import Step4 from './components/step4.vue';
 import Step5 from './components/step5.vue';
 import ChangePopup from './components/changePopup.vue';
-import { mapActions } from 'vuex';
+import { mapActions,mapGetters,mapState } from 'vuex';
 export default {
 	components: {
 		Step1,
@@ -58,29 +58,7 @@ export default {
 	},
 	data() {
 		return {
-			tabCurrentIndex:0,
-			navList: [
-				{
-					state: 0,
-					text: '照片'
-				},
-				{
-					state: 1,
-					text: '视频'
-				},
-				{
-					state: 2,
-					text: '剪辑'
-				},
-				{
-					state: 3,
-					text: '视频制作'
-				},
-				{
-					state: 4,
-					text: '课程录制'
-				}
-			]
+			tabCurrentIndex:0
 		};
 	},
 
@@ -88,11 +66,45 @@ export default {
 		this.$methods.showLoading();
 		this.getData();
 	},
+	computed:{
+		...mapState('service', ['serviceData']),
+		...mapGetters('service', ['step1Select']),
+		navList(){
+			return [
+				{
+					state: 0,
+					text: '照片',
+					num:this.step1Select.length
+				},
+				{
+					state: 1,
+					text: '视频',
+					num:0
+				},
+				{
+					state: 2,
+					text: '剪辑',
+					num:0
+				},
+				{
+					state: 3,
+					text: '视频制作',
+					num:0
+				},
+				{
+					state: 4,
+					text: '课程录制',
+					num:0
+				}
+			]
+		}
+	},
 
 	methods: {
 		...mapActions('service', ['getInfo']),
 		addItem(){
-			this.$bus.$emit('openPopup',{...this.info,type:1,nodeid:this.tabCurrentIndex+1})
+			// 新增服务项目
+			this.$bus.$emit('openPopup',{...this.info,type:1,nodeid:this.tabCurrentIndex+1,canConfig:true})
 		},
 		async getData() {
 			await this.getInfo()
@@ -110,7 +122,7 @@ export default {
 			this.tabCurrentIndex = index;
 		},
 		nextStep() {
-			this.$jump(`/pages/my/editPriceSheet`);
+			this.$jump(`/pages/index/editOfferPrice`);
 		}
 	}
 };

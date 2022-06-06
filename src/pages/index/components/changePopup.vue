@@ -1,7 +1,7 @@
 <template>
 	<uni-popup ref="popup" type="center" background-color="#fff" :animation="false">
 		<view class="popup column-center">
-			<view class="title">修改项目设置</view>
+			<view class="title">{{query.type==1?'新增服务项目':'修改项目设置'}}</view>
 			<view class="row-start form-item">
 				<view class="label">
 					名称
@@ -39,7 +39,8 @@ export default {
 				unit: '',
 				type: 2,
 				item_id: 0
-			}
+			},
+			canConfig:true,
 		};
 	},
 	mounted() {
@@ -50,13 +51,23 @@ export default {
 			this.$refs.popup.close();
 		},
 		openPopup(info) {
-			const { name, unit_price, unit, type, id,nodeid } = info;
-			let query = { name, unit_price, unit, type};
-			if (type == 1) {
-				// 新增
-				query.node_id = nodeid;
-			}else{
+			const { name,unit_price,unit,type,id,nodeid,canConfig} = info;
+			let query = { name,unit_price,unit,type};
+			if(!canConfig){
+				//固有项目
+				this.canConfig = canConfig
 				query.item_id = id
+			}else{
+				this.canConfig = true
+				if(type == 2){
+					//编辑
+					query.item_id = id
+				}else if(type ==3){
+					query = {
+						item_id:id
+					}
+				}
+				query.node_id = nodeid;
 			}
 			this.query = query;
 			this.$nextTick(() => {
@@ -73,23 +84,27 @@ export default {
 		},
 		async submit() {
 			const type = this.query.type;
+			const canConfig = this.canConfig
 			let title = `更新中...`
 			if(type==1){
 				title = `新增中...`
 			}
 			this.$methods.showLoading(title);
-			// const data = await this.$API.home.edit_item(this.query);
-			
-			const data = await this.$API.home.edit_dynamic(this.query);
+			let API = canConfig?this.$API.home.edit_dynamic:this.$API.home.edit_item		
+			const {item_id} = await API(this.query);
 			let toast = `更新成功`
 			if(type==1){
 				toast = `新增成功`
-			}else{
-				this.$store.commit('service/changeServiceObj',this.query)
+				this.$store.commit('service/addDynamicObj',{...this.query,id:item_id})
+			}else if(type==2){		
+				if(!canConfig){
+					this.$store.commit('service/changeServiceObj',this.query)
+				}else{
+					this.$store.commit('service/changeDynamicObj',this.query)
+				}		
 			}
 			this.$methods.showToast(toast);
-			this.$refs.popup.close();
-			
+			this.$refs.popup.close();	
 		}
 	}
 };
