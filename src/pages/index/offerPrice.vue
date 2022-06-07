@@ -26,7 +26,7 @@
 		<view class="foot-detail row-between">
 			<view class="txt row-start">
 				<text class="red">￥</text>
-				<text class="red weight font36">3200</text>
+				<text class="red weight font36">{{total_money}}</text>
 				<text class="mgl15">(累计总价)</text>
 			</view>
 			<view class="foot-btn row-end">
@@ -58,7 +58,7 @@ export default {
 	},
 	data() {
 		return {
-			tabCurrentIndex:0
+			tabCurrentIndex:4
 		};
 	},
 
@@ -68,7 +68,7 @@ export default {
 	},
 	computed:{
 		...mapState('service', ['serviceData']),
-		...mapGetters('service', ['step1Select']),
+		...mapGetters('service', ['step1Select','step2Select','step3Select','step4Select','step5Select','total_money']),
 		navList(){
 			return [
 				{
@@ -79,22 +79,22 @@ export default {
 				{
 					state: 1,
 					text: '视频',
-					num:0
+					num:this.step2Select.length
 				},
 				{
 					state: 2,
 					text: '剪辑',
-					num:0
+					num:this.step3Select.length
 				},
 				{
 					state: 3,
 					text: '视频制作',
-					num:0
+					num:this.step4Select.length
 				},
 				{
 					state: 4,
 					text: '课程录制',
-					num:0
+					num:this.step5Select.length
 				}
 			]
 		}
@@ -109,9 +109,6 @@ export default {
 		async getData() {
 			await this.getInfo()
 			uni.hideLoading();
-		},
-		popupCallBack(res) {
-			console.log(res);
 		},
 		//swiper 切换
 		changeTab(e) {

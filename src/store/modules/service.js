@@ -2,11 +2,11 @@
 //ok
 import API from '@/api'
 import mutations from './service/mutations.js'
-import {step1,staticStep1,step1Select} from './service/step1.js'
-import {staticStep2} from './service/step2.js'
-import {staticStep3} from './service/step3.js'
-import {staticStep4} from './service/step4.js'
-import {staticStep5} from './service/step5.js'
+import * as step1Getters from './service/step1.js'
+import * as step2Getters from './service/step2.js'
+import * as step3Getters from './service/step3.js'
+import * as step4Getters from './service/step4.js'
+import * as step5Getters from './service/step5.js'
 const service = {
 	namespaced: true,
 	state: {
@@ -25,12 +25,14 @@ const service = {
 		}
 	},
 	getters:{
-		step1,
-		staticStep1,
-		step1Select,
+		...step1Getters,
+        ...step2Getters,
+        ...step3Getters,
+        ...step4Getters,
+	    ...step5Getters,
 		total_money(state,getter){
-			let price = 0;
-			price = getter.step1Select.reduce((total,item)=>total+item.price,price)
+			const {step1Price,step1Price2,step2Price,step3Price,step4Price,step5Price} = getter
+			let price = step1Price+step1Price2+step2Price+step3Price+step4Price+step5Price
 			return price
 		}
 	},

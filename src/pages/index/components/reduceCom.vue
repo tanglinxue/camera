@@ -10,7 +10,7 @@
 				</template>
 			</view>	
 			<view v-if="info.type == 'input'" class='input-box'>
-				<input  v-model="info.num" type="number" @input="inputTap"/>
+				<input  :value="info.num" type='number' @input="inputTap" ref="input"/>
 			</view>	
 			<uni-number-box  :min="0" :max="99" v-model="info.num * 1" v-else-if='info.type !== "noNum"' @input='numTap' />
 		</view>
@@ -24,8 +24,7 @@ export default {
 	props: {
 		info: {
 			type: Object,
-			default: () => ({
-			})
+			default: () => ({})
 		},
 		deleteIcon:{
 			type:Boolean,
@@ -59,16 +58,15 @@ export default {
 			this.$store.commit('service/deleteDynamicObj',{id:this.info.id,nodeid:this.nodeid})
 		},
 		inputTap(e){
-			console.log(e)
 			let val = e.detail.value;
 			val = val.replace(/^(0+)|[^\d]+/g,'')
 			this.$nextTick(()=>{
-				
-			})
+				this.$store.commit('service/changeServiceObj',{num:val,item_id:this.info.id,updateNum:true,parentId:this.info.parentId?this.info.parentId:""})
+			})	
 		},
 		numTap(num){
 			console.log(num)
-			this.$store.commit('service/changeServiceObj',{num,item_id:this.info.id,updateNum:true})
+			this.$store.commit('service/changeServiceObj',{num,item_id:this.info.id,updateNum:true,parentId:this.info.parentId?this.info.parentId:""})
 		}
 	}
 };

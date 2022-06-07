@@ -19,7 +19,7 @@
 				</reduceCom>
 			</view>
 			<view class="row-start box">
-				<view class="column-center item" :class="{ acitve: index === currentIndex }" v-for="(item, index) in list3" :key="index" @click.stop="select(index)">
+				<view class="column-center item" :class="{ acitve: index === currentIndex }" v-for="(item, index) in list3" :key="item.id" @click.stop="select(item.id,index)">
 					<view class="name font24">{{ item.name }}</view>
 					<view class="tips font20">¥{{ item.unit_price }}/{{ item.unit }}</view>
 					<view @tap.stop="open(item)">
@@ -80,12 +80,11 @@ export default {
 		open(info) {
 			this.$bus.$emit('openPopup', { ...info, type: 2 });
 		},
-		select(index) {
-			// if (this.currentIndex == index) {
-			// 	return (this.currentIndex = -1);
-			// }
-			// this.currentIndex = index;
-			this.$store.commit('service/changeStep1Index',{id:this.info.id,nodeid:this.nodeid})
+		select(id,index) {
+			if (this.currentIndex == index) {
+				return this.$store.commit('service/changeStep1Index',{id:0,index:1})
+			}
+			this.$store.commit('service/changeStep1Index',{id,index:index+2})
 		}
 	}
 };

@@ -1,21 +1,17 @@
 <template>
 	<view class="row-between time mgb0">
-		<view class="txt1 mgr15 row-start">{{ info.name +'：'}} 
+		<view class="txt1 mgr15 row-start">{{ info.name || ''}}： 
 			<template v-if="info.id">
 				<view class="gray normal mgl10">
-					¥{{ info.unit_price }}
+					¥{{ info.unit_price || 0}}
 					<template v-if="info.unit">
-						/{{ info.unit }}
+						/{{ info.unit || '' }}
 					</template>
 				</view>
 				<uni-icons type="compose" size="20" color="#919191" class="mgl15 normal" @click="open(info)"></uni-icons>
 			</template>
 		</view>
 		<view class='row-start'>
-			<view class="radio row-start"  @click='select(0)'>
-				<image :src="currentIndex==0?'/static/common/icon-radio-sel.png':'/static/common/icon-radio.png'" class="icon"></image>
-				<text class="txt">否</text>
-			</view>
 			<view class="radio row-start mgl30" @click='select(1)'>
 				<image :src="currentIndex==1?'/static/common/icon-radio-sel.png':'/static/common/icon-radio.png'" class="icon"></image>
 				<text class="txt">是</text>

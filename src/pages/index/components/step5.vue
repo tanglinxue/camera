@@ -7,66 +7,81 @@
 			</view>
 			<view class="red fee">费用组成：技术服务费+录课人数费</view>
 
-			<view class="row-start checkbox pd30">
-				<image src="/static/common/icon-checkbox-sel.png" class="icon"></image>
+			<view class="row-start checkbox pd30" @click='select("down")'>
+				<image :src="downClassOpen?'/static/common/icon-checkbox-sel.png':'/static/common/icon-checkbox.png'" class="icon"></image>
 				<text class="text">线下录课</text>
 			</view>
-			<view class="mgb20 listItem" v-for="(item, index) in list" :key="index">
+			<view class="mgb20 listItem" v-for="(item, index) in list" :key="index" v-if='downClassOpen'>
 				<reduceCom :info="item">
 					<view slot="footer" class="footer">{{ item.footer }}</view>
 				</reduceCom>
 			</view>
-			<approachCom :info='info'/>
+			<approachCom :info='info' :currentIndex='currentIndex'/>
 		</view>
 		<view class="content">
-			<view class="row-start checkbox pd30">
-				<image src="/static/common/icon-checkbox.png" class="icon"></image>
-				<text class="text">线下录课</text>
+			<view class="row-start checkbox pd30"  @click='select("up")'>
+				<image :src="upClassOpen?'/static/common/icon-checkbox-sel.png':'/static/common/icon-checkbox.png'" class="icon"></image>
+				<text class="text">线上录课</text>
 			</view>
-			<view class="mgb20 listItem" v-for="(item, index) in list2" :key="index">
+			<view class="mgb20 listItem" v-for="(item, index) in list2" :key="index" v-if='upClassOpen'>
 				<reduceCom :info="item">
 					<view slot="footer" class="footer">{{ item.footer }}</view>
 				</reduceCom>
 			</view>
 		</view>
-		<!-- <view class="content">
-			<view class="row-start time mgb0 pd30">
-				<view class="txt1 mgr15">提前一天进场：</view>
-				<view class="radio row-start">
-					<image src="/static/common/icon-radio.png" class="icon"></image>
-					<text class="txt">是</text>
-				</view>
-				<view class="radio row-start">
-					<image src="/static/common/icon-radio-sel.png" class="icon"></image>
-					<text class="txt">否</text>
-				</view>
-			</view>
-		</view> -->
 	</view>
 </template>
 
 <script>
 import approachCom from './approachCom';
 import reduceCom from './reduceCom';
-import { mapState } from 'vuex';
+import { mapState,mapGetters } from 'vuex';
 export default {
 	components: {
 		reduceCom,
 		approachCom
 	},
 	computed: {
-		...mapState('service', ['serviceInfo']),
+		...mapGetters('service', ['step5']),
+		...mapState('service', ['serviceInfo','serviceData']),
+		upClassOpen(){
+			const kclz_xxxslk = this.serviceData.kclz_xxxslk
+			return kclz_xxxslk==3||kclz_xxxslk==4
+		},
+		downClassOpen(){
+			const kclz_xxxslk = this.serviceData.kclz_xxxslk
+			return kclz_xxxslk==2||kclz_xxxslk==4
+		},
 		list() {
 			const serviceInfo = this.serviceInfo;
-			return [{ ...serviceInfo['501'], id: 501,type:'noNum' }, { ...serviceInfo['502'], id: 502,footer: '注：正常每天可录制1-7人，具体以需求为准' }];
+			return this.step5.slice(0, 2);
 		},
 		list2() {
 			const serviceInfo = this.serviceInfo;
-			return [{ ...serviceInfo['511'], id: 511,type:'noNum' }, { ...serviceInfo['512'], id: 512,footer: '注：正常每天可录制1-7人，具体以需求为准'}];
+			return this.step5.slice(2, 4);
 		},
 		info(){
 			const serviceInfo = this.serviceInfo;
-			return { ...serviceInfo['208'], id: 208 }
+			return { ...serviceInfo['503'], id: 503 }
+		},
+		currentIndex(){
+			 //"zp_cyzt": 4,照片-冲印状态: 1-无  2-塑封；3-盒装；4-其他  默认
+			const {spzz_djs} = this.serviceData;
+			console.log(spzz_djs)
+			switch(spzz_djs){
+				case 2:
+					return 0;
+				case 3:
+					return 1;
+				default:
+					return -1;
+			}
+		}
+		
+	},
+	methods:{
+		select(type){
+			this.$store.commit('service/changeStep5Index',type)
 		}
 	}
 };

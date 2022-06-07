@@ -1,7 +1,7 @@
 <template>
 	<view class="row-start time mgb0">
 		<view class="txt1 mgr15 ">{{ name }}</view>
-		<view class="radio row-start" v-for="(info,index) in options" :key="info.id" @click='select(index)'>
+		<view class="radio row-start" v-for="(info,index) in options" :key="info.id" @click.stop="select(info.id,index)">
 			<image :src="currentIndex==index?'/static/common/icon-radio-sel.png':'/static/common/icon-radio.png'" class="icon"></image>
 			<text class="txt">{{ info.name }}</text>
 			<template v-if="info.id">
@@ -27,22 +27,25 @@ export default {
 		name: {
 			type: String,
 			default: ''
-		}
-	},
-	data(){
-		return {
-			currentIndex:-1
+		},
+		currentIndex:{
+			type:Number,
+			default:-1
 		}
 	},
 	methods:{
 		open(info){
 			this.$bus.$emit('openPopup',{...info,type:2})
 		},
-		select(index){
-			if(this.currentIndex == index){
-				return this.currentIndex =-1
+		select(id,index){
+			if (this.currentIndex == index) {
+				return this.$store.commit('service/changeStep4Index',{id:0,index:1})
 			}
-			this.currentIndex = index
+			this.$store.commit('service/changeStep4Index',{id,index:index+2})
+		},
+		numTap(num){
+			console.log(num)
+			this.$store.commit('service/changeServiceObj',{num,item_id:this.info.id,updateNum:true})
 		}
 	}
 };

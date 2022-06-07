@@ -15,40 +15,25 @@
 					<view slot="footer" class="footer">{{ item.footer }}</view>
 				</reduceCom>
 			</view>
-			<selectCom :options='options' name='有同传接入'/>
+			<selectCom :options="options" name="有同传接入" />
 		</view>
-		<view class='content' >
-			<approachCom :info='info'/>
-		</view>
+		<view class="content"><approachCom :info="info" /></view>
 		<view class="content">
-			<view class="title">增选项</view>
+			<view class="title row-between">
+				增选项
+				<view>收起</view>
+			</view>
 			<view class="mgb20 listItem" v-for="(item, index) in list3" :key="index">
-				<reduceCom :info="item" v-if='item.id'>
+				<reduceCom :info="item" v-if="item.id">
 					<view slot="footer" class="footer">{{ item.footer }}</view>
 					<view slot="warn" class="red">{{ item.footer }}</view>
 				</reduceCom>
-				<view v-else class='mgb20'>
-					<selectCom :options='options2' name='实时字幕：' />
+				<view v-else class="mgb20">
+					<selectCom :options="options2" name="实时字幕：" />
 					<view class="footer">注：字幕准确率80%</view>
 				</view>
-				
 			</view>
 		</view>
-		<!-- <view class="content">
-			<view class="row-start time mgb0 pd30">
-				<view class="txt1 mgr15">提前一天进场：</view>
-				<view class="radio row-start">
-					<image src="/static/common/icon-radio.png" class="icon"></image>
-					<text class="txt">是</text>
-				</view>
-				<view class="radio row-start">
-					<image src="/static/common/icon-radio-sel.png" class="icon"></image>
-					<text class="txt">否</text>
-				</view>
-			</view>
-		</view>
-		
-		 -->
 	</view>
 </template>
 
@@ -56,71 +41,43 @@
 import reduceCom from './reduceCom';
 import selectCom from './selectCom';
 import approachCom from './approachCom';
-import { mapState } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 export default {
 	components: {
 		reduceCom,
 		selectCom,
 		approachCom
 	},
+	data() {
+		return {
+			status: 'open'
+		};
+	},
 	computed: {
+		...mapGetters('service', ['step2']),
 		...mapState('service', ['serviceInfo']),
 		list() {
-			const serviceInfo = this.serviceInfo;
-			return [
-				{ ...serviceInfo['201'], id: 201 },
-				{ ...serviceInfo['202'], id: 202, footer: '注：多画面视频信号切换(含导播台、录机、通话系统、导播师)' },
-				{
-					...serviceInfo['203'],
-					id: 203,
-					placeholder: '￥3500/场',
-					footer: '服务包含：直播设备、技术服务、并发200人直播间1个；',
-					warn: '并发:直播间同时在线观看最高人数(如需扩容，另计费)'
-				}
-			];
+			return this.step2.slice(0, 3);
 		},
 		list2() {
-			const serviceInfo = this.serviceInfo;
-			return [
-				{ ...serviceInfo['204'], id: 204 },
-				{ ...serviceInfo['205'], id: 205 }
-			];
+			return this.step2.slice(3, 5);
 		},
 		list3() {
-			const serviceInfo = this.serviceInfo;
-			return [
-				{ ...serviceInfo['221'], id: 221 },
-				{ ...serviceInfo['222'], id: 222 },
-				{ ...serviceInfo['223'], id: 223 },
-				{ ...serviceInfo['224'], id: 224, footer: '注：人+PPT开窗、人名条、视频插播、滚屏信息等' },
-				{ ...serviceInfo['225'], id: 225 },
-				{ ...serviceInfo['226'], id: 226 },
-				{ ...serviceInfo['227'], id: 227, footer: '注：上下行带宽稳定在100M' },
-				{ ...serviceInfo['228'], id: 228 },
-				{ ...serviceInfo['229'], id: 229 },
-				{ ...serviceInfo['230'], id: 230 },
-				{ ...serviceInfo['231'], id: 231 },
-				{ ...serviceInfo['232'], id: 232, footer: '注：大屏画面切换(含大屏切换、画面调度两名技术员)' },
-				{ id:null},
-				{ ...serviceInfo['235'], id: 235, footer: '注：摄像1个、连接技术服务' },
-				{ ...serviceInfo['236'], id: 236 },
-				{ ...serviceInfo['237'], id: 237, footer: '注：电视、支架、线材、装运(2台起送)' }
-			];
+			return this.step2.slice(5);
 		},
 		options() {
 			const serviceInfo = this.serviceInfo;
 			return [{ ...serviceInfo['206'], id: 206 }, { ...serviceInfo['207'], id: 207 }];
 		},
-		options2(){
+		options2() {
 			const serviceInfo = this.serviceInfo;
 			return [{ ...serviceInfo['233'], id: 233 }, { ...serviceInfo['234'], id: 234 }];
 		},
-		info(){
+		info() {
 			const serviceInfo = this.serviceInfo;
-			return { ...serviceInfo['208'], id: 208 }
+			return { ...serviceInfo['208'], id: 208 };
 		}
-	},
-	
+	}
 };
 </script>
 

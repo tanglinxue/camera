@@ -24,33 +24,21 @@
 
 <script>
 import reduceCom from './reduceCom';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
 	components: {
 		reduceCom
 	},
 	computed: {
-		...mapState('service', ['serviceInfo']),
+		...mapGetters('service', ['step3']),
 		list() {
-			const serviceInfo = this.serviceInfo;
-			return [
-				{ ...serviceInfo['301'], id: 301 },
-				{ ...serviceInfo['302'], id: 302 },		
-			];
+				return this.step3.slice(0, 2);
 		},
 		list2() {
-			const serviceInfo = this.serviceInfo;
-			return [
-				{ ...serviceInfo['311'], id: 311 },
-				{ ...serviceInfo['312'], id: 312 },		
-			];
+		return this.step3.slice(2, 4);
 		},
 		list3() {
-			const serviceInfo = this.serviceInfo;
-			return [
-				{ ...serviceInfo['321'], id: 321,footer: '注：流程素材，简单拼接（含背景音乐）' },
-				{ ...serviceInfo['322'], id: 322,footer: '注：流程素材，特效拼接（含背景音乐）' },		
-			];
+				return this.step3.slice(4, 6);
 		}
 	},
 

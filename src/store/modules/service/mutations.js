@@ -1,4 +1,4 @@
-
+import Vue from 'vue'
 export default {
 	// 读取接口的自有服务集合
 	updateServiceInfo(state, serviceInfo) {
@@ -27,8 +27,29 @@ export default {
 			updateNum,
 			num
 		} = obj
+		console.log(num)	
 		let days = 0;
 		if(obj.updateNum){
+			if(item_id==11234){
+				if(obj.parentId){
+					item_id = obj.parentId
+				}else{
+					return serviceInfo[item_id] = {
+						...serviceInfo[item_id],
+						num
+					}
+				}
+			}
+			if(item_id==4034){
+				if(obj.parentId){
+					item_id = obj.parentId
+				}else{
+					return serviceInfo[item_id] = {
+						...serviceInfo[item_id],
+						num
+					}
+				}
+			}
 			// 改变数量
 			days = work_day
 			serviceInfo[item_id] = {
@@ -37,6 +58,7 @@ export default {
 				days,
 				price: serviceInfo[item_id].unit_price * num * days
 			}
+			console.log(serviceInfo[item_id])
 		}else{
 			let {num,days} = serviceInfo[item_id];
 			serviceInfo[item_id] = {
@@ -46,7 +68,8 @@ export default {
 				unit,
 				price: unit_price * num * days
 			}
-		}	
+		}
+		console.log(serviceInfo[item_id])
 	},
 	//修改接口的动态服务
 	changeDynamicObj(state, obj) {
@@ -104,7 +127,107 @@ export default {
 		const findIndex = dynamicArr.findIndex(item=>item.id==id)
 		dynamicArr.splice(findIndex,1)
 	},
-	changeStep1Index(index){
-		
+	changeStep1Index(state,{id,index}){
+		const {serviceInfo} = state;
+		state.serviceData.zp_cyzt=index
+		let arr = ['112','113','114']
+		for(let key of arr){
+			serviceInfo[key]={
+				...serviceInfo[key],
+				num:0,
+				days:0
+			}
+		}
+	},
+	changeStep4Index(state,{id,index}){
+		const {serviceInfo} = state;
+		state.serviceData.spzz_djs=index
+		console.log(id)
+		let arr = ['403','404']
+		for(let key of arr){
+			serviceInfo[key]={
+				...serviceInfo[key],
+				num:0,
+				days:0
+			}
+		}
+	},
+	changeStep5Index(state,type){
+		const {serviceInfo,serviceData:{kclz_xxxslk}} = state;
+		let setName = 0
+		if(type=='up'){
+			// 线上
+			if(kclz_xxxslk==1){
+				setName=3
+			}else if(kclz_xxxslk==2){
+				setName=4
+			}else if(kclz_xxxslk==3){
+				setName=1
+			}else if(kclz_xxxslk==4){
+				setName=2
+			}
+		}else if(type='down'){
+			//线下
+			if(kclz_xxxslk==1){
+				setName=2
+			}else if(kclz_xxxslk==2){
+				setName=1
+			}else if(kclz_xxxslk==3){
+				setName=4
+			}else if(kclz_xxxslk==4){
+				setName=3
+			}
+		}
+		if(setName==1){
+			serviceInfo[501]={
+				...serviceInfo[501],
+				num:0,
+				days:0
+			}
+			serviceInfo[511]={
+				...serviceInfo[501],
+				num:0,
+				days:0
+			}
+		}else if(setName==2){
+			// 线下打开
+			serviceInfo[501]={
+				...serviceInfo[501],
+				num:1,
+				days:1
+			}
+			serviceInfo[511]={
+				...serviceInfo[501],
+				num:0,
+				days:0
+			}
+		}else if(setName==3){
+			// 线上打开
+			serviceInfo[511]={
+				...serviceInfo[511],
+				num:1,
+				days:1
+			}
+			serviceInfo[501]={
+				...serviceInfo[501],
+				num:0,
+				days:0
+			}
+		}else if(setName==4){
+			// 线下打开
+			serviceInfo[501]={
+				...serviceInfo[501],
+				num:1,
+				days:1
+			}
+			// 线上打开
+			serviceInfo[511]={
+				...serviceInfo[511],
+				num:1,
+				days:1
+			}
+		}
+
+		state.serviceData.kclz_xxxslk=setName
 	}
 }

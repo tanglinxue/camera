@@ -5,7 +5,7 @@
 		</view>
 		<view class="content">
 			<view class="mgb20">
-				<selectCom :options='options' name='倒计时：'/>
+				<selectCom :options='options' name='倒计时：' :currentIndex='currentIndex'/>
 			</view>
 			<view class="mgb20 listItem" v-for="(item, index) in list2" :key="index"><reduceCom :info="item"></reduceCom></view>
 		</view>
@@ -22,35 +22,40 @@
 <script>
 import reduceCom from './reduceCom';
 import selectCom from './selectCom';
-import { mapState } from 'vuex';
+import { mapState,mapGetters } from 'vuex';
 export default {
 	components: {
 		reduceCom,
 		selectCom
 	},
 	computed: {
-		...mapState('service', ['serviceInfo']),
+		...mapState('service', ['serviceData']),
+		...mapGetters('service', ['step4']),
 		list() {
-			const serviceInfo = this.serviceInfo;
-			return [{ ...serviceInfo['401'], id: 401 }, { ...serviceInfo['402'], id: 402 }];
+			return this.step4.slice(0, 2);
 		},
 		list2() {
-			const serviceInfo = this.serviceInfo;
-			return [
-				{
-					name: '数量',
-					hidePrice: true,
-					num: 0
-				}
-			];
+			return this.step4.slice(6);
 		},
 		list3() {
 			const serviceInfo = this.serviceInfo;
-			return [{ ...serviceInfo['405'], id: 405 }, { ...serviceInfo['406'], id: 406, footer: '注：访谈视频、素材剪辑、特效视频、短片拍摄等' }];
+			return this.step4.slice(4, 6);
 		},
 		options(){
-			const serviceInfo = this.serviceInfo;
-			return [{ ...serviceInfo['403'], id: 403 }, { ...serviceInfo['404'], id: 404 }];
+			return this.step4.slice(2, 4);
+		},
+		currentIndex(){
+			 //"zp_cyzt": 4,照片-冲印状态: 1-无  2-塑封；3-盒装；4-其他  默认
+			const {spzz_djs} = this.serviceData;
+			console.log(spzz_djs)
+			switch(spzz_djs){
+				case 2:
+					return 0;
+				case 3:
+					return 1;
+				default:
+					return -1;
+			}
 		}
 	}
 };
