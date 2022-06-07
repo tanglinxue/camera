@@ -58,7 +58,7 @@ export default {
 	},
 	data() {
 		return {
-			tabCurrentIndex:4
+			tabCurrentIndex:1
 		};
 	},
 

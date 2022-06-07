@@ -167,7 +167,6 @@ export default {
 				font-size: 26rpx;
 				width: 100%;
 				.date {
-					width: 250rpx;
 					text-align: right;
 				}
 			}

@@ -11,7 +11,8 @@ export const step5 = (state) => {
 		{ ...serviceInfo['501'], id: 501,type:'noNum',needPrice: true}, 
 		{ ...serviceInfo['502'], id: 502,footer: '注：正常每天可录制1-7人，具体以需求为准',needPrice: true },
 		{ ...serviceInfo['511'], id: 511,type:'noNum',needPrice: true }, 
-		{ ...serviceInfo['512'], id: 512,footer: '注：正常每天可录制1-7人，具体以需求为准',needPrice: true}
+		{ ...serviceInfo['512'], id: 512,footer: '注：正常每天可录制1-7人，具体以需求为准',needPrice: true},
+		{ ...serviceInfo['503'], id: 503,needPrice: true }
 	]
 }
 export const step5Select = (state, getter) => {

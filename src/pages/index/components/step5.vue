@@ -53,16 +53,13 @@ export default {
 			return kclz_xxxslk==2||kclz_xxxslk==4
 		},
 		list() {
-			const serviceInfo = this.serviceInfo;
 			return this.step5.slice(0, 2);
 		},
 		list2() {
-			const serviceInfo = this.serviceInfo;
 			return this.step5.slice(2, 4);
 		},
 		info(){
-			const serviceInfo = this.serviceInfo;
-			return { ...serviceInfo['503'], id: 503 }
+			return this.step5[4];
 		},
 		currentIndex(){
 			 //"zp_cyzt": 4,照片-冲印状态: 1-无  2-塑封；3-盒装；4-其他  默认

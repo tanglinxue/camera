@@ -39,10 +39,12 @@ export const step2 = (state) => {
 		{
 			...serviceInfo['206'],
 			id: 206
-		}, {
+		}, 
+		{
 			...serviceInfo['207'],
 			id: 207
 		},
+		{ ...serviceInfo['208'], id: 208,needPrice:true},
 		{
 			...serviceInfo['221'],
 			id: 221

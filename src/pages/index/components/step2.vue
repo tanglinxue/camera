@@ -75,7 +75,7 @@ export default {
 		},
 		info() {
 			const serviceInfo = this.serviceInfo;
-			return { ...serviceInfo['208'], id: 208 };
+			return this.step2[7];
 		}
 	}
 };
