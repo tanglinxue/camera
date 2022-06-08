@@ -5,7 +5,7 @@
 		</view>
 		<view class="content">
 			<view class="mgb20">
-				<selectCom :options='options' name='倒计时：' :currentIndex='currentIndex'/>
+				<selectCom :options='options' name='倒计时：' :currentIndex='currentIndex' selectType='spzz_djs'/>
 			</view>
 			<view class="mgb20 listItem" v-for="(item, index) in list2" :key="index"><reduceCom :info="item"></reduceCom></view>
 		</view>
@@ -47,7 +47,6 @@ export default {
 		currentIndex(){
 			 //"zp_cyzt": 4,照片-冲印状态: 1-无  2-塑封；3-盒装；4-其他  默认
 			const {spzz_djs} = this.serviceData;
-			console.log(spzz_djs)
 			switch(spzz_djs){
 				case 2:
 					return 0;

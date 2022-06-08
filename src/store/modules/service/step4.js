@@ -10,33 +10,42 @@ export const step4 = (state) => {
 	return [{
 			...serviceInfo['401'],
 			id: 401,
-			needPrice: true
+			needPrice: true,
+			noDays:true
 		},
 		{
 			...serviceInfo['402'],
 			id: 402,
-			needPrice: true
+			needPrice: true,
+			noDays:true
 		},
 		{
 			...serviceInfo['403'],
 			id: 403,
-			needPrice: true
+			needPrice: true,
+			beforeName:`倒计时(${serviceInfo['403'].name})`,
+			noDays:true
+			
 		},
 		{
 			...serviceInfo['404'],
 			id: 404,
-			needPrice: true
+			needPrice: true,
+			beforeName:`倒计时(${serviceInfo['404'].name})`,
+			noDays:true
 		},
 		{
 			...serviceInfo['405'],
 			id: 405,
-			needPrice: true
+			needPrice: true,
+			noDays:true
 		},
 		{
 			...serviceInfo['406'],
 			id: 406,
 			footer: '注：访谈视频、素材剪辑、特效视频、短片拍摄等',
-			needPrice: true
+			needPrice: true,
+			noDays:true
 		},
 		{
 			name: '数量',

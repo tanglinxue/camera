@@ -29,23 +29,29 @@ export const step1 = (state) => {
 			...serviceInfo['111'],
 			footer: '注：200人以内，按200人计费',
 			type: 'input',
-			needPrice:true
+			needPrice:true,
+			noDays:true
 		},
 		printItem,
 		{
 			id: 112,
 			...serviceInfo['112'],
-			needPrice:true
+			needPrice:true,
+			noDays:true,
+			beforeName:`冲印：(${serviceInfo['112'].name})`
 		},
 		{
 			id: 113,
 			...serviceInfo['113'],
-			needPrice:true
+			needPrice:true,
+			noDays:true,
+			beforeName:`冲印：(${serviceInfo['112'].name})`
 		},
 		{
 			id: 114,
 			...serviceInfo['114'],
-			needPrice:true
+			needPrice:true,
+			beforeName:`冲印：(${serviceInfo['112'].name})`
 		}
 	]
 }

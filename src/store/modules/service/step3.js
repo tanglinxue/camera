@@ -19,24 +19,32 @@ export const step3 = (state) => {
 		{
 			...serviceInfo['311'],
 			id: 311,
-			needPrice: true
+			needPrice: true,
+			noDays:true,
+			beforeName:`快剪(${serviceInfo['311'].name})`,
 		},
 		{
 			...serviceInfo['312'],
 			id: 312,
-			needPrice: true
+			needPrice: true,
+			noDays:true,
+			beforeName:`快剪(${serviceInfo['312'].name})`,
 		},
 		{
 			...serviceInfo['321'],
 			id: 321,
 			footer: '注：流程素材，简单拼接（含背景音乐）',
-			needPrice: true
+			needPrice: true,
+			noDays:true,
+			beforeName:`慢剪(${serviceInfo['321'].name})`,		
 		},
 		{
 			...serviceInfo['322'],
 			id: 322,
 			footer: '注：流程素材，特效拼接（含背景音乐）',
-			needPrice: true
+			needPrice: true,
+			noDays:true,
+			beforeName:`慢剪(${serviceInfo['322'].name})`,
 		},
 	]
 }

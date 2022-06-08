@@ -58,11 +58,15 @@ export default {
 	},
 	data() {
 		return {
-			tabCurrentIndex:1
+			tabCurrentIndex:1,
+			type:1
 		};
 	},
 
-	onLoad() {
+	onLoad(option) {
+		if(option.type && option.type==2){
+			return this.type = 2
+		}
 		this.$methods.showLoading();
 		this.getData();
 	},
@@ -119,6 +123,11 @@ export default {
 			this.tabCurrentIndex = index;
 		},
 		nextStep() {
+			if(this.type==2){
+				return uni.navigateBack({
+					delta:1
+				})
+			}
 			this.$jump(`/pages/index/editOfferPrice`);
 		}
 	}

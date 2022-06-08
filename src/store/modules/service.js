@@ -7,6 +7,7 @@ import * as step2Getters from './service/step2.js'
 import * as step3Getters from './service/step3.js'
 import * as step4Getters from './service/step4.js'
 import * as step5Getters from './service/step5.js'
+import {allPro} from './service/allPro.js'
 const service = {
 	namespaced: true,
 	state: {
@@ -30,6 +31,7 @@ const service = {
         ...step3Getters,
         ...step4Getters,
 	    ...step5Getters,
+		allPro,
 		total_money(state,getter){
 			const {step1Price,step1Price2,step2Price,step3Price,step4Price,step5Price} = getter
 			let price = step1Price+step1Price2+step2Price+step3Price+step4Price+step5Price

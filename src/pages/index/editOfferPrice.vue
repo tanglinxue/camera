@@ -15,27 +15,17 @@
 					<view class="input-box row-center width160"><input type="text" placeholder="联系人" class="input" v-model="query.contact_name"/></view>
 				</view>
 			</view>
-			<view class='top-title borderbottom mgb20 row-start'><view class='label'>项目收费：</view><view class="small-btn">增减项目</view></view>
-			<view class="title">照片</view>
-			<view class="row row-between">
-				<view class="left-txt">照片直播：</view>
-				<view class="right-txt">￥1500*1个*1天=2000元</view>
+			<view class='top-title borderbottom mgb20 row-start'><view class='label'>项目收费：</view><view class="small-btn" @click='goOfferPrice'>增减项目</view></view>
+			<view v-for="(item, index) in allPro" :key="index" style='width:100%'>
+				<template v-if='item.list.length'>
+					<view class="title">{{item.name}}</view>
+					<view class="row row-between"  v-for="(bitem, index) in item.list" :key="bitem.id">
+						<view class="left-txt">{{bitem.name}}</view>
+						<view class="right-txt">￥{{bitem.unit_price}}*{{bitem.num}}{{bitem.unit}}*{{bitem.days}}天=2000元</view>
+					</view>
+					<view class="price borderbottom red">小计：￥{{item.price}}</view>
+				</template>		
 			</view>
-			<view class="row row-between">
-				<view class="left-txt">传统摄影：</view>
-				<view class="right-txt">￥1500*1个*1天=2000元</view>
-			</view>
-			<view class="price borderbottom red">小计：￥1500</view>
-		<!-- 	<view class="title">站架合影</view>
-			<view class="row row-between">
-				<view class="left-txt">人数：</view>
-				<view class="right-txt">￥1500*1个*1天=2000元</view>
-			</view>
-			<view class="row row-between">
-				<view class="left-txt">冲印：</view>
-				<view class="right-txt">￥1500*1个*1天=2000元</view>
-			</view>
-			<view class="price red borderbottom">小计：￥1500</view> -->
 			<view class='top-title borderbottom mgb20 row-start'>
 				<view class='label'>其他项目：</view><view class="small-btn">增加项目</view>
 			</view>
@@ -70,25 +60,42 @@
 					real_money:'',//项目结算总价
 					case_memo:'',//项目报价备注
 					company_name:''//报价方/报价日期字串
-				}
+				},
+				price_id:''
+			}
+		},
+		onLoad(options){
+			if(options.detail){
+				this.query = JSON.parse(options.detail)
+				this.price_id = options.price_id
 			}
 		},
 		computed:{
 			...mapState('service', ['serviceInfo','dynamicInfo','serviceData']),
-			...mapGetters('service', ['total_money']),
+			...mapGetters('service', ['total_money','allPro']),
 		},
 		methods:{
 			async submit(){
-				const {query,serviceData,serviceInfo,dynamicInfo} = this;
-				this.$methods.showLoading('发布中...');
-				const {price_id} = await this.$API.home.publish_price({
+				const {query,serviceData,serviceInfo,dynamicInfo,price_id} = this;
+				let title = price_id?'编辑中...':'发布中...';
+				let toast = price_id?'编辑成功':'发布成功';
+				let API = price_id?this.$API.home.edit_price:this.$API.home.publish_price
+				this.$methods.showLoading(title);
+				let params = {
 					...query,
 					...serviceData,
 					case_item:JSON.stringify(serviceInfo),
 					dynamic_item:JSON.stringify(dynamicInfo),
 					total_money:this.total_money
-				});
-				this.$methods.showToast('发布成功');
+				}
+				if(price_id){
+					params.price_id = price_id
+				}
+				await API(params);
+				this.$methods.showToast(toast);
+			},
+			goOfferPrice(){
+				this.$jump(`/pages/index/offerPrice?type=2`);
 			}
 		}
 	}

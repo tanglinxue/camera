@@ -72,6 +72,15 @@ export default {
 		})
 		return res
 	},
+	//编辑报价
+	async edit_price(data = {}) {
+		let res = await request({
+			url: '/api/orders/do_edit_price',
+			method: 'POST',
+			data
+		})
+		return res
+	},
 	//通过报价id获取报价详情 
 	async getPriceById(data = {}) {
 		let res = await request({

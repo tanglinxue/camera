@@ -31,17 +31,33 @@ export default {
 		currentIndex:{
 			type:Number,
 			default:-1
+		},
+		selectType:{
+			type:String,
+			default:''
 		}
 	},
 	methods:{
 		open(info){
 			this.$bus.$emit('openPopup',{...info,type:2})
 		},
-		select(id,index){
-			if (this.currentIndex == index) {
-				return this.$store.commit('service/changeStep4Index',{id:0,index:1})
+		select(upId,index){
+			const selectType = this.selectType;
+			let upIndex = 1;
+			let id = 0;
+			if (this.currentIndex != index) {
+				id = upId
+				upIndex = index+2
 			}
-			this.$store.commit('service/changeStep4Index',{id,index:index+2})
+			if(selectType=='spzz_djs'){
+				this.$store.commit('service/changeStep4Index',{id,index:upIndex})
+			}
+			if(selectType=='sp_tcjr'){
+				this.$store.commit('service/changeStep2Index',{id,index:upIndex})
+			}
+			if(selectType=='sp_sszm'){
+				this.$store.commit('service/changeStep2Index2',{id,index:upIndex})
+			}
 		},
 		numTap(num){
 			console.log(num)

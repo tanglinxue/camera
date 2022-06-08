@@ -2,17 +2,46 @@
 export const step5 = (state) => {
 	const {
 		serviceInfo,
-		serviceData:{spzz_djs}
+		serviceData: {
+			spzz_djs
+		}
 	} = state;
 	if (!Object.keys(serviceInfo).length) {
 		return []
 	}
-	return [
-		{ ...serviceInfo['501'], id: 501,type:'noNum',needPrice: true}, 
-		{ ...serviceInfo['502'], id: 502,footer: '注：正常每天可录制1-7人，具体以需求为准',needPrice: true },
-		{ ...serviceInfo['511'], id: 511,type:'noNum',needPrice: true }, 
-		{ ...serviceInfo['512'], id: 512,footer: '注：正常每天可录制1-7人，具体以需求为准',needPrice: true},
-		{ ...serviceInfo['503'], id: 503,needPrice: true }
+	return [{
+			...serviceInfo['501'],
+			id: 501,
+			type: 'noNum',
+			needPrice: true,
+			beforeName:`线下录课(${serviceInfo['501'].name})`
+		},
+		{
+			...serviceInfo['502'],
+			id: 502,
+			footer: '注：正常每天可录制1-7人，具体以需求为准',
+			needPrice: true
+		},
+		{
+			...serviceInfo['503'],
+			id: 503,
+			needPrice: true
+		},
+		{
+			...serviceInfo['511'],
+			id: 511,
+			type: 'noNum',
+			needPrice: true,
+			beforeName:`线上录课(${serviceInfo['501'].name})`
+			
+		},
+		{
+			...serviceInfo['512'],
+			id: 512,
+			footer: '注：正常每天可录制1-7人，具体以需求为准',
+			needPrice: true
+		}
+
 	]
 }
 export const step5Select = (state, getter) => {
@@ -29,10 +58,12 @@ export const step5Price = (state, getter) => {
 }
 // 照片类动态
 export const staticStep5 = (state) => {
-	const {dynamicInfo} = state;
-	if(dynamicInfo[5]){
+	const {
+		dynamicInfo
+	} = state;
+	if (dynamicInfo[5]) {
 		return dynamicInfo[5]
-	}else{
+	} else {
 		return []
 	}
 }

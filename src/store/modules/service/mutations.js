@@ -139,6 +139,92 @@ export default {
 			}
 		}
 	},
+	changeStep2Index(state,{id,index}){
+		const {serviceInfo} = state;
+		state.serviceData.sp_tcjr=index
+		console.log(id)
+		if(id == 0){
+			let arr = ['206','207']
+			for(let key of arr){
+				serviceInfo[key]={
+					...serviceInfo[key],
+					num:0,
+					days:0,
+					price:0
+				}
+			}
+		}else if(id=='206'){
+			serviceInfo['206']={
+				...serviceInfo['206'],
+				num:1,
+				days:1,
+				price: serviceInfo['206'].unit_price
+			}
+			serviceInfo['207']={
+				...serviceInfo['207'],
+				num:0,
+				days:0,
+				price:0
+			}
+		}else{
+			serviceInfo['207']={
+				...serviceInfo['207'],
+				num:1,
+				days:1,
+				price: serviceInfo['207'].unit_price
+			}
+			serviceInfo['206']={
+				...serviceInfo['206'],
+				num:0,
+				days:0,
+				price:0
+			}
+		}
+		
+	},
+	changeStep2Index2(state,{id,index}){
+		const {serviceInfo} = state;
+		state.serviceData.sp_sszm=index
+		console.log(id)
+		if(id == 0){
+			let arr = ['233','234']
+			for(let key of arr){
+				serviceInfo[key]={
+					...serviceInfo[key],
+					num:0,
+					days:0,
+					price:0
+				}
+			}
+		}else if(id=='233'){
+			serviceInfo['233']={
+				...serviceInfo['233'],
+				num:1,
+				days:1,
+				price: serviceInfo['233'].unit_price
+			}
+			serviceInfo['234']={
+				...serviceInfo['234'],
+				num:0,
+				days:0,
+				price:0
+			}
+		}else{
+			serviceInfo['234']={
+				...serviceInfo['234'],
+				num:1,
+				days:1,
+				price: serviceInfo['234'].unit_price
+			}
+			serviceInfo['233']={
+				...serviceInfo['233'],
+				num:0,
+				days:0,
+				price:0
+			}
+		}
+		
+	},
 	changeStep4Index(state,{id,index}){
 		const {serviceInfo} = state;
 		state.serviceData.spzz_djs=index
