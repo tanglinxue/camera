@@ -50,7 +50,7 @@ export const step2 = (state) => {
 			id: 208,
 			needPrice: true
 		},
-	
+
 		{
 			...serviceInfo['221'],
 			id: 221,
@@ -155,10 +155,8 @@ export const step2Select = (state, getter) => {
 
 export const step2Price = (state, getter) => {
 	const step2 = getter.step2;
-	console.log(step2)
 	let arr = step2.filter(item => item.needPrice && item.num)
 	let price = arr.reduce((total, item) => total + item.price, 0)
-	console.log(price)
 	return price
 }
 
