@@ -18,6 +18,7 @@
 </template>
 
 <script>
+//finish	
 export default {
 	props: {
 		options: {
@@ -39,29 +40,26 @@ export default {
 	},
 	methods:{
 		open(info){
+			// 打开编辑弹窗
 			this.$bus.$emit('openPopup',{...info,type:2})
 		},
 		select(upId,index){
-			const selectType = this.selectType;
+			const type = this.selectType;
+			let upId = 0;
 			let upIndex = 1;
-			let id = 0;
 			if (this.currentIndex != index) {
-				id = upId
-				upIndex = index+2
+				upId = id
+				upIndex = index + 2
 			}
-			if(selectType=='spzz_djs'){
-				this.$store.commit('service/changeStep4Index',{id,index:upIndex})
+			if(type=='spzz_djs'){
+				this.$store.commit('service/changeIndex',{id:upId,index:upIndex,type,arr:['403','404']})
 			}
-			if(selectType=='sp_tcjr'){
-				this.$store.commit('service/changeStep2Index',{id,index:upIndex})
+			if(type=='sp_tcjr'){
+				this.$store.commit('service/changeIndex',{id:upId,index:upIndex,type,arr:['206','207'],needAdd:true})
 			}
-			if(selectType=='sp_sszm'){
-				this.$store.commit('service/changeStep2Index2',{id,index:upIndex})
+			if(type=='sp_sszm'){
+				this.$store.commit('service/changeIndex',{id:upId,index:upIndex,type,arr:['233','234'],needAdd:true})
 			}
-		},
-		numTap(num){
-			console.log(num)
-			this.$store.commit('service/changeServiceObj',{num,item_id:this.info.id,updateNum:true})
 		}
 	}
 };

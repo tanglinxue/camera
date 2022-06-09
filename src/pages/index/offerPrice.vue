@@ -58,7 +58,7 @@ export default {
 	},
 	data() {
 		return {
-			tabCurrentIndex:1,
+			tabCurrentIndex:0,
 			type:1
 		};
 	},
@@ -72,33 +72,33 @@ export default {
 	},
 	computed:{
 		...mapState('service', ['serviceData']),
-		...mapGetters('service', ['step1Select','step2Select','step3Select','step4Select','step5Select','total_money']),
+		...mapGetters('service', ['step1SelectNum','allPro','total_money']),
 		navList(){
 			return [
 				{
 					state: 0,
 					text: '照片',
-					num:this.step1Select.length
+					num:this.step1SelectNum
 				},
 				{
 					state: 1,
 					text: '视频',
-					num:this.step2Select.length
+					num:this.allPro[2].list.length
 				},
 				{
 					state: 2,
 					text: '剪辑',
-					num:this.step3Select.length
+					num:this.allPro[3].list.length
 				},
 				{
 					state: 3,
 					text: '视频制作',
-					num:this.step4Select.length
+					num:this.allPro[4].list.length
 				},
 				{
 					state: 4,
 					text: '课程录制',
-					num:this.step5Select.length
+					num:this.allPro[5].list.length
 				}
 			]
 		}

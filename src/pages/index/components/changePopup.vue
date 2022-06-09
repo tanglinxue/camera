@@ -29,8 +29,8 @@
 </template>
 
 <script>
+//finish
 export default {
-
 	data() {
 		return {
 			query: {
@@ -44,6 +44,7 @@ export default {
 		};
 	},
 	mounted() {
+		// 打开弹窗
 		this.$bus.$on('openPopup', this.openPopup);
 	},
 	methods: {
@@ -53,13 +54,12 @@ export default {
 		openPopup(info) {
 			const { name,unit_price,unit,type,id,nodeid,canConfig} = info;
 			let query = { name,unit_price,unit,type};
-			if(!canConfig){
-				//固有项目
-				this.canConfig = canConfig
-				query.item_id = id
-			}else{
+			if(canConfig){	
+				// 动态配置项目
 				this.canConfig = true
-				if(type == 2){
+				if(type==1){
+					query.days = 1
+				}else if(type == 2){
 					//编辑
 					query.item_id = id
 				}else if(type ==3){
@@ -68,6 +68,10 @@ export default {
 					}
 				}
 				query.node_id = nodeid;
+			}else{
+				//固有项目
+				this.canConfig = false
+				query.item_id = id
 			}
 			this.query = query;
 			this.$nextTick(() => {
@@ -75,7 +79,6 @@ export default {
 			});
 		},
 		inputTap(e){
-			console.log(e)
 			let val = e.detail.value;
 			val = val.replace(/^(0+)|[^\d]+/g,'')
 			this.$nextTick(()=>{

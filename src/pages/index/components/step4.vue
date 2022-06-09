@@ -20,6 +20,7 @@
 </template>
 
 <script>
+//finish
 import reduceCom from './reduceCom';
 import selectCom from './selectCom';
 import { mapState,mapGetters } from 'vuex';
@@ -38,14 +39,12 @@ export default {
 			return this.step4.slice(6);
 		},
 		list3() {
-			const serviceInfo = this.serviceInfo;
 			return this.step4.slice(4, 6);
 		},
 		options(){
 			return this.step4.slice(2, 4);
 		},
 		currentIndex(){
-			 //"zp_cyzt": 4,照片-冲印状态: 1-无  2-塑封；3-盒装；4-其他  默认
 			const {spzz_djs} = this.serviceData;
 			switch(spzz_djs){
 				case 2:

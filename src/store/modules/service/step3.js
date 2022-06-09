@@ -1,4 +1,5 @@
 // 剪辑类固定
+//finish
 export const step3 = (state) => {
 	const {
 		serviceInfo
@@ -6,7 +7,11 @@ export const step3 = (state) => {
 	if (!Object.keys(serviceInfo).length) {
 		return []
 	}
-	return [{
+	function getBeforeName(type,key){
+		return `${type}(${serviceInfo[key].name})`
+	}
+	return [
+		{
 			...serviceInfo['301'],
 			id: 301,
 			needPrice: true
@@ -21,14 +26,14 @@ export const step3 = (state) => {
 			id: 311,
 			needPrice: true,
 			noDays:true,
-			beforeName:`快剪(${serviceInfo['311'].name})`,
+			beforeName:getBeforeName('快剪','311'),
 		},
 		{
 			...serviceInfo['312'],
 			id: 312,
 			needPrice: true,
 			noDays:true,
-			beforeName:`快剪(${serviceInfo['312'].name})`,
+			beforeName:getBeforeName('快剪','312'),
 		},
 		{
 			...serviceInfo['321'],
@@ -36,7 +41,7 @@ export const step3 = (state) => {
 			footer: '注：流程素材，简单拼接（含背景音乐）',
 			needPrice: true,
 			noDays:true,
-			beforeName:`慢剪(${serviceInfo['321'].name})`,		
+			beforeName:getBeforeName('慢剪','321'),  		
 		},
 		{
 			...serviceInfo['322'],
@@ -44,30 +49,7 @@ export const step3 = (state) => {
 			footer: '注：流程素材，特效拼接（含背景音乐）',
 			needPrice: true,
 			noDays:true,
-			beforeName:`慢剪(${serviceInfo['322'].name})`,
+			beforeName:getBeforeName('慢剪','322'),
 		},
 	]
-}
-export const step3Select = (state, getter) => {
-	const step3 = getter.step3;
-	const selectArr = step3.filter(item => item.needPrice && item.num)
-	return selectArr
-}
-
-export const step3Price = (state, getter) => {
-	const step3 = getter.step3;
-	let arr = step3.filter(item => item.needPrice && item.num)
-	let price = arr.reduce((total, item) => total + item.price, 0)
-	return price
-}
-// 剪辑类动态
-export const staticStep3 = (state) => {
-	const {
-		dynamicInfo
-	} = state;
-	if (dynamicInfo[3]) {
-		return dynamicInfo[3]
-	} else {
-		return []
-	}
 }

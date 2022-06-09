@@ -1,9 +1,8 @@
 
+//finish
 export const allPro = (state,getter) => {
 	const {step1,step2,step3,step4,step5} = getter;
 	const list11 = getArr(step1.slice(0, 2))
-	console.log('list11')
-	console.log(list11)
 	const price11 = getPrice(list11)
 	const list12 = getArr(step1.slice(2))
 	const price12 = getPrice(list12)

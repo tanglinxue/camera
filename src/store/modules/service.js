@@ -1,5 +1,5 @@
 
-//ok
+//finish
 import API from '@/api'
 import mutations from './service/mutations.js'
 import * as step1Getters from './service/step1.js'
@@ -8,6 +8,7 @@ import * as step3Getters from './service/step3.js'
 import * as step4Getters from './service/step4.js'
 import * as step5Getters from './service/step5.js'
 import {allPro} from './service/allPro.js'
+
 const service = {
 	namespaced: true,
 	state: {
@@ -32,14 +33,12 @@ const service = {
         ...step4Getters,
 	    ...step5Getters,
 		allPro,
-		total_money(state,getter){
-			const {step1Price,step1Price2,step2Price,step3Price,step4Price,step5Price} = getter
-			let price = step1Price+step1Price2+step2Price+step3Price+step4Price+step5Price
-			return price
+		total_money(state,getter){//总价
+			return getter.allPro.reduce((total,item)=>total+item.price,0)
 		}
 	},
 	actions:{
-		// 读取服务接口
+		// 读取服务初始化接口
 		async getInfo({commit}){
 			const { item_info } = await API.home.getPriceByUser();
 			let {case_item,dynamic_item,kclz_xxxslk,sp_sszm,sp_tcjr,spzz_djs,work_day,zp_cyzt} = item_info

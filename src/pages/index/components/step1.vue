@@ -38,6 +38,7 @@
 </template>
 
 <script>
+//finish
 import reduceCom from './reduceCom';
 import { mapGetters,mapState } from 'vuex';
 export default {
@@ -46,7 +47,7 @@ export default {
 	},
 	computed: {
 		...mapState('service', ['serviceData']),
-		...mapGetters('service', ['step1','staticStep1']),
+		...mapGetters('service', ['step1','dynamicInfo']),
 		list() {
 			return this.step1.slice(0, 2);
 		},
@@ -59,7 +60,7 @@ export default {
 			return this.step1.slice(4, 7);
 		},
 		list4(){
-			return this.staticStep1
+			return this.dynamicInfo[1]
 		},
 		currentIndex(){
 			 //"zp_cyzt": 4,照片-冲印状态: 1-无  2-塑封；3-盒装；4-其他  默认
@@ -78,13 +79,17 @@ export default {
 	},
 	methods: {
 		open(info) {
-			this.$bus.$emit('openPopup', { ...info, type: 2 });
+			//打开修改弹窗
+			this.$bus.$emit('openPopup', {...info,type:2});
 		},
-		select(id,index) {
-			if (this.currentIndex == index) {
-				return this.$store.commit('service/changeStep1Index',{id:0,index:1})
+		select(id,index){
+			let upId = 0;
+			let upIndex = 1;
+			if (this.currentIndex != index) {
+				upId = id
+				upIndex = index + 2
 			}
-			this.$store.commit('service/changeStep1Index',{id,index:index+2})
+			this.$store.commit('service/changeIndex',{id:upId,index:upIndex,type:'zp_cyzt',arr:['112','113','114']})
 		}
 	}
 };

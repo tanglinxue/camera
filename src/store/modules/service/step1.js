@@ -1,8 +1,15 @@
 // 照片类固定
+//finish
 export const step1 = (state) => {
 	const {serviceInfo,serviceData:{zp_cyzt}} = state;
 	if(!Object.keys(serviceInfo).length){
 		return []
+	}
+	let num = 0;
+	let parentId = '';
+	if(zp_cyzt>1){
+		num = serviceInfo['11'+zp_cyzt].num;
+		parentId = ('11'+zp_cyzt)*1
 	}
 	const printItem ={
 		name: '冲印：（张数）',
@@ -10,8 +17,12 @@ export const step1 = (state) => {
 		type: 'input',
 		hidePrice: true,
 		id:11234,
-		num:zp_cyzt==1?0:serviceInfo['11'+zp_cyzt].num,
-		parentId:zp_cyzt==1?'':('11'+zp_cyzt)*1
+		num
+		parentId,
+		noDays:true
+	}
+	function getBeforeName(key){
+		return `冲印：(${serviceInfo[key].name})`
 	}
 	return [
 		{
@@ -38,47 +49,26 @@ export const step1 = (state) => {
 			...serviceInfo['112'],
 			needPrice:true,
 			noDays:true,
-			beforeName:`冲印：(${serviceInfo['112'].name})`
+			beforeName:getBeforeName('112')
 		},
 		{
 			id: 113,
 			...serviceInfo['113'],
 			needPrice:true,
 			noDays:true,
-			beforeName:`冲印：(${serviceInfo['112'].name})`
+			beforeName:getBeforeName('113')
 		},
 		{
 			id: 114,
 			...serviceInfo['114'],
 			needPrice:true,
-			beforeName:`冲印：(${serviceInfo['112'].name})`
+			beforeName:getBeforeName('114')
 		}
 	]
 }
 
-export const step1Select = (state, getter)=>{
+// 获取数量
+export const step1SelectNum = (state, getter)=>{
 	const step1 = getter.step1;
-	const selectArr = step1.filter(item=>item.needPrice && item.num)
-	return selectArr
-}
-export const step1Price = (state,getter)=>{
-	const step1 = getter.step1;
-	let arr = step1.slice(0,2).filter(item=>item.needPrice && item.num)
-	let price = arr.reduce((total,item)=>total+item.price,0)
-	return price
-}
-export const step1Price2 = (state,getter)=>{
-	const step1 = getter.step1;
-	let arr = step1.slice(2).filter(item=>item.needPrice && item.num)
-	let price = arr.reduce((total,item)=>total+item.price,0)
-	return price
-}
-// 照片类动态
-export const staticStep1 = (state) => {
-	const {dynamicInfo} = state;
-	if(dynamicInfo[1]){
-		return dynamicInfo[1]
-	}else{
-		return []
-	}
+	return step1.filter(item=>item.needPrice && item.num).length
 }

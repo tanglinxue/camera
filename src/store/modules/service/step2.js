@@ -1,4 +1,5 @@
 // 视频类固定
+//finish
 export const step2 = (state) => {
 	const {
 		serviceInfo
@@ -145,29 +146,4 @@ export const step2 = (state) => {
 			needPrice: true
 		}
 	]
-}
-
-export const step2Select = (state, getter) => {
-	const step2 = getter.step2;
-	const selectArr = step2.filter(item => item.needPrice && item.num)
-	return selectArr
-}
-
-export const step2Price = (state, getter) => {
-	const step2 = getter.step2;
-	let arr = step2.filter(item => item.needPrice && item.num)
-	let price = arr.reduce((total, item) => total + item.price, 0)
-	return price
-}
-
-// 视频类动态
-export const staticStep2 = (state) => {
-	const {
-		dynamicInfo
-	} = state;
-	if (dynamicInfo[2]) {
-		return dynamicInfo[2]
-	} else {
-		return []
-	}
 }

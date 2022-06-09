@@ -1,9 +1,10 @@
 <template>
 	<view class="row-between time mgb0">
-		<view class="txt1 mgr15 row-start"><text v-if='info.name'>{{ info.name}}：</text>
+		<view class="txt1 mgr15 row-start">
+			<text v-if="info.name">{{ info.name }}：</text>
 			<template v-if="info.id">
 				<view class="gray normal mgl10">
-					¥{{ info.unit_price || 0}}
+					¥{{ info.unit_price || 0 }}
 					<template v-if="info.unit">
 						/{{ info.unit || '' }}
 					</template>
@@ -11,9 +12,9 @@
 				<uni-icons type="compose" size="20" color="#919191" class="mgl15 normal" @click="open(info)"></uni-icons>
 			</template>
 		</view>
-		<view class='row-start'>
-			<view class="radio row-start mgl30" @click='select'>
-				<image :src="info.num?'/static/common/icon-radio-sel.png':'/static/common/icon-radio.png'" class="icon"></image>
+		<view class="row-start">
+			<view class="radio row-start mgl30" @click="select">
+				<image :src="info.num ? '/static/common/icon-radio-sel.png' : '/static/common/icon-radio.png'" class="icon"></image>
 				<text class="txt">是</text>
 			</view>
 		</view>
@@ -21,20 +22,22 @@
 </template>
 
 <script>
+//finish
 export default {
 	props: {
-		info:{
-			type:Object,
-			default:()=>({})
+		info: {
+			type: Object,
+			default: () => ({})
 		}
 	},
-	methods:{
-		open(info){
-			this.$bus.$emit('openPopup',{...info,type:2})
+	methods: {
+		open(info) {
+			//打开编辑弹窗
+			this.$bus.$emit('openPopup', { ...info, type: 2 });
 		},
-		select(){
-			const num = this.info.num;
-			this.$store.commit('service/changeServiceObj',{num:num?0:1,item_id:this.info.id,updateNum:true})
+		select() {
+			let {num,id} = this.info;
+			this.$store.commit('service/changeServiceObj', { num: num ? 0 : 1, item_id:id, updateNum: true });
 		}
 	}
 };
