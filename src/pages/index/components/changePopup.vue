@@ -86,24 +86,24 @@ export default {
 			})
 		},
 		async submit() {
-			const type = this.query.type;
-			const canConfig = this.canConfig
+			const {query,canConfig} = this
+			const type = {query};
 			let title = `更新中...`
 			if(type==1){
 				title = `新增中...`
 			}
 			this.$methods.showLoading(title);
 			let API = canConfig?this.$API.home.edit_dynamic:this.$API.home.edit_item		
-			const {item_id} = await API(this.query);
+			const {item_id} = await API(query);
 			let toast = `更新成功`
 			if(type==1){
 				toast = `新增成功`
-				this.$store.commit('service/addDynamicObj',{...this.query,id:item_id})
+				this.$store.commit('service/addDynamicObj',{...query,id:item_id})
 			}else if(type==2){		
 				if(!canConfig){
-					this.$store.commit('service/changeServiceObj',this.query)
+					this.$store.commit('service/changeServiceObj',query)
 				}else{
-					this.$store.commit('service/changeDynamicObj',this.query)
+					this.$store.commit('service/changeDynamicObj',query)
 				}		
 			}
 			this.$methods.showToast(toast);

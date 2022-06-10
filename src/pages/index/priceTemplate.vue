@@ -29,7 +29,7 @@
 </template>
 
 <script>
-// ok
+// finisth
 export default {
 	data() {
 		return {

@@ -39,7 +39,7 @@
 </template>
 
 <script>
-// ok
+// finish
 import Step1 from './components/step1.vue';
 import Step2 from './components/step2.vue';
 import Step3 from './components/step3.vue';
@@ -74,31 +74,32 @@ export default {
 		...mapState('service', ['serviceData']),
 		...mapGetters('service', ['step1SelectNum','allPro','total_money']),
 		navList(){
+			const {step1SelectNum,allPro} = this;
 			return [
 				{
 					state: 0,
 					text: '照片',
-					num:this.step1SelectNum
+					num:step1SelectNum
 				},
 				{
 					state: 1,
 					text: '视频',
-					num:this.allPro[2].list.length
+					num:allPro[2].list.length
 				},
 				{
 					state: 2,
 					text: '剪辑',
-					num:this.allPro[3].list.length
+					num:allPro[3].list.length
 				},
 				{
 					state: 3,
 					text: '视频制作',
-					num:this.allPro[4].list.length
+					num:allPro[4].list.length
 				},
 				{
 					state: 4,
 					text: '课程录制',
-					num:this.allPro[5].list.length
+					num:allPro[5].list.length
 				}
 			]
 		}
@@ -107,8 +108,9 @@ export default {
 	methods: {
 		...mapActions('service', ['getInfo']),
 		addItem(){
+			const {info,tabCurrentIndex} = this;
 			// 新增服务项目
-			this.$bus.$emit('openPopup',{...this.info,type:1,nodeid:this.tabCurrentIndex+1,canConfig:true})
+			this.$bus.$emit('openPopup',{...info,type:1,nodeid:tabCurrentIndex+1,canConfig:true})
 		},
 		async getData() {
 			await this.getInfo()
@@ -124,9 +126,7 @@ export default {
 		},
 		nextStep() {
 			if(this.type==2){
-				return uni.navigateBack({
-					delta:1
-				})
+				return uni.navigateBack()
 			}
 			this.$jump(`/pages/index/editOfferPrice`);
 		}

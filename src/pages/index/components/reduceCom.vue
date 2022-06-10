@@ -20,6 +20,7 @@
 </template>
 
 <script>
+//finish	
 export default {
 	props: {
 		info: {
@@ -42,31 +43,42 @@ export default {
 	},
 	methods: {
 		open(){
-			let canConfig = this.deleteIcon?true:false
-			this.$bus.$emit('openPopup',{...this.info,canConfig,type:2,nodeid:this.nodeid})
+			let canConfig = this.deleteIcon ? true:false;
+			const {info,nodeid} = this;
+			this.$bus.$emit('openPopup',{...info,canConfig,nodeid,type:2})
 		},
 		// 删除
 		async deleteTap(){
+			const {info:{id},nodeid} = this;
 			await this.$methods.showModal('确认删除该自定义项目？')
 			this.$methods.showLoading('删除中...');
 			const {item_id} = await this.$API.home.edit_dynamic({
-				item_id:this.info.id,
-				node_id:this.nodeid,
+				item_id:id,
+				node_id:nodeid,
 				type:3
 			});
 			this.$methods.showToast('删除成功');
-			this.$store.commit('service/deleteDynamicObj',{id:this.info.id,nodeid:this.nodeid})
+			this.$store.commit('service/deleteDynamicObj',{id,nodeid})
 		},
 		inputTap(e){
 			let val = e.detail.value;
 			val = val.replace(/^(0+)|[^\d]+/g,'')
+			const {id,parentId} = this.info;
+			let params = {num:val,item_id:id,updateNum:true}
+			if(parentId){
+				params.parentId = parentId;
+			}
 			this.$nextTick(()=>{
-				this.$store.commit('service/changeServiceObj',{num:val,item_id:this.info.id,updateNum:true,parentId:this.info.parentId?this.info.parentId:""})
+				this.$store.commit('service/changeServiceObj',params)
 			})	
 		},
 		numTap(num){
-			console.log(num)
-			this.$store.commit('service/changeServiceObj',{num,item_id:this.info.id,updateNum:true,parentId:this.info.parentId?this.info.parentId:""})
+			const {id,parentId} = this.info;
+			let params = {num,item_id:id,updateNum:true}
+			if(parentId){
+				params.parentId = parentId;
+			}
+			this.$store.commit('service/changeServiceObj',params)
 		}
 	}
 };

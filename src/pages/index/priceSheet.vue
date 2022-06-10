@@ -7,13 +7,11 @@
 				<view>联系人：{{ detail.contact_name }}</view>
 			</view>
 			<view class="top-title borderbottom mgb20">项目收费：</view>
-			<view v-for="(item, index) in allPro" :key="index"  style='width:100%'>
+			<view v-for="(item, index) in allPro" :key="index" style="width:100%">
 				<template v-if="item.list.length">
 					<view class="title">{{ item.name }}</view>
 					<view class="row row-between" v-for="(bitem, index) in item.list" :key="bitem.id">
-						<view class="left-txt">
-							{{ bitem.beforeName || bitem.name }}
-						</view>
+						<view class="left-txt">{{ bitem.beforeName || bitem.name }}</view>
 						<view class="right-txt">
 							￥{{ bitem.unit_price }}*{{ bitem.num }}{{ bitem.unit }}
 							<template v-if="!bitem.noDays">
@@ -42,6 +40,7 @@
 	</view>
 </template>
 <script>
+//finisth
 import { mapMutations, mapGetters } from 'vuex';
 export default {
 	data() {

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-	//finish
+//finish
 import approachCom from './approachCom';
 import reduceCom from './reduceCom';
 import { mapState,mapGetters } from 'vuex';
