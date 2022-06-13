@@ -87,7 +87,7 @@ export default {
 		},
 		async submit() {
 			const {query,canConfig} = this
-			const type = {query};
+			const {type} = query;
 			let title = `更新中...`
 			if(type==1){
 				title = `新增中...`

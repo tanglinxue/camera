@@ -69,23 +69,33 @@ export default {
 	//修改接口的动态服务
 	changeDynamicObj(state, obj) {
 		const {
-			name,
-			unit_price,
-			unit,
 			item_id,
-			node_id
+			node_id,
+			updateNum
 		} = obj
+		
 		const dynamicArr = state.dynamicInfo[node_id];
 		let findIndex = dynamicArr.findIndex(item=>item.id==item_id)
 		const findObj = dynamicArr[findIndex]
-		const num = findObj.num
-		dynamicArr.splice(findIndex,1,{
-			...findObj,
-			name,
-			unit_price,
-			unit,
-			price: Math.floor(unit_price*num)
-		})
+		if(updateNum){
+			const num = obj.num;
+			// 修改的是数量
+			const {unit_price} = findObj
+			dynamicArr.splice(findIndex,1,{
+				...findObj,
+				price: Math.floor(unit_price*num)
+			})
+		}else{
+			const {name,unit_price,unit} = obj
+			const num = findObj.num
+			dynamicArr.splice(findIndex,1,{
+				...findObj,
+				name,
+				unit_price,
+				unit,
+				price: Math.floor(unit_price*num)
+			})
+		}	
 	},
 	// 新增动态服务项目
 	addDynamicObj(state, obj){

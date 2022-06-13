@@ -43,7 +43,7 @@ export default {
 			// 打开编辑弹窗
 			this.$bus.$emit('openPopup',{...info,type:2})
 		},
-		select(upId,index){
+		select(id,index){
 			const type = this.selectType;
 			let upId = 0;
 			let upIndex = 1;

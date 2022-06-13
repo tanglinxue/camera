@@ -74,11 +74,18 @@ export default {
 		},
 		numTap(num){
 			const {id,parentId} = this.info;
+			let {nodeid,deleteIcon} = this;
 			let params = {num,item_id:id,updateNum:true}
 			if(parentId){
 				params.parentId = parentId;
 			}
-			this.$store.commit('service/changeServiceObj',params)
+			if(deleteIcon){
+				params.node_id = nodeid
+				this.$store.commit('service/changeDynamicObj',params)
+			}else{
+				this.$store.commit('service/changeServiceObj',params)
+			}
+			
 		}
 	}
 };

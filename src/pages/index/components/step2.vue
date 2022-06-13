@@ -38,11 +38,13 @@
 				</view>
 			</view>
 		</view>
+		<dynamicInfo :nodeid='2'/>
 	</view>
 </template>
 
 <script>
 //finish
+import dynamicInfo from './dynamicInfo';
 import reduceCom from './reduceCom';
 import selectCom from './selectCom';
 import approachCom from './approachCom';
@@ -51,7 +53,8 @@ export default {
 	components: {
 		reduceCom,
 		selectCom,
-		approachCom
+		approachCom,
+		dynamicInfo
 	},
 	data() {
 		return {
@@ -93,7 +96,8 @@ export default {
 			this.status = this.status == 'open' ? 'close' : 'open';
 		},
 		getIndex(num) {
-			switch (sp_sszm) {
+			
+			switch (num) {
 				case 2:
 					return 0;
 				case 3:

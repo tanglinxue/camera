@@ -17,7 +17,7 @@ export const step1 = (state) => {
 		type: 'input',
 		hidePrice: true,
 		id:11234,
-		num
+		num,
 		parentId,
 		noDays:true
 	}

@@ -21,16 +21,19 @@
 				</reduceCom>
 			</view>
 		</view>
+		<dynamicInfo :nodeid='3'/>
 	</view>
 </template>
 
 <script>
 //finish
+import dynamicInfo from './dynamicInfo';
 import reduceCom from './reduceCom';
 import { mapGetters } from 'vuex';
 export default {
 	components: {
-		reduceCom
+		reduceCom,
+		dynamicInfo
 	},
 	computed: {
 		...mapGetters('service', ['step3']),

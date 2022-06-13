@@ -28,26 +28,23 @@
 				</view>
 			</view>
 		</view>
-		<view class="content" v-if='list4.length'>
-			<view class="mgb20 listItem" v-for="(item, index) in list4" :key="index">
-				<reduceCom :info="item" :deleteIcon='true' :nodeid='1'>
-				</reduceCom>
-			</view>
-		</view>
+		<dynamicInfo :nodeid='1'/>
 	</view>
 </template>
 
 <script>
 //finish
 import reduceCom from './reduceCom';
+import dynamicInfo from './dynamicInfo';
 import { mapGetters,mapState } from 'vuex';
 export default {
 	components: {
-		reduceCom
+		reduceCom,
+		dynamicInfo
 	},
 	computed: {
-		...mapState('service', ['serviceData']),
-		...mapGetters('service', ['step1','dynamicInfo']),
+		...mapState('service', ['serviceData','dynamicInfo']),
+		...mapGetters('service', ['step1']),
 		list() {
 			return this.step1.slice(0, 2);
 		},

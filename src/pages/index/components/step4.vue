@@ -16,18 +16,21 @@
 				</reduceCom>
 			</view>
 		</view>
+		<dynamicInfo :nodeid='4'/>
 	</view>
 </template>
 
 <script>
 //finish
+import dynamicInfo from './dynamicInfo';
 import reduceCom from './reduceCom';
 import selectCom from './selectCom';
 import { mapState,mapGetters } from 'vuex';
 export default {
 	components: {
 		reduceCom,
-		selectCom
+		selectCom,
+		dynamicInfo
 	},
 	computed: {
 		...mapState('service', ['serviceData']),
