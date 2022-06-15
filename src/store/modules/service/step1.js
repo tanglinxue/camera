@@ -19,7 +19,8 @@ export const step1 = (state) => {
 		id:11234,
 		num,
 		parentId,
-		noDays:true
+		noDays:true,
+		noAddPrice:true
 	}
 	function getBeforeName(key){
 		return `冲印：(${serviceInfo[key].name})`
@@ -27,41 +28,35 @@ export const step1 = (state) => {
 	return [
 		{
 			...serviceInfo['101'],
-			id: 101,
-			needPrice:true
+			id: 101	
 		},
 		{
 			...serviceInfo['102'],
-			id: 102,
-			needPrice:true
+			id: 102
 		},
 		{
 			id: 111,
 			...serviceInfo['111'],
 			footer: '注：200人以内，按200人计费',
 			type: 'input',
-			needPrice:true,
 			noDays:true
 		},
 		printItem,
 		{
 			id: 112,
 			...serviceInfo['112'],
-			needPrice:true,
 			noDays:true,
 			beforeName:getBeforeName('112')
 		},
 		{
 			id: 113,
 			...serviceInfo['113'],
-			needPrice:true,
 			noDays:true,
 			beforeName:getBeforeName('113')
 		},
 		{
 			id: 114,
 			...serviceInfo['114'],
-			needPrice:true,
 			beforeName:getBeforeName('114')
 		}
 	]
@@ -70,5 +65,5 @@ export const step1 = (state) => {
 // 获取数量
 export const step1SelectNum = (state, getter)=>{
 	const step1 = getter.step1;
-	return step1.filter(item=>item.needPrice && item.num).length
+	return step1.filter(item=>!item.noAddPrice && item.num).length
 }

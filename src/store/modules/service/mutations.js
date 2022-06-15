@@ -83,8 +83,10 @@ export default {
 			const {unit_price} = findObj
 			dynamicArr.splice(findIndex,1,{
 				...findObj,
+				num,
 				price: Math.floor(unit_price*num)
 			})
+			console.log(dynamicArr)
 		}else{
 			const {name,unit_price,unit} = obj
 			const num = findObj.num

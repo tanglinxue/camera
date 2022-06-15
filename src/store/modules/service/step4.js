@@ -25,41 +25,34 @@ export const step4 = (state) => {
 	return [{
 			...serviceInfo['401'],
 			id: 401,
-			needPrice: true,
 			noDays: true
 		},
 		{
 			...serviceInfo['402'],
 			id: 402,
-			needPrice: true,
 			noDays: true
 		},
 		{
 			...serviceInfo['403'],
 			id: 403,
-			needPrice: true,
 			beforeName:getBeforeName('403'),
 			noDays: true
-
 		},
 		{
 			...serviceInfo['404'],
 			id: 404,
-			needPrice: true,
 			beforeName:getBeforeName('404'),
 			noDays: true
 		},
 		{
 			...serviceInfo['405'],
 			id: 405,
-			needPrice: true,
 			noDays: true
 		},
 		{
 			...serviceInfo['406'],
 			id: 406,
 			footer: '注：访谈视频、素材剪辑、特效视频、短片拍摄等',
-			needPrice: true,
 			noDays: true
 		},
 		{
@@ -68,7 +61,8 @@ export const step4 = (state) => {
 			num,
 			parentId,
 			id: 4034,
-			noDays:true
+			noDays:true,
+			noAddPrice:true
 		}
 	]
 }

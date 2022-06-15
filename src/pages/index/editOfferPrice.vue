@@ -24,7 +24,7 @@
 					<view class="title">{{ item.name }}</view>
 					<view class="row row-between" v-for="(bitem, index) in item.list" :key="bitem.id">
 						<view class="left-txt">{{ bitem.name }}</view>
-						<view class="right-txt">￥{{ bitem.unit_price }}*{{ bitem.num }}{{ bitem.unit }}*{{ bitem.days }}天=2000元</view>
+						<view class="right-txt">￥{{ bitem.unit_price }}*{{ bitem.num }}{{ bitem.unit }}<template v-if="!bitem.noDays">*{{ bitem.days }}天</template>=2000元</view>
 					</view>
 					<view class="price borderbottom red">小计：￥{{ item.price }}</view>
 				</template>

@@ -84,22 +84,22 @@ export default {
 				{
 					state: 1,
 					text: '视频',
-					num:allPro[2].list.length
+					num:allPro[3].list.length
 				},
 				{
 					state: 2,
 					text: '剪辑',
-					num:allPro[3].list.length
+					num:allPro[4].list.length
 				},
 				{
 					state: 3,
 					text: '视频制作',
-					num:allPro[4].list.length
+					num:allPro[5].list.length
 				},
 				{
 					state: 4,
 					text: '课程录制',
-					num:allPro[5].list.length
+					num:allPro[6].list.length
 				}
 			]
 		}
