@@ -45,19 +45,21 @@ export const step1 = (state) => {
 		{
 			id: 112,
 			...serviceInfo['112'],
-			noDays:true,
-			beforeName:getBeforeName('112')
+			beforeName:getBeforeName('112'),
+      noDays:true,
 		},
 		{
 			id: 113,
 			...serviceInfo['113'],
 			noDays:true,
-			beforeName:getBeforeName('113')
+			beforeName:getBeforeName('113'),
+      noDays:true,
 		},
 		{
 			id: 114,
 			...serviceInfo['114'],
-			beforeName:getBeforeName('114')
+			beforeName:getBeforeName('114'),
+      noDays:true,
 		}
 	]
 }

@@ -19,20 +19,39 @@
 				<view class="label">项目收费：</view>
 				<view class="small-btn" @click="goOfferPrice">增减项目</view>
 			</view>
-			<view v-for="(item, index) in allPro" :key="index" style="width:100%">
-				<template v-if="item.list.length">
+			<view v-for="(item, index) in inerAllPro" :key="index" style="width:100%">
+				<template v-if="item.list.length ">
 					<view class="title">{{ item.name }}</view>
-					<view class="row row-between" v-for="(bitem, index) in item.list" :key="bitem.id">
-						<view class="left-txt">{{ bitem.name }}</view>
-						<view class="right-txt">￥{{ bitem.unit_price }}*{{ bitem.num }}{{ bitem.unit }}<template v-if="!bitem.noDays">*{{ bitem.days }}天</template>=2000元</view>
+					<view v-for="(bitem) in item.list" :key="bitem.id">
+						<view class="row row-between">
+							<view class="left-txt">{{ bitem.name }}</view>
+							<view class="right-txt row-start" @click="openTag(bitem.id)">
+								<view>
+									￥{{ bitem.unit_price }}*{{ bitem.num }}{{ bitem.unit }}
+									<template v-if="!bitem.noDays">
+										*{{ bitem.days }}天
+									</template>
+									=2000元
+								</view>
+								<uni-icons type="bottom" size="15" color="#919191" class="mgl15"></uni-icons>
+							</view>
+						</view>
+						<view class="row-end nums" v-if="idArrs.includes(bitem.id)">
+							<uni-number-box :min="1" :max="99" class="num" />
+							{{ bitem.unit }}
+							<uni-number-box :min="0.5" :max="99" class="num" step='0.5'/>
+							天
+						</view>
 					</view>
+
 					<view class="price borderbottom red">小计：￥{{ item.price }}</view>
 				</template>
 			</view>
 			<view class="top-title borderbottom mgb20 row-start">
 				<view class="label">其他项目：</view>
-				<view class="small-btn">增加项目</view>
+				<view class="small-btn" @click="addItem">增加项目</view>
 			</view>
+			<view class="other-pro mgb20" v-for="(item, index) in list" :key="index"><reduceCom :info="item" :deleteIcon="true" :nodeid='8'></reduceCom></view>
 			<view class="total-price black weight">总计：￥{{ total_money }}</view>
 			<view class="total-price  weight row-end">
 				<text class="red">结算价</text>
@@ -49,6 +68,7 @@
 			</view>
 		</view>
 		<view class="row-center btn-box"><view class="main-btn" @click="submit">保存</view></view>
+		<changePopup />
 	</view>
 </template>
 
@@ -66,7 +86,8 @@ export default {
 				case_memo: '', //项目报价备注
 				company_name: '' //报价方/报价日期字串
 			},
-			price_id: ''
+			price_id: '',
+      idArrs:[]
 		};
 	},
 	onLoad(options) {
@@ -77,16 +98,27 @@ export default {
 	},
 	computed: {
 		...mapState('service', ['serviceInfo', 'dynamicInfo', 'serviceData']),
-		...mapGetters('service', ['total_money', 'allPro'])
+		...mapGetters('service', ['total_money', 'inerAllPro']),
+		list() {
+			return this.dynamicInfo[8];
+		}
+	},
+	onHide() {
+		console.log('你好');
+		this.$bus.$emit('closePopup');
 	},
 	methods: {
+		addItem() {
+			// 新增服务项目
+			this.$bus.$emit('openPopup', { type: 1, nodeid: 8, canConfig: true });
+		},
 		async submit() {
-			const { query, serviceData, serviceInfo, dynamicInfo, price_id,total_money} = this;
+			const { query, serviceData, serviceInfo, dynamicInfo, price_id, total_money } = this;
 			let title = '发布中...';
-			let toast = '发布成功'
-			if(price_id){
-				title = '编辑中...'
-				toast = '编辑成功'
+			let toast = '发布成功';
+			if (price_id) {
+				title = '编辑中...';
+				toast = '编辑成功';
 			}
 			let API = price_id ? this.$API.home.edit_price : this.$API.home.publish_price;
 			this.$methods.showLoading(title);
@@ -105,7 +137,16 @@ export default {
 		},
 		goOfferPrice() {
 			this.$jump(`/pages/index/offerPrice?type=2`);
-		}
+		},
+    openTag(id){
+      let idArrs = this.idArrs
+      if(idArrs.includes(id)){
+        let index = idArrs.findIndex(item=>item.id==id)
+        this.idArrs.splice(index,1)
+      }else{
+        this.idArrs.push(id)
+      }
+    }
 	}
 };
 </script>
@@ -138,8 +179,13 @@ export default {
 		padding: 10rpx 0;
 		color: $gray;
 		font-size: 26rpx;
+		
 	}
-
+	.nums{
+		color: $gray;
+		font-size: 26rpx;
+		
+	}
 	.price {
 		width: 100%;
 		padding: 10rpx 0;
@@ -190,5 +236,12 @@ export default {
 }
 .textarea {
 	flex: 1;
+}
+.other-pro {
+	width: 100%;
+}
+.num {
+	scale: 0.7;
+	margin-right: -20rpx;
 }
 </style>

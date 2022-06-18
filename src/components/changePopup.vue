@@ -16,7 +16,7 @@
 				</view>
 				<view class="input-box"><input placeholder="请输入" class="input" v-model="query.unit_price" type="number" @input="inputTap" /></view>
 			</view>
-			<view class="row-start form-item">
+			<view class="row-start form-item" v-if='nodeid!=8'>
 				<view class="label">计价单位</view>
 				<view class="input-box"><input type='text' placeholder="请输入" class="input" v-model="query.unit" /></view>
 			</view>
@@ -41,18 +41,31 @@ export default {
 				item_id: 0
 			},
 			canConfig:true,
+			nodeid:-1
 		};
+	},
+	created(){
+		this.$bus.$off('openPopup');
+		this.$bus.$off('closePopup');
 	},
 	mounted() {
 		// 打开弹窗
 		this.$bus.$on('openPopup', this.openPopup);
+		this.$bus.$on('closePopup', this.close);
 	},
 	methods: {
 		close() {
 			this.$refs.popup.close();
 		},
 		openPopup(info) {
+			console.log('我收到了打开')
 			const { name,unit_price,unit,type,id,nodeid,canConfig} = info;
+      if(nodeid){
+        this.nodeid = nodeid
+      }else{
+        this.nodeid = -1
+      }
+		
 			let query = { name,unit_price,unit,type};
 			if(canConfig){	
 				// 动态配置项目

@@ -27,14 +27,8 @@
 
 <script>
 //finish
-import dynamicInfo from './dynamicInfo';
-import reduceCom from './reduceCom';
 import { mapGetters } from 'vuex';
 export default {
-	components: {
-		reduceCom,
-		dynamicInfo
-	},
 	computed: {
 		...mapGetters('service', ['step3']),
 		list() {
@@ -51,5 +45,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/common.scss';
+@import '@/static/scss/common.scss';
 </style>

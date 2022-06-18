@@ -22,28 +22,28 @@ export const step3 = (state) => {
 		{
 			...serviceInfo['311'],
 			id: 311,
-			noDays:true,
 			beforeName:getBeforeName('快剪','311'),
+      noDays:true,
 		},
 		{
 			...serviceInfo['312'],
 			id: 312,
-			noDays:true,
 			beforeName:getBeforeName('快剪','312'),
+      noDays:true,
 		},
 		{
 			...serviceInfo['321'],
 			id: 321,
 			footer: '注：流程素材，简单拼接（含背景音乐）',
-			noDays:true,
-			beforeName:getBeforeName('慢剪','321'),  		
+			beforeName:getBeforeName('慢剪','321'),  	
+      noDays:true,	
 		},
 		{
 			...serviceInfo['322'],
 			id: 322,
 			footer: '注：流程素材，特效拼接（含背景音乐）',
-			noDays:true,
 			beforeName:getBeforeName('慢剪','322'),
+      noDays:true,
 		},
 	]
 }

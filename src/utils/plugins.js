@@ -3,7 +3,8 @@ import {
 	jump
 } from 'utils/method.js'
 import API from '@/api'
-import Empty from '@/components/empty/index.vue'
+
+
 //ok
 export default {
 	install(Vue) {
@@ -12,7 +13,6 @@ export default {
 		Vue.prototype.$API = API
 		Vue.prototype.$jump = jump
 		Vue.prototype.$methods = methods
-		Vue.component('Empty',Empty)
-		
+
 	}
 }

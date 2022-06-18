@@ -26,7 +26,7 @@
 		<view class="foot-detail row-between">
 			<view class="txt row-start">
 				<text class="red">￥</text>
-				<text class="red weight font36">{{total_money}}</text>
+				<text class="red weight font36">{{iner_money}}</text>
 				<text class="mgl15">(累计总价)</text>
 			</view>
 			<view class="foot-btn row-end">
@@ -34,7 +34,7 @@
 				<view class="middle-btn mgl20" @click="nextStep">下一步</view>
 			</view>
 		</view>
-		<ChangePopup />
+		<changePopup />
 	</view>
 </template>
 
@@ -45,7 +45,6 @@ import Step2 from './components/step2.vue';
 import Step3 from './components/step3.vue';
 import Step4 from './components/step4.vue';
 import Step5 from './components/step5.vue';
-import ChangePopup from './components/changePopup.vue';
 import { mapActions,mapGetters,mapState } from 'vuex';
 export default {
 	components: {
@@ -54,7 +53,6 @@ export default {
 		Step3,
 		Step4,
 		Step5,
-		ChangePopup
 	},
 	data() {
 		return {
@@ -72,7 +70,7 @@ export default {
 	},
 	computed:{
 		...mapState('service', ['serviceData']),
-		...mapGetters('service', ['step1SelectNum','allPro','total_money']),
+		...mapGetters('service', ['step1SelectNum','allPro','iner_money']),
 		navList(){
 			const {step1SelectNum,allPro} = this;
 			return [
@@ -104,11 +102,14 @@ export default {
 			]
 		}
 	},
-
+	onHide(){
+		this.$bus.$emit('closePopup')
+	},
 	methods: {
 		...mapActions('service', ['getInfo']),
 		addItem(){
 			const {info,tabCurrentIndex} = this;
+			console.log('我都爱买')
 			// 新增服务项目
 			this.$bus.$emit('openPopup',{...info,type:1,nodeid:tabCurrentIndex+1,canConfig:true})
 		},

@@ -14,8 +14,8 @@ export const step5 = (state) => {
 	return [{
 			...serviceInfo['501'],
 			id: 501,
-			type: 'noNum',
-			beforeName: getBeforeName('线下录课', '501')
+			beforeName: getBeforeName('线下录课', '501'),
+      noNum: true,
 		},
 		{
 			...serviceInfo['502'],
@@ -24,14 +24,15 @@ export const step5 = (state) => {
 		},
 		{
 			...serviceInfo['503'],
-			id: 503
+			id: 503,
+      noNum: true,
+      noDays:true,
 		},
 		{
 			...serviceInfo['511'],
-			id: 511,
-			type: 'noNum',
-			beforeName: getBeforeName('线上录课', '511')
-
+			id: 511,	
+			beforeName: getBeforeName('线上录课', '511'),
+      noNum: true,
 		},
 		{
 			...serviceInfo['512'],

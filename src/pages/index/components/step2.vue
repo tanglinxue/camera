@@ -44,18 +44,9 @@
 
 <script>
 //finish
-import dynamicInfo from './dynamicInfo';
-import reduceCom from './reduceCom';
-import selectCom from './selectCom';
-import approachCom from './approachCom';
+
 import { mapGetters, mapState } from 'vuex';
 export default {
-	components: {
-		reduceCom,
-		selectCom,
-		approachCom,
-		dynamicInfo
-	},
 	data() {
 		return {
 			status: 'close'
@@ -77,7 +68,7 @@ export default {
 			return this.step2[7];
 		},
 		list3() {
-			return this.step2.slice(7, 20).concat(this.step2.slice(22));
+			return this.step2.slice(8, 20).concat(this.step2.slice(22));
 		},
 		options2() {
 			return this.step2.slice(20, 22);
@@ -111,7 +102,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/common.scss';
+@import '@/static/scss/common.scss';
 .openTag {
 	font-weight: normal;
 	font-size: 22rpx;

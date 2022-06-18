@@ -12,13 +12,19 @@
 					<view class="title">{{ item.name }}</view>
 					<view class="row row-between" v-for="(bitem, index) in item.list" :key="bitem.id">
 						<view class="left-txt">{{ bitem.beforeName || bitem.name }}</view>
-						<view class="right-txt">
-							￥{{ bitem.unit_price }}*{{ bitem.num }}{{ bitem.unit }}
+						<view class="right-txt" v-if="!bitem.noNum || !bitem.noDays">
+							￥{{ bitem.unit_price }}*
+              <template v-if="!bitem.noNum">
+                {{ bitem.num }}{{ bitem.unit }}
+              </template>
 							<template v-if="!bitem.noDays">
 								*{{ bitem.days }}天
 							</template>
 							={{ bitem.price }}元
 						</view>
+            <view v-else>
+              {{ bitem.price }}元
+            </view>
 					</view>
 					<view class="price borderbottom red">小计：￥{{ item.price }}</view>
 				</template>

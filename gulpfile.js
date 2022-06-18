@@ -26,3 +26,4 @@ gulp.task('upload-sftp', () => gulp.src('./dist/build/h5/**/*')
 
 // 打包并发布
 gulp.task('build', gulp.series('upload-before', 'upload-sftp'));
+

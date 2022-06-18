@@ -35,16 +35,8 @@
 
 <script>
 //finish
-import approachCom from './approachCom';
-import reduceCom from './reduceCom';
-import dynamicInfo from './dynamicInfo';
 import { mapState,mapGetters } from 'vuex';
 export default {
-	components: {
-		reduceCom,
-		approachCom,
-		dynamicInfo
-	},
 	computed: {
 		...mapGetters('service', ['step5']),
 		...mapState('service', ['serviceInfo','serviceData']),
@@ -88,5 +80,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/common.scss';
+@import '@/static/scss/common.scss';
 </style>

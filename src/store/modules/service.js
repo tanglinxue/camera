@@ -7,7 +7,7 @@ import * as step2Getters from './service/step2.js'
 import * as step3Getters from './service/step3.js'
 import * as step4Getters from './service/step4.js'
 import * as step5Getters from './service/step5.js'
-import {allPro,dynamicInfo} from './service/allPro.js'
+import * as allPro from './service/allPro.js'
 
 const service = {
 	namespaced: true,
@@ -32,11 +32,8 @@ const service = {
         ...step3Getters,
         ...step4Getters,
 	    ...step5Getters,
-		allPro,
-		dynamicInfo,
-		total_money(state,getter){//总价
-			return getter.allPro.reduce((total,item)=>total+item.price,0)
-		}
+		...allPro
+		
 	},
 	actions:{
 		// 读取服务初始化接口

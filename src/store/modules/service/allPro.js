@@ -1,7 +1,13 @@
-
 //finish
-export const allPro = (state,getter) => {
-	const {step1,step2,step3,step4,step5,dynamicInfo} = getter;
+export const allPro = (state, getter) => {
+	const {
+		step1,
+		step2,
+		step3,
+		step4,
+		step5,
+		dynamicInfo
+	} = getter;
 	const list11 = getArr(step1.slice(0, 2))
 	const price11 = getPrice(list11)
 	const list12 = getArr(step1.slice(2))
@@ -16,67 +22,84 @@ export const allPro = (state,getter) => {
 	const price4 = getPrice(list4)
 	const list5 = getArr(step5.concat(getDynamicInfoArr(dynamicInfo[5])))
 	const price5 = getPrice(list5)
-	return [
-		{
-			name:'照片 - 摄影',
-			price:price11,
-			list:list11
+	const list6 = getArr(getDynamicInfoArr(dynamicInfo[8]))
+	const price6 = getPrice(list6)
+	return [{
+			name: '照片 - 摄影',
+			price: price11,
+			list: list11
 		},
 		{
-			name:'照片 - 站架合影',
-			price:price12,
-			list:list12
+			name: '照片 - 站架合影',
+			price: price12,
+			list: list12
 		},
 		{
-			name:'照片 - 其他',
-			price:price13,
-			list:list13
+			name: '照片 - 其他',
+			price: price13,
+			list: list13
 		},
 		{
-			name:'视频',
-			price:price2,
-			list:list2
+			name: '视频',
+			price: price2,
+			list: list2
 		},
 		{
-			name:'剪辑',
-			price:price3,
-			list:list3
+			name: '剪辑',
+			price: price3,
+			list: list3
 		},
 		{
-			name:'视频制作',
-			price:price4,
-			list:list4
+			name: '视频制作',
+			price: price4,
+			list: list4
 		},
 		{
-			name:'课程录制',
-			price:price5,
-			list:list5
+			name: '课程录制',
+			price: price5,
+			list: list5
+		},
+		{
+			name: '其他项目',
+			price: price6,
+			list: list6
 		}
 	]
 }
+export const inerAllPro = (state,getter) => {
+	return getter.allPro.filter(item=>item.name!='其他项目')
+}
 export const dynamicInfo = (state) => {
-	console.log('变化了')
-	const {dynamicInfo}=state;
-	if(!Object.keys(dynamicInfo).length){
+	const {
+		dynamicInfo
+	} = state;
+	if (!Object.keys(dynamicInfo).length) {
 		return {}
 	}
-	for(let key in dynamicInfo){
-		dynamicInfo[key] = dynamicInfo[key].map(item=>{
+	for (let key in dynamicInfo) {
+		dynamicInfo[key] = dynamicInfo[key].map(item => {
 			item.noDays = true
 			return item
 		})
 	}
-	console.log('arr'+JSON.stringify(dynamicInfo))
+	console.log('arr' + JSON.stringify(dynamicInfo))
 	return dynamicInfo
 }
-function getArr(arr=[]){
-	return arr.filter(item=>!item.noAddPrice && item.num)
+export const iner_money = (state, getter)=> { //总价
+	return getter.inerAllPro.reduce((total, item) => total + item.price, 0)
 }
-function getPrice(arr){
-	return arr.reduce((total,item)=>total+item.price,0)
+export const total_money = (state, getter)=> { //总价
+	return getter.allPro.reduce((total, item) => total + item.price, 0)
 }
-function getDynamicInfoArr(arr=[]){
+
+function getArr(arr = []) {
+	return arr.filter(item => !item.noAddPrice && item.num)
+}
+
+function getPrice(arr) {
+	return arr.reduce((total, item) => total + item.price, 0)
+}
+
+function getDynamicInfoArr(arr = []) {
 	return arr
 }
-
-
