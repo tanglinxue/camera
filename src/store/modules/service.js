@@ -24,7 +24,8 @@ const service = {
 			"spzz_djs": 1, //视频制作-倒计时:  1-无  2-通用  3-定制
 			"kclz_xxxslk": 1, //课程录制-线下线上录课:  1-无  2-线下录课  3-线上录课  4-线下线上都有
 			"work_day": 1 //工作天数
-		}
+		},
+    showId:[]
 	},
 	getters:{
 		...step1Getters,
