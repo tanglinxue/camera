@@ -24,6 +24,8 @@ export default {
 			unit,
 			item_id,
 			updateNum,
+			days,
+			updateDay
 		} = obj;
 		const serviceItem = serviceInfo[item_id];
 		if (obj.updateNum) {
@@ -62,6 +64,15 @@ export default {
 				days,
 				price: Math.floor(serviceItem.unit_price * num * days)
 			}
+		}else if(updateDay){
+			console.log(serviceItem)
+			console.log(days)
+			const {unit_price,num} = serviceItem
+			serviceInfo[item_id] = {
+				...serviceItem,
+				days,
+				price: Math.floor(unit_price * num * days)
+			}
 		} else {
 			// 修改的是服务
 			let {
@@ -99,7 +110,6 @@ export default {
 				num,
 				price: Math.floor(unit_price * num)
 			})
-			console.log(dynamicArr)
 		} else {
 			const {
 				name,
@@ -165,20 +175,21 @@ export default {
 		const {
 			serviceInfo
 		} = state;
+		console.log(id)
 		state.serviceData[type] = index
 		for (let key of arr) {
 			let num = 0;
 			let days = 0;
+			const {unit_price} = serviceInfo[key]
 			if (needAdd && key == id) {
 				num = 1;
-				days = 1
+				days = 1		
 			}
-			if (key != id) {
-				serviceInfo[key] = {
-					...serviceInfo[key],
-					num,
-					days
-				}
+			serviceInfo[key] = {
+				...serviceInfo[key],
+				num,
+				days,
+				price:Math.floor(unit_price*num*days)
 			}
 		}
 	},
@@ -227,10 +238,12 @@ export default {
 		}
 
 		function setSeviceInfo(key, num, days) {
+			const {unit_price} = serviceInfo[key]
 			serviceInfo[key] = {
 				...serviceInfo[key],
 				num,
-				days
+				days,
+				price:Math.floor(unit_price*num*days)
 			}
 		}
 		state.serviceData.kclz_xxxslk = setName

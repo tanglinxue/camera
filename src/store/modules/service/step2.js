@@ -7,6 +7,9 @@ export const step2 = (state) => {
 	if (!Object.keys(serviceInfo).length) {
 		return []
 	}
+	function getBeforeName(type,key){
+		return `${type}(${serviceInfo[key].name})`
+	}
 	return [
 		{
 			...serviceInfo['201'],//摄像
@@ -39,13 +42,16 @@ export const step2 = (state) => {
 			...serviceInfo['206'],//线上
 			id: 206,
       noDays:true,
-      noNum:true
+      noNum:true,
+	   beforeName:getBeforeName('有同传接入','206'),
 		},
 		{
 			...serviceInfo['207'],//现场
 			id: 207,
       noDays:true,
-      noNum:true
+      noNum:true,
+	   beforeName:getBeforeName('有同传接入','207'),
+	  
 		},
 		{
 			...serviceInfo['208'],//提前一天进场
@@ -116,13 +122,15 @@ export const step2 = (state) => {
 			...serviceInfo['233'],//字幕
 			id: 233,
       noDays:true,
-      noNum:true
+      noNum:true,
+	  beforeName:getBeforeName('实时字幕','233'),
 		},
 		{
 			...serviceInfo['234'],//翻译
 			id: 234,
       noDays:true,
-      noNum:true
+      noNum:true,
+	  beforeName:getBeforeName('实时字幕','234'),
 		},
 		{
 			id: null,

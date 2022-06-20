@@ -2,7 +2,7 @@
 	<view class="row-start time mgb0">
 		<view class="txt1 mgr15 ">{{ name }}</view>
 		<view class="radio row-start" v-for="(info,index) in options" :key="info.id" @click.stop="select(info.id,index)">
-			<image :src="currentIndex==index?'/static/common/icon-radio-sel.png':'/static/common/icon-radio.png'" class="icon"></image>
+			<image :src="currentIndex==index && info.num?'/static/common/icon-radio-sel.png':'/static/common/icon-radio.png'" class="icon"></image>
 			<text class="txt">{{ info.name }}</text>
 			<template v-if="info.id">
 				<view class="gray normal mgl10">

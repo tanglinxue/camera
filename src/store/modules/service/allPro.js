@@ -79,6 +79,7 @@ export const dynamicInfo = (state) => {
 	for (let key in dynamicInfo) {
 		dynamicInfo[key] = dynamicInfo[key].map(item => {
 			item.noDays = true
+			item.node_id = key
 			return item
 		})
 	}

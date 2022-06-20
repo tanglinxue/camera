@@ -13,26 +13,20 @@
 					<view class="row row-between" v-for="(bitem, index) in item.list" :key="bitem.id">
 						<view class="left-txt">{{ bitem.beforeName || bitem.name }}</view>
 						<view class="right-txt" v-if="!bitem.noNum || !bitem.noDays">
-							￥{{ bitem.unit_price }}*
-              <template v-if="!bitem.noNum">
-                {{ bitem.num }}{{ bitem.unit }}
-              </template>
+							￥{{ bitem.unit_price }}
+							<template v-if="!bitem.noNum">
+								*{{ bitem.num }}{{ bitem.unit }}
+							</template>
 							<template v-if="!bitem.noDays">
 								*{{ bitem.days }}天
 							</template>
 							={{ bitem.price }}元
 						</view>
-            <view v-else>
-              {{ bitem.price }}元
-            </view>
+						<view v-else>{{ bitem.price }}元</view>
 					</view>
 					<view class="price borderbottom red">小计：￥{{ item.price }}</view>
 				</template>
 			</view>
-			<!-- <view class="row row-between borderbottom pdb30 mgb20">
-				<view class="left-txt font30 black">其他自定义临时项目</view>
-				<view class="right-txt red weight">￥2000</view>
-			</view> -->
 			<view class="total-price black weight">总计：￥{{ detail.total_money }}</view>
 			<view class="total-price red weight">结算价：￥{{ detail.real_money }}</view>
 			<view class="total-price gray">{{ detail.case_memo }}</view>

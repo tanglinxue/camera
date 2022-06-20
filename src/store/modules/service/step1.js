@@ -51,7 +51,6 @@ export const step1 = (state) => {
 		{
 			id: 113,
 			...serviceInfo['113'],
-			noDays:true,
 			beforeName:getBeforeName('113'),
       noDays:true,
 		},
@@ -64,8 +63,3 @@ export const step1 = (state) => {
 	]
 }
 
-// 获取数量
-export const step1SelectNum = (state, getter)=>{
-	const step1 = getter.step1;
-	return step1.filter(item=>!item.noAddPrice && item.num).length
-}

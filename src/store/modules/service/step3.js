@@ -8,7 +8,7 @@ export const step3 = (state) => {
 		return []
 	}
 	function getBeforeName(type,key){
-		return `${type}(${serviceInfo[key].name})`
+		return `${type}${serviceInfo[key].name}`
 	}
 	return [
 		{

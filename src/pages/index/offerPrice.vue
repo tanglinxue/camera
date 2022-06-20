@@ -70,14 +70,15 @@ export default {
 	},
 	computed:{
 		...mapState('service', ['serviceData']),
-		...mapGetters('service', ['step1SelectNum','allPro','iner_money']),
+		...mapGetters('service', ['allPro','iner_money']),
 		navList(){
-			const {step1SelectNum,allPro} = this;
+			const {allPro} = this;
+			
 			return [
 				{
 					state: 0,
 					text: '照片',
-					num:step1SelectNum
+					num:allPro[0].list.length+allPro[1].list.length+allPro[2].list.length
 				},
 				{
 					state: 1,
@@ -109,7 +110,6 @@ export default {
 		...mapActions('service', ['getInfo']),
 		addItem(){
 			const {info,tabCurrentIndex} = this;
-			console.log('我都爱买')
 			// 新增服务项目
 			this.$bus.$emit('openPopup',{...info,type:1,nodeid:tabCurrentIndex+1,canConfig:true})
 		},

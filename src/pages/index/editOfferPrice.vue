@@ -20,28 +20,40 @@
 				<view class="small-btn" @click="goOfferPrice">增减项目</view>
 			</view>
 			<view v-for="(item, index) in inerAllPro" :key="index" style="width:100%">
-				<template v-if="item.list.length ">
+				<template v-if="item.list.length">
 					<view class="title">{{ item.name }}</view>
-					<view v-for="(bitem) in item.list" :key="bitem.id">
+					<view v-for="bitem in item.list" :key="bitem.id">
 						<view class="row row-between">
-							<view class="left-txt">{{ bitem.name }}</view>
-							<view class="right-txt row-start" @click="openTag(bitem.id)">
-								<view>
-									￥{{ bitem.unit_price }}*{{ bitem.num }}{{ bitem.unit }}
-									<template v-if="!bitem.noDays">
-										*{{ bitem.days }}天
-									</template>
-									=2000元
-								</view>
+							<view class="left-txt">{{ bitem.beforeName || bitem.name }}</view>
+							<view class="right-txt row-start" @click="openTag(bitem, bitem.id)" v-if="!bitem.noNum || !bitem.noDays">
+								￥{{ bitem.unit_price }}
+								<template v-if="!bitem.noNum">
+									*{{ bitem.num }}{{ bitem.unit }}
+								</template>
+								<template v-if="!bitem.noDays">
+									*{{ bitem.days }}天
+								</template>
+								<template>
+									={{ bitem.price }}元
+								</template>
 								<uni-icons type="bottom" size="15" color="#919191" class="mgl15"></uni-icons>
 							</view>
+							<view v-else>
+								{{ bitem.price }}元
+							</view>
 						</view>
-						<view class="row-end nums" v-if="idArrs.includes(bitem.id)">
-							<uni-number-box :min="1" :max="99" class="num" />
-							{{ bitem.unit }}
-							<uni-number-box :min="0.5" :max="99" class="num" step='0.5'/>
-							天
-						</view>
+						<template v-if="idArrs.includes(bitem.id) && (!bitem.noNum || !bitem.noDays)">
+							<view class="row-end nums">
+								<template v-if="!bitem.noNum">
+									<uni-number-box :min="1" :max="99" class="num" :value="bitem.num" @change="e => {numTap(e, bitem)}"/>
+									{{ bitem.unit || '单位'}}
+								</template>
+								<template v-if="!bitem.noDays">
+									<uni-number-box :min="0.5"	:max="99"	class="num"	step="0.5"	:value="bitem.days"	@change="e => {dayTap(e, bitem)}"/>
+									天
+								</template>
+							</view>
+						</template>
 					</view>
 
 					<view class="price borderbottom red">小计：￥{{ item.price }}</view>
@@ -51,8 +63,8 @@
 				<view class="label">其他项目：</view>
 				<view class="small-btn" @click="addItem">增加项目</view>
 			</view>
-			<view class="other-pro mgb20" v-for="(item, index) in list" :key="index"><reduceCom :info="item" :deleteIcon="true" :nodeid='8'></reduceCom></view>
-			<view class="total-price black weight">总计：￥{{ total_money }}</view>
+			<view class="other-pro mgb20" v-for="(item, index) in list" :key="index"><reduceCom :info="item" :deleteIcon="true" :nodeid="8"></reduceCom></view>
+			<view class="total-price red weight ">总计：￥{{ total_money }}</view>
 			<view class="total-price  weight row-end">
 				<text class="red">结算价</text>
 				：
@@ -87,7 +99,7 @@ export default {
 				company_name: '' //报价方/报价日期字串
 			},
 			price_id: '',
-      idArrs:[]
+			idArrs: []
 		};
 	},
 	onLoad(options) {
@@ -108,6 +120,26 @@ export default {
 		this.$bus.$emit('closePopup');
 	},
 	methods: {
+		numTap(num, info) {
+			const { id, node_id } = info;
+			let params = { num, item_id: id, updateNum: true };
+			if (node_id) {
+				params.node_id = node_id;
+				this.$store.commit('service/changeDynamicObj', params);
+			} else {
+				this.$store.commit('service/changeServiceObj', params);
+			}
+		},
+		dayTap(days, info) {
+			const { id, node_id } = info;
+			let params = { days, item_id: id, updateDay: true };
+			if (node_id) {
+				params.node_id = node_id;
+				this.$store.commit('service/changeDynamicObj', params);
+			} else {
+				this.$store.commit('service/changeServiceObj', params);
+			}
+		},
 		addItem() {
 			// 新增服务项目
 			this.$bus.$emit('openPopup', { type: 1, nodeid: 8, canConfig: true });
@@ -138,15 +170,17 @@ export default {
 		goOfferPrice() {
 			this.$jump(`/pages/index/offerPrice?type=2`);
 		},
-    openTag(id){
-      let idArrs = this.idArrs
-      if(idArrs.includes(id)){
-        let index = idArrs.findIndex(item=>item.id==id)
-        this.idArrs.splice(index,1)
-      }else{
-        this.idArrs.push(id)
-      }
-    }
+		openTag(item, id) {
+			const { noNum, noDays } = item;
+			if (noNum && noDays) return;
+			let idArrs = this.idArrs;
+			if (idArrs.includes(id)) {
+				let index = idArrs.findIndex(item => item.id == id);
+				this.idArrs.splice(index, 1);
+			} else {
+				this.idArrs.push(id);
+			}
+		}
 	}
 };
 </script>
@@ -179,12 +213,10 @@ export default {
 		padding: 10rpx 0;
 		color: $gray;
 		font-size: 26rpx;
-		
 	}
-	.nums{
+	.nums {
 		color: $gray;
 		font-size: 26rpx;
-		
 	}
 	.price {
 		width: 100%;
