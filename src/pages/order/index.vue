@@ -71,7 +71,7 @@ export default {
 			status: 'more',
 			total: 0,
 			loading: true,
-			list: [1, 2, 3, 45, 5],
+			list: [],
 			query: {
 				status:[0, 1, 2, 3],
 				month_time:1,
@@ -118,22 +118,22 @@ export default {
 			});
 			uni.hideLoading();
 			console.log(res)
-			// let { data: clist, total } = tech_order;
-			// if (loading) {
-			// 	this.loading = false;
-			// }
-			// const { page } = query;
-			// if (page !== 1) {
-			// 	this.list = [...list, ...clist];
-			// } else {
-			// 	this.list = clist;
-			// }
-			// this.total = total;
-			// if (total > this.list.length) {
-			// 	this.status = 'more';
-			// } else {
-			// 	this.status = 'noMore';
-			// }
+			let { list: clist, all_count } = res;
+			if (loading) {
+				this.loading = false;
+			}
+			const { page } = query;
+			if (page !== 1) {
+				this.list = [...list, ...clist];
+			} else {
+				this.list = clist;
+			}
+			this.total = all_count;
+			if (all_count > this.list.length) {
+				this.status = 'more';
+			} else {
+				this.status = 'noMore';
+			}
 		}
 	}
 };
