@@ -13,6 +13,5 @@ export default {
 		Vue.prototype.$API = API
 		Vue.prototype.$jump = jump
 		Vue.prototype.$methods = methods
-
 	}
 }

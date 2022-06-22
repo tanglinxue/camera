@@ -1,23 +1,22 @@
 <template>
 	<view class="main column-center">
 		<view class="boxOuter">
-			<view class="main-title  font36 mgb30">绿城新品发布会 影像服务</view>
-			<view class="mgb30 total-fee row-between">
+			<view class="main-title  font36 mgb30">{{query.case_name}}</view>
+			<view class="mgb30 total-fee row-between" >
 				<view class='row-start'>
 					<view class='left-text'>
 						费用总计
 					</view>
 					<view class='row-start'>
-						 36000(
-						<text>36500</text>
+						 {{query.real_money}}(
+						<text>{{query.total_money}}</text>
 						)元
 					</view>
-					<view class="red row-start fee" @click='jump(1)'>
+					<view class="red row-start fee" @click='jump'>
 						明细
 						<uni-icons type="forward" size="16" color="#f66745" class="icon"></uni-icons>
 					</view>
 				</view>
-
 			</view>
 			<view class="mgb30 row-start">
 				<view class='left-text'>
@@ -25,7 +24,20 @@
 				</view>
 				<view class="input-box row-center width200" ><input type="number" placeholder="预付款" class="input" v-model="query.first_money"/></view>
 			</view>
-			<slot name='header'></slot>
+			<view class="mgb30 row-start" v-if='type==2'>
+				<view class='row-start'>
+					<view class='left-text'>
+						结算价
+					</view>
+					<view class="input-box row-center width200" ><input type="number"  class="input" :maxlength="11" v-model="query.real_money"/></view>
+				</view>
+				<view class='row-start mgl20'>
+					<view class='left-text short-left-text'>
+						尾款
+					</view>
+					<view class="input-box row-center width200" ><input type="number" class="input" :maxlength="11" v-model="query.end_money"/></view>
+				</view>
+			</view>
 			<view class="mgb30 row-start">
 				<view class='left-text'>
 					预定单位
@@ -92,7 +104,12 @@
 				<view class='left-text'>备注</view>
 				<uni-easyinput type="textarea" placeholder="请填写备注" class="textarea" :clearable="false" maxlength="200" v-model="query.memo"/>
 			</view>
-			<slot name='footer'></slot>
+			<view class="mgb30 row-start" v-if='type==2'>
+				<view class='left-text'>
+					服务状态
+				</view>
+				<view class="row-start order"><uni-data-checkbox :localdata="statusArr" v-model="query.status"/></view>
+			</view>
 		</view>
 		<view class="btn-box"><view class="main-btn" @click='submit'>提交</view></view>
 	</view>
@@ -103,11 +120,15 @@ export default {
 	props: {
 		type: {
 			type: Number,
-			default: 1
+			default: 1 //1是创建订单，2是订单详情
 		},
 		price_id:{
 			type:String,
 			default:''
+		},
+		detail:{
+			type:Object,
+			default:()=>{}
 		}
 	},
 	data() {
@@ -118,7 +139,7 @@ export default {
 					value: 1
 				},
 				{
-					text: '无法提供',
+					text: '不提供',
 					value: 0
 				}
 			],
@@ -135,8 +156,34 @@ export default {
 				contact_name:'',
 				contact_tel:'',
 				memo:''
-			}
+			},
+			statusArr: [
+				{
+					text: '已预订',
+					value: 1
+				},
+				{
+					text: '已完成(待结算)',
+					value: 2
+				},
+				{
+					text: '已结算',
+					value: 4
+				},
+				{
+					text: '取消',
+					value: 4
+				}
+			]
 		};
+	},
+	watch:{
+		detail:{
+			handler(val){
+				this.query = val
+			},
+			deep:true
+		}
 	},
 	methods: {
 		toMap() {
@@ -150,10 +197,8 @@ export default {
 				}
 			});
 		},
-		jump(num){
-			if(num==1){
-				this.$jump(`/pages/index/priceSheet?type=2`);
-			}
+		jump(){
+			this.$jump(`/pages/index/priceSheet?type=2&id=${this.query.price_id}`);
 		},
 		async submit(){
 			const {query,price_id} = this;
@@ -169,4 +214,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '../style/order.scss';
+::v-deep .order .uni-data-checklist .checklist-group .checklist-box {
+	margin-right: 0;
+	padding-right: 10rpx;
+}
+::v-deep .uni-data-checklist .checklist-group .checklist-box .radio__inner {
+	width:24rpx;
+	height:24rpx;
+}
+.short-left-text{
+	width:100rpx !important
+}
 </style>
