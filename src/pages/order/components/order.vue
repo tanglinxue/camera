@@ -180,7 +180,7 @@ export default {
 	watch:{
 		detail:{
 			handler(val){
-				this.query = val
+				this.query = {...val,...this.query}
 			},
 			deep:true
 		}

@@ -34,8 +34,8 @@
 		</view>
 		<view class="row-center btn-box">
 			<view class="middle-btn">生成图片</view>
-			<view class="middle-btn mgl30" v-if="type == 1" @click="nextStep">编辑</view>
-			<view class="middle-btn mgl30" @click="jump">预定</view>
+			<view class="middle-btn mgl30"  @click="nextStep">编辑</view>
+			<view class="middle-btn mgl30" v-if="type == 1" @click="jump">预定</view>
 		</view>
 	</view>
 </template>
@@ -76,7 +76,8 @@ export default {
 		...mapMutations('service', ['updateServiceInfo', 'updateDynamicInfo', 'updateServiceData']),
 		jump() {
 			const detail = JSON.stringify(this.detail);
-			this.$jump(`/pages/order/creatOrder?detail=${detail}`);
+			console.log(detail)
+			this.$jump(`/pages/order/creatOrder?detail=${detail}&id=${this.price_id}`);
 		},
 		async getData() {
 			let {
