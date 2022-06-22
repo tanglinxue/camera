@@ -75,7 +75,8 @@ export default {
 	methods: {
 		...mapMutations('service', ['updateServiceInfo', 'updateDynamicInfo', 'updateServiceData']),
 		jump() {
-			this.$jump(`/pages/order/creatOrder`);
+			const detail = JSON.stringify(this.detail);
+			this.$jump(`/pages/order/creatOrder?detail=${detail}`);
 		},
 		async getData() {
 			let {
