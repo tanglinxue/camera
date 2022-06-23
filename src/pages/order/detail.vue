@@ -29,4 +29,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+	::v-deep .uni-data-checklist .checklist-group .checklist-box {
+		margin-right: 0 !important;
+		padding-right: 10rpx;
+	}
+	::v-deep .uni-data-checklist .checklist-group .checklist-box .radio__inner {
+		width: 24rpx;
+		height: 24rpx;
+	}
 </style>
