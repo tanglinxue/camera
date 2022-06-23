@@ -142,7 +142,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
 ::v-deep .uni-date__x-input {
-	height: 60rpx;
+	height: 90rpx;
 	line-height: 60rpx;
 	font-size: 24rpx;
 }

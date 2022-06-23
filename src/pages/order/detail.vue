@@ -1,5 +1,5 @@
 <template>
-	<Order :type='2' :detail='detail'></Order>
+	<Order :type='2' :detail='detail' :price_id='detail.price_id'></Order>
 </template>
 
 <script>

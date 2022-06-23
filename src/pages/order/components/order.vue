@@ -108,7 +108,7 @@
 				<view class='left-text'>
 					服务状态
 				</view>
-				<view class="row-start order"><uni-data-checkbox :localdata="statusArr" v-model="query.status"/></view>
+				<view class="row-start order"><uni-data-checkbox :localdata="statusArr" v-model="query.status" class='checkBox'/></view>
 			</view>
 		</view>
 		<view class="btn-box"><view class="main-btn" @click='submit'>提交</view></view>
@@ -198,7 +198,7 @@ export default {
 			});
 		},
 		jump(){
-			this.$jump(`/pages/index/priceSheet?type=2&id=${this.query.price_id}`);
+			this.$jump(`/pages/index/priceSheet?type=2&id=${this.price_id}`);
 		},
 		async submit(){
 			const {query,price_id} = this;
@@ -213,16 +213,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+	::v-deep .uni-data-checklist .checklist-group .checklist-box  {
+		margin-right: 0 !important;
+		padding-right: 10rpx;
+	}
 @import '../style/order.scss';
-::v-deep .order .uni-data-checklist .checklist-group .checklist-box {
-	margin-right: 0;
-	padding-right: 10rpx;
-}
+
 ::v-deep .uni-data-checklist .checklist-group .checklist-box .radio__inner {
 	width:24rpx;
 	height:24rpx;
 }
-.short-left-text{
-	width:100rpx !important
-}
+
 </style>
