@@ -28,7 +28,7 @@
 	}
 	/* #endif */
 	@import './static/scss/index.scss';
-	@import './css/uni.css';
+	// @import './css/uni.css';
 	/*每个页面公共css */
 	page {
 		background: $backColor;

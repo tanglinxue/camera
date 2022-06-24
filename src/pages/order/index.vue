@@ -141,37 +141,38 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
-::v-deep .uni-date__x-input {
-	height: 60rpx;
-	line-height: 60rpx;
-	font-size: 24rpx;
-}
-::v-deep .uniui-calendar {
-	display: none;
-}
-::v-deep .uni-date-editor--x .uni-date__icon-clear {
-	border-width: 14rpx;
-}
 ::v-deep .checklist-text {
 	font-size: 24rpx !important;
 }
-::v-deep .uni-input-placeholder {
-	font-size: 26rpx;
-	text-align: center;
-}
-::v-deep .uni-date-x {
-	width: 220rpx;
-}
-::v-deep .uni-date-x--border {
-	border-color: $border;
-}
 ::v-deep .uni-data-checklist .checklist-group .checklist-box {
-	margin-right: 0;
+	margin-right: 20rpx;
 }
+// ::v-deep .uni-date__x-input {
+// 	height: 60rpx;
+// 	line-height: 60rpx;
+// 	font-size: 24rpx;
+// }
+// ::v-deep .uniui-calendar {
+// 	display: none;
+// }
+// ::v-deep .uni-date-editor--x .uni-date__icon-clear {
+// 	border-width: 14rpx;
+// }
+
+// ::v-deep .uni-input-placeholder {
+// 	font-size: 26rpx;
+// 	text-align: center;
+// }
+// ::v-deep .uni-date-x {
+// 	width: 220rpx;
+// }
+// ::v-deep .uni-date-x--border {
+// 	border-color: $border;
+// }
+
 
 .main {
 	padding: 20rpx;
-
 	.search {
 		font-size: 28rpx;
 		.input {
