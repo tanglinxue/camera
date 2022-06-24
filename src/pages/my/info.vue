@@ -42,7 +42,7 @@
 	</view>
 </template>
 <script>
-// ok
+// finish
 export default {
 	data() {
 		return {
@@ -64,13 +64,10 @@ export default {
 	methods: {
 		async getData() {
 			const { user_info } = await this.$API.my.getmyinfo();
-			for (let key in user_info) {
-				if (user_info[key]) {
-					this.form[key] = user_info[key];
-				}
-			}
+			this.form = user_info
 			uni.hideLoading();
 		},
+		// 更新消息
 		async submit() {
 			const form = this.form;
 			if (!/(^1[0-9]{10}$)/.test(form.mobile)) {
@@ -83,18 +80,19 @@ export default {
 				this.$methods.showLoading(`更新信息中...`);
 				const data = await this.$API.my.myinfo(this.form);
 				this.$methods.showToast('更新成功');
+				uni.navigateBack({
+					delta:1
+				})
 			} catch (err) {
 				console.log(err);
 			} finally {
 				setTimeout(() => {
 					uni.hideLoading();
 					this.canclick = true
-					uni.navigateBack({
-						delta:1
-					})
 				}, 1000);
 			}
 		},
+		// 上传图片
 		async chooseImage(name) {
 			let res = await this.$methods.chooseImage();
 			const file = res.tempFilePaths[0];
@@ -113,7 +111,6 @@ export default {
 .main {
 	background: $backColor;
 	font-size: 28rpx;
-
 	padding: 30rpx;
 	.boxOuter {
 		padding: 0;
@@ -133,7 +130,6 @@ export default {
 			}
 		}
 	}
-
 	.bottom-btn {
 		width: 100%;
 		position: fixed;

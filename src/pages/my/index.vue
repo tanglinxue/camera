@@ -76,11 +76,17 @@
 </template>
 
 <script>
+//finish
 export default {
 	data() {
 		return {
 			fristEnter: true,
-			userinfo: {},
+			userinfo: {
+				avatar: '',
+				end_date: '',
+				level: '',
+				nickname: ''
+			},
 			price_count: 0, //报价数
 			reserve_count: 0, //预定数
 			settled_count: 0, //成交数
@@ -92,10 +98,8 @@ export default {
 		if (this.fristEnter) {
 			this.$methods.showLoading();
 			this.fristEnter = false;
-			this.getData();
-		} else {
-			this.getData();
 		}
+		this.getData();
 	},
 	methods: {
 		async getData(time = 300) {
@@ -112,8 +116,10 @@ export default {
 		},
 		jump(type) {
 			if (type == 1) {
+				// 历史报价记录
 				this.$jump(`/pages/my/historyRecord`);
 			} else if (type == 4) {
+				// 我的信息
 				this.$jump(`/pages/my/info`);
 			}
 		}
@@ -164,28 +170,29 @@ export default {
 	.boxOuter-box {
 		width: 100%;
 		padding: 0 30rpx;
-		.num-box {
-			padding: 30rpx;
-			background: $white;
-			.item {
-				flex: 1;
-				.text1 {
-					margin-bottom: 20rpx;
-				}
-				.text2 {
-					font-weight: bold;
+
+		.boxOuter {
+			padding: 0;
+			overflow: hidden;
+			.num-box {
+				padding: 30rpx;
+				background: $white;
+				.item {
+					flex: 1;
+					.text1 {
+						margin-bottom: 20rpx;
+					}
+					.text2 {
+						font-weight: bold;
+					}
 				}
 			}
-		}
-	}
-	.boxOuter {
-		padding: 0;
-		overflow: hidden;
-		.row {
-			padding: 30rpx;
-			color: $gray;
-			.icon {
-				margin-right: 20rpx;
+			.row {
+				padding: 30rpx;
+				color: $gray;
+				.icon {
+					margin-right: 20rpx;
+				}
 			}
 		}
 	}

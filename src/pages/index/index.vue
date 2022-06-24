@@ -1,7 +1,7 @@
 <template>
 	<view class="main column-center">
 		<view class="banner">
-			<swiper class="swiper" :autoplay="true" :circular="true">
+			<swiper class="swiper" :autoplay="true" :circular="true" @change="swiperChange">
 				<swiper-item v-for="(item, index) in list" :key="index"><img :src="item.img" class="img" /></swiper-item>
 			</swiper>
 			<view class="dots" v-if="list.length > 1">
@@ -10,25 +10,25 @@
 		</view>
 		<view class="btn-box mgb20"><view class="main-btn red-shadow" @click="jump(3)">开始报价</view></view>
 		<view class="boxOuter-box">
-			<view class="boxOuter" v-if='price_info.length'>
+			<view class="boxOuter" v-if="price_info.length">
 				<view class="title row-between">
 					<text class="txt1">最新报价:</text>
 					<text @click="jump(1)">更多...</text>
 				</view>
 				<view class="list">
-					<view class="item row-between"  v-for="item in price_info" :key='item.id' @click='jump(4,item.id)'>
-						<view class="textElis flex1">{{item.case_name}}</view>
-						<view class="date">{{item.create_time}}</view>
+					<view class="item row-between" v-for="item in price_info" :key="item.id" @click="jump(4, item.id)">
+						<view class="textElis flex1">{{ item.case_name }}</view>
+						<view class="date">{{ item.create_time }}</view>
 					</view>
 				</view>
 			</view>
-			<view class="boxOuter" v-if='temlate_info.length'>
+			<view class="boxOuter" v-if="temlate_info.length">
 				<view class="title row-between">
 					<text class="txt1">报价模板:</text>
 					<text @click="jump(2)">更多...</text>
 				</view>
 				<view class="list">
-					<view class="item textElis" v-for="item in temlate_info" :key='item.id' @click='jump(5,item.id)'>{{item.template_name}}</view>
+					<view class="item textElis" v-for="item in temlate_info" :key="item.id" @click="jump(5, item.id)">{{ item.template_name }}</view>
 				</view>
 			</view>
 		</view>
@@ -36,8 +36,8 @@
 </template>
 
 <script>
+//finish
 export default {
-	onShow() {},
 	data() {
 		return {
 			list: [
@@ -52,8 +52,8 @@ export default {
 				}
 			],
 			swiperCurrent: 0,
-			price_info: [],
-			temlate_info: [],
+			price_info: [], //最新报价
+			temlate_info: [], //报价模板
 			fristEnter: true
 		};
 	},
@@ -61,35 +61,39 @@ export default {
 		if (this.fristEnter) {
 			this.$methods.showLoading();
 			this.fristEnter = false;
-			this.getData();
-		} else {
-			this.getData();
 		}
+		this.getData();
 	},
 	methods: {
 		async getData(time = 300) {
-			const {price_info,temlate_info} = await this.$API.home.get_index_price();
+			const { price_info, temlate_info } = await this.$API.home.get_index_price();
 			this.price_info = price_info;
-			this.temlate_info = temlate_info
+			this.temlate_info = temlate_info;
 			setTimeout(() => {
 				uni.hideLoading();
 			}, time);
 		},
-		jump(type,id) {
+		jump(type, id) {
 			if (type == 1) {
+				// 历史报价记录
 				this.$jump(`/pages/my/historyRecord`);
 			} else if (type == 2) {
+				// 报价模板
 				this.$jump(`/pages/index/templateRecord`);
 			} else if (type == 3) {
 				// 开始报价
 				this.$jump(`/pages/index/offerPrice`);
-			}else if (type == 4) {
-				// 报价单
+			} else if (type == 4) {
+				// 单个报价单
 				this.$jump(`/pages/index/priceSheet?id=${id}`);
 			} else if (type == 5) {
-				// 报价模板
+				// 单个报价模板
 				this.$jump(`/pages/index/priceTemplate?id=${id}`);
 			}
+		},
+		// 滑动banner
+		swiperChange(e) {
+			this.swiperCurrent = e.detail.current;
 		}
 	},
 	onPullDownRefresh() {
@@ -114,7 +118,6 @@ export default {
 		.swiper {
 			width: 100%;
 			height: 100%;
-
 			swiper-item {
 				width: 100%;
 				height: 100%;
