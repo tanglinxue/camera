@@ -1,11 +1,11 @@
 <template>
 	<view class="main column-center">
-		<view class="banner">
+		<view class="banner" v-if='false'>
 			<swiper class="swiper" :autoplay="true" :circular="true" @change="swiperChange">
-				<swiper-item v-for="(item, index) in list" :key="index"><img :src="item.img" class="img" /></swiper-item>
+				<swiper-item v-for="(item, index) in banner_info" :key="index"><img :src="item.bannerpic" class="img" /></swiper-item>
 			</swiper>
-			<view class="dots" v-if="list.length > 1">
-				<block v-for="(item, index) in list" :key="index"><view class="dot" :class="index == swiperCurrent ? 'active' : ''"></view></block>
+			<view class="dots" v-if="banner_info.length > 1">
+				<block v-for="(item, index) in banner_info" :key="index"><view class="dot" :class="index == swiperCurrent ? 'active' : ''"></view></block>
 			</view>
 		</view>
 		<view class="btn-box mgb20"><view class="main-btn red-shadow" @click="jump(3)">开始报价</view></view>
@@ -40,17 +40,7 @@
 export default {
 	data() {
 		return {
-			list: [
-				{
-					img: 'https://baikebcs.bdimg.com/解淑萍右侧轮播.png'
-				},
-				{
-					img: 'https://baikebcs.bdimg.com/解淑萍右侧轮播.png'
-				},
-				{
-					img: 'https://baikebcs.bdimg.com/解淑萍右侧轮播.png'
-				}
-			],
+			banner_info: [],
 			swiperCurrent: 0,
 			price_info: [], //最新报价
 			temlate_info: [], //报价模板
@@ -66,9 +56,10 @@ export default {
 	},
 	methods: {
 		async getData(time = 300) {
-			const { price_info, temlate_info } = await this.$API.home.get_index_price();
+			const { banner_info,price_info, temlate_info} = await this.$API.home.get_index_price();
 			this.price_info = price_info;
 			this.temlate_info = temlate_info;
+			this.banner_info = banner_info;
 			setTimeout(() => {
 				uni.hideLoading();
 			}, time);

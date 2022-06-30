@@ -108,4 +108,13 @@ export default {
 		})
 		return res
 	},
+	// 报价模板列表
+	async template_more(data = {}) {
+		let res = await request({
+			url: '/api/orders/template_more',
+			method: 'POST',
+			data
+		})
+		return res
+	},
 }

@@ -3,10 +3,10 @@ import store from '@/store'
 import methods from '@/utils/method.js'
 export default function service(options) {
 	const token = store.state.user.token
-	console.log(token)
 	if(!token){
+		console.log('从接口跑去登录')
 		const res =  methods.toLogin()
-		if(!res) return
+		if(!res) return new Promise(()=>{})
 	}
 	options.url =config.baseApi + options.url
 	return new Promise((resolve, reject) => {

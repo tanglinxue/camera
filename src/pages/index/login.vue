@@ -10,7 +10,7 @@
 	</view>
 </template>
 <script>
-// ok
+// finish
 export default {
 	data() {
 		return {
@@ -22,7 +22,6 @@ export default {
 		async getCode() {
 			console.log('拉起允许手机号弹窗');
 			this.code = await this.$methods.getCode();
-			console.log(this.code);
 		},
 		async tologin() {
 			this.canclick = false
