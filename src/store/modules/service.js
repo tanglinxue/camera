@@ -33,8 +33,7 @@ const service = {
         ...step3Getters,
         ...step4Getters,
 	    ...step5Getters,
-		...allPro
-		
+		...allPro	
 	},
 	actions:{
 		// 读取服务初始化接口

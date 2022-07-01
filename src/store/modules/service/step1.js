@@ -1,34 +1,39 @@
 // 照片类固定
 //finish
 export const step1 = (state) => {
-	const {serviceInfo,serviceData:{zp_cyzt}} = state;
-	if(!Object.keys(serviceInfo).length){
+	const {
+		serviceInfo,
+		serviceData: {
+			zp_cyzt
+		}
+	} = state;
+	if (!Object.keys(serviceInfo).length) {
 		return []
 	}
 	let num = 0;
 	let parentId = '';
-	if(zp_cyzt>1){
-		num = serviceInfo['11'+zp_cyzt].num;
-		parentId = ('11'+zp_cyzt)*1
+	if (zp_cyzt > 1) {
+		num = serviceInfo['11' + zp_cyzt].num;
+		parentId = ('11' + zp_cyzt) * 1
 	}
-	const printItem ={
+	const printItem = {
 		name: '冲印：（张数）',
 		footer: '注：50张起步，不足按50张计费，400人以上合影冲印另计',
 		type: 'input',
 		hidePrice: true,
-		id:11234,
+		id: 11234,
 		num,
 		parentId,
-		noDays:true,
-		noAddPrice:true
+		noDays: true,
+		noAddPrice: true
 	}
-	function getBeforeName(key){
+
+	function getBeforeName(key) {
 		return `冲印：(${serviceInfo[key].name})`
 	}
-	return [
-		{
+	return [{
 			...serviceInfo['101'],
-			id: 101	
+			id: 101
 		},
 		{
 			...serviceInfo['102'],
@@ -39,27 +44,26 @@ export const step1 = (state) => {
 			...serviceInfo['111'],
 			footer: '注：200人以内，按200人计费',
 			type: 'input',
-			noDays:true
+			noDays: true
 		},
 		printItem,
 		{
 			id: 112,
 			...serviceInfo['112'],
-			beforeName:getBeforeName('112'),
-      noDays:true,
+			beforeName: getBeforeName('112'),
+			noDays: true,
 		},
 		{
 			id: 113,
 			...serviceInfo['113'],
-			beforeName:getBeforeName('113'),
-      noDays:true,
+			beforeName: getBeforeName('113'),
+			noDays: true,
 		},
 		{
 			id: 114,
 			...serviceInfo['114'],
-			beforeName:getBeforeName('114'),
-      noDays:true,
+			beforeName: getBeforeName('114'),
+			noDays: true,
 		}
 	]
 }
-

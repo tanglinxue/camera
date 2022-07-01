@@ -20,7 +20,7 @@
 		</swiper>
 		<view class="row-start dayCompute">
 			<text class="txt1">服务天数：</text>
-			<uni-number-box class="num"  :min="0" :max="99" v-model="serviceData.work_day" />
+			<uni-number-box class="num"  :min="1" :max="99" v-model="serviceData.work_day" @input='numAllTap'/>
 			<text class="txt2">单个项目的天数可在下一步修改</text>
 		</view>
 		<view class="foot-detail row-between">
@@ -130,6 +130,9 @@ export default {
 				return uni.navigateBack()
 			}
 			this.$jump(`/pages/index/editOfferPrice`);
+		},
+		numAllTap(){
+			
 		}
 	}
 };
