@@ -1,71 +1,82 @@
 <template>
 	<view class="main column-center">
 		<view class="boxOuter">
+			<view class="row-start date-box">
+				<picker @change="yearChange" :value="yearIndex" :range="yearArr" class="date">
+					<view class="date-input row-between">
+						<text>{{ yearArr[yearIndex] }}</text>
+						<view class="bottom-point"></view>
+					</view>
+				</picker>
+				年
+				<picker @change="monthChange" :value="monthIndex" :range="monthArr" class="date">
+					<view class="date-input row-between">
+						<text>{{ monthArr[monthIndex] }}</text>
+						<view class="bottom-point"></view>
+					</view>
+				</picker>
+				月
+			</view>
 			<view class="time row-between">
 				<view class="row-start search">
 					<view class="name">关键词</view>
-					<view class="input row-start"><input type="text" placeholder="活动方,合作方" v-model="query.keywords"/></view>
-					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange" :custom-item="customItem" class="date" fields="month">
-						<view class="date-input row-between">
-							<text>全部</text>
-							<view class="bottom-point"></view>
-						</view>
-					</picker>
+					<view class="input row-start"><input type="text" placeholder="活动方,合作方" v-model="query.keywords" /></view>
 				</view>
-				<view class="main-btn" @click="search">查询</view>
+				<view class="main-btn" @click="getList(1)">查询</view>
 			</view>
 		</view>
-		<view class="boxOuter row-center"><uni-data-checkbox v-model="query.status" multiple :localdata="hobbys" /></view>
+		<view class="boxOuter row-center"><uni-data-checkbox v-model="query.status" multiple :localdata="selectArr" @change="getList(1)" /></view>
 		<view class="boxOuter price">
 			<view class="row-center mgb10">
 				订单数：
-				<text class="gray mgr15">1020(取消23)</text>
+				<text class="gray mgr15">{{ numObj.all_count || 0 }}(取消{{ numObj.cancel_order || 0 }})</text>
 				订单额：
-				<text class="gray">213000</text>
-				1
+				<text class="gray">{{ numObj.all_sum_money || 0 }}</text>
 			</view>
 			<view class="row-center">
 				已结款：
-				<text class="gray mgr15">160000(已结·80单)</text>
+				<text class="gray mgr15">{{ numObj.settled_order_sum || 0 }}(已结{{ numObj.settled_order || 0 }}单)</text>
 				待结款：
-				<text class="orange">53000(未结19单)</text>
+				<text class="orange">{{ numObj.completed_order_sum || 0 }}(未结{{ numObj.completed_order || 0 }}单)</text>
 			</view>
 		</view>
-		<view class="ordeList">
-			<!-- 订单列表 -->
-			<view v-for="(item, index) in list" :key="index"><Item :info="item" /></view>
+		<view class="ordeList" v-if="!loading">
+			<Empty v-if="!list.length" text="暂无订单"></Empty>
+			<template v-else>
+				<!-- 订单列表 -->
+				<view v-for="item in list" :key="item.id"><Item :info="item" /></view>
+				<uni-load-more :status="status" class="load" v-if="status == 'loading'" />
+			</template>
 		</view>
 	</view>
 </template>
 <script>
-//ok
+//finish
 import Item from './components/item';
 export default {
 	data() {
-		const currentDate = this.getDate({
-			format: true
-		});
 		return {
-			tabCurrentIndex: 0,
-			date: currentDate,
-			customItem: '全部',
+			yearArr: ['全部', '近半年', '近1年'],
+			yearIndex:0,
+			monthArr: [1,2,3,4,5,6,7,8,9,10,11,12],
+			monthIndex:0,
 			// 多选数据源
-			hobbys: [
+			selectArr: [
 				{
 					text: '已预定',
-					value: 0
-				},
-				{
-					text: '已完成(待结算)',
 					value: 1
 				},
 				{
-					text: '已结算',
+					text: '已完成(待结算)',
 					value: 2
 				},
 				{
-					text: '取消',
+					text: '已结算',
 					value: 3
+				},
+				{
+					text: '取消',
+					value: 4
 				}
 			],
 			status: 'more',
@@ -73,52 +84,72 @@ export default {
 			loading: true,
 			list: [],
 			query: {
-				status:[0, 1, 2, 3],
-				month_time:1,
-				keywords:'',
+				status: [1, 2, 3, 4],
+				month_time: '',
+				keywords: '',
 				page: 1,
 				pagesize: 20
-			}
+			},
+			numObj: {
+				all_count: 0, //订单数
+				cancel_order: 0, //取消订单数
+				all_sum_money: 0, //订单总额
+				settled_order_sum: 0, //已结款总额
+				settled_order: 0, //已结订单数
+				completed_order_sum: 0, //待结款总额
+				completed_order: 0 //待结款订单数
+			},
 		};
-	},
-	computed: {
-		startDate() {
-			return this.getDate('start');
-		},
-		endDate() {
-			return this.getDate('end');
-		}
 	},
 	components: {
 		Item
 	},
-	onLoad(){
-		this.getList()
+	onLoad() {
+		this.getDate()
+		this.getList();
 	},
 	methods: {
-		// 获取日期
-		getDate(type) {
-			const date = new Date();
-			let year = date.getFullYear();
-			let month = date.getMonth() + 1;
-			if (type === 'start') {
-				year = year - 60;
-			} else if (type === 'end') {
-				year = year + 2;
+		getDate(){
+			let arr = []
+			let date = new Date().getFullYear()+2
+			for(let i=0;i<10;i++){
+				date -= 1
+				arr.push(date)
 			}
-			month = month > 9 ? month : '0' + month;
-			return `${year}-${month}`;
+			this.yearArr = this.yearArr.concat(arr)
+		},
+		yearChange(e) {
+			console.log(e);
+			this.yearIndex = e.detail.value*1
+		},
+		monthChange(e){
+			this.monthIndex = e.detail.value*1
 		},
 		// 获取列表
-		async getList() {
-			const { loading, list, query, navList, tabCurrentIndex } = this;
+		async getList(pageNum = 1) {
+			this.query.page = pageNum;
+			const { loading, list, query, navList,yearIndex,monthIndex,yearArr,monthArr } = this;
+			let month_time  = ''
+			if(yearIndex<3){
+				month_time = yearIndex+1
+			}else{
+				month_time = yearArr[yearIndex]+'-'+(monthArr[monthIndex]<9?'0'+monthArr[monthIndex]:monthArr[monthIndex])
+			}
 			this.status = 'loading';
 			let res = await this.$API.order.getList({
-				...query
+				...query,month_time
 			});
 			uni.hideLoading();
-			console.log(res)
-			let { list: clist, all_count } = res;
+			let { list: clist, all_count, cancel_order, all_sum_money, settled_order_sum, settled_order, completed_order_sum, completed_order } = res;
+			this.numObj = {
+				all_count,
+				cancel_order,
+				all_sum_money,
+				settled_order_sum,
+				settled_order,
+				completed_order_sum,
+				completed_order
+			};
 			if (loading) {
 				this.loading = false;
 			}
@@ -135,6 +166,12 @@ export default {
 				this.status = 'noMore';
 			}
 		}
+	},
+	onReachBottom() {
+		// 下拉加载更多
+		if (this.status === 'more') {
+			this.getList(this.query.page + 1);
+		}
 	}
 };
 </script>
@@ -147,36 +184,27 @@ export default {
 ::v-deep .uni-data-checklist .checklist-group .checklist-box {
 	margin-right: 20rpx;
 }
-// ::v-deep .uni-date__x-input {
-// 	height: 60rpx;
-// 	line-height: 60rpx;
-// 	font-size: 24rpx;
-// }
-// ::v-deep .uniui-calendar {
-// 	display: none;
-// }
-// ::v-deep .uni-date-editor--x .uni-date__icon-clear {
-// 	border-width: 14rpx;
-// }
-
-// ::v-deep .uni-input-placeholder {
-// 	font-size: 26rpx;
-// 	text-align: center;
-// }
-// ::v-deep .uni-date-x {
-// 	width: 220rpx;
-// }
-// ::v-deep .uni-date-x--border {
-// 	border-color: $border;
-// }
-
-
 .main {
 	padding: 20rpx;
+	.date-box {
+		padding-left: 80rpx;
+		margin-bottom: 20rpx;
+		.date-input {
+			margin-left: 20rpx;
+			border: 1px solid $border;
+			width: 150rpx;
+			height: 70rpx;
+			border-radius: 8rpx;
+			padding: 15rpx;
+			font-size: 26rpx;
+			color: $gray;
+			margin-right: 20rpx;
+		}
+	}
 	.search {
 		font-size: 28rpx;
 		.input {
-			width: 200rpx;
+			width: 400rpx;
 			padding: 0 15rpx;
 			height: 70rpx;
 			border-radius: 8rpx;
@@ -184,20 +212,7 @@ export default {
 			border: 1px solid $border;
 			margin-left: 20rpx;
 		}
-		.date {
-			.date-input {
-				margin-left: 20rpx;
-				border: 1px solid $border;
-				width: 180rpx;
-				height: 70rpx;
-				border-radius: 8rpx;
-				padding: 15rpx;
-				font-size: 26rpx;
-				color: $gray;
-			}
-		}
 	}
-
 	.time {
 		.main-btn {
 			width: 120rpx;

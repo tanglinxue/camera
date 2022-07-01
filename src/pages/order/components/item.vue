@@ -1,15 +1,14 @@
 <template>
 	<view class="boxOuter" @click='jump'>
-		<view class='txt borderbottom row-between'><view>活动名称：<text>{{info.case_name}}</text></view><view class='green'>{{info.status | getStatusName}}</view></view>
+		<view class='txt borderbottom row-between'><view>执行时间：<text>{{info.start_time.split(' ')[0]}}</text></view><view class='green'>{{info.status | getStatusName}}</view></view>
+		<view class='txt'>活动名称：<text>{{info.case_name}}</text></view>
 		<view class='txt'>主办方：<text>{{info.case_host}}</text></view>
-		<view class='txt'>金额：<text>{{info.real_money}}</text></view>
-		<view class='txt'>联系人：<text>{{info.contact_name}}</text></view>
-		<view class='txt'>报价时间：<text>{{info.create_time}}</text></view>
+		<view class='txt'>金额：<text>{{info.real_money}}</text></view>	
 	</view>
 </template>
 
 <script>
-// ok
+// finish
 export default {
 	props: {
 		info: {

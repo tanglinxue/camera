@@ -6,9 +6,13 @@
 				<view class="row-start">
 					<view class="left-text">费用总计</view>
 					<view class="row-start">
-						{{ query.real_money }}(
-						<text>{{ query.total_money }}</text>
-						)元
+						{{ query.real_money || 0 }}
+						<template v-if="type == 1">
+							(
+							<text>{{ query.total_money || 0 }}</text>
+							)
+						</template>
+						元
 					</view>
 					<view class="red row-start fee" @click="jump">
 						明细
@@ -42,9 +46,9 @@
 					活动地址
 					<text class="red">*</text>
 				</view>
-				<view class="row-between flex1">
-					<view class="input-box row-center flex1"><input type="text" placeholder="请填写详细地址" class="input" :value="query.address" /></view>
-					<uni-icons type="map" size="30" class="mgl20" @click="toMap"></uni-icons>
+				<view class="row-between flex1" @click="toMap">
+					<view class="input-box row-center flex1"><input type="text" placeholder="请填写详细地址" class="input" :value="query.address" disabled /></view>
+					<uni-icons type="map" size="30" class="mgl20"></uni-icons>
 				</view>
 			</view>
 			<view class="mgb30 row-start">
@@ -58,14 +62,14 @@
 						开始（日期时间）
 						<text class="red">*</text>
 					</view>
-					<view class="time"><uni-datetime-picker type="date" return-type="timestamp" v-model="query.start_time" /></view>
+					<view class="time"><uni-datetime-picker type="date" v-model="query.start_time" /></view>
 				</view>
 				<view class="mgl20">
 					<view class="big-left-text mgb10">
 						结束（日期时间）
 						<text class="red">*</text>
 					</view>
-					<view class="time"><uni-datetime-picker type="date" return-type="timestamp" v-model="query.end_time" /></view>
+					<view class="time"><uni-datetime-picker type="date" v-model="query.end_time" /></view>
 				</view>
 			</view>
 
@@ -99,6 +103,7 @@
 </template>
 
 <script>
+	//finish
 export default {
 	props: {
 		type: {
@@ -135,10 +140,13 @@ export default {
 				people_num: '',
 				start_time: '',
 				end_time: '',
-				work_meal: '',
+				work_meal: 1,
 				contact_name: '',
 				contact_tel: '',
-				memo: ''
+				memo: '',
+				real_money:0,
+				total_money:0
+				
 			},
 			statusArr: [
 				{
@@ -160,12 +168,16 @@ export default {
 			]
 		};
 	},
-	watch: {
-		detail: {
-			handler(val) {
-				this.query = { ...val, ...this.query };
-			},
-			deep: true
+	mounted() {
+		console.log('我来了');
+		console.log(this.detail);
+		if (this.type == 2) {
+			const { real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,id } = this.detail;
+			this.query = { real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,order_id:id }
+		}else{
+			const {real_money,total_money} = this.detail;
+			this.query.real_money = real_money;
+			this.query.total_money = total_money;
 		}
 	},
 	methods: {
@@ -184,21 +196,35 @@ export default {
 			this.$jump(`/pages/index/priceSheet?type=2&id=${this.price_id}`);
 		},
 		async submit() {
-			const { query, price_id } = this;
-			this.$methods.showLoading('创建订单中...');
-			const res = await this.$API.home.submit_order({
+			const { query, price_id, type } = this;
+			let {start_time,end_time,book_company,address} = query;
+			if (!book_company) return this.$methods.showToast('请填写预定单位');
+			if (!address) return this.$methods.showToast('请填写详细地址');
+			if (!start_time) return this.$methods.showToast('请选择开始日期');
+			if (!end_time) return this.$methods.showToast('请选择结束日期');
+			if (new Date(end_time).getTime() < new Date(start_time).getTime()) return this.$methods.showToast('结束日期不能早于开始日期');
+			const title = type == 1?'创建订单中...':'编辑订单中...';
+			const tip = type == 1?'创建订单成功':'编辑订单成功';
+			const API = type == 1?this.$API.home.submit_order:this.$API.home.edit_order;
+			this.$methods.showLoading(title);
+			const res = await API({
 				...query,
 				price_id
-			});
-			this.$methods.showToast('创建订单成功');
+			});	
+			this.$methods.showToast(tip);
+			if (type == 1) {		
+			} else {
+				setTimeout(() => {
+					uni.navigateBack({
+						delta: 1
+					});
+				}, 1500);
+			}
 		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
-
 @import '../style/order.scss';
-
-
 </style>

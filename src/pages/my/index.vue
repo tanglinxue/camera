@@ -34,13 +34,13 @@
 						<text class="tit">我的信息</text>
 					</view>
 				</view>
-				<view class="row row-between borderbottom">
+				<view class="row row-between borderbottom" @click='downFile(price_template)'>
 					<view class="row-start">
 						<uni-icons type="download" size="26" class="icon"></uni-icons>
 						<text class="tit">行业报价模版（下载）</text>
 					</view>
 				</view>
-				<view class="row row-between">
+				<view class="row row-between" @click='downFile(contract_template)'>
 					<view class="row-start">
 						<uni-icons type="download" size="26" class="icon"></uni-icons>
 						<text class="tit">行业合同模版（下载）</text>
@@ -90,6 +90,8 @@ export default {
 			price_count: 0, //报价数
 			reserve_count: 0, //预定数
 			settled_count: 0, //成交数
+			price_template:'',//报价模板
+			contract_template:'',//合同模板
 			essay_gzh: '', //关注公众的公众号文章链接
 			essay_kefu: '' //客服的公众号文章链接
 		};
@@ -103,13 +105,15 @@ export default {
 	},
 	methods: {
 		async getData(time = 300) {
-			const { userinfo, price_count, reserve_count, settled_count, essay_gzh, essay_kefu } = await await this.$API.my.mypage();
+			const { userinfo, price_count, reserve_count, settled_count, essay_gzh, essay_kefu,price_template, contract_template} = await await this.$API.my.mypage();
 			this.userinfo = userinfo;
 			this.price_count = price_count;
 			this.reserve_count = reserve_count;
 			this.settled_count = settled_count;
 			this.essay_gzh = essay_gzh;
 			this.essay_kefu = essay_kefu;
+			this.price_template = price_template;
+			this.contract_template = contract_template;
 			setTimeout(() => {
 				uni.hideLoading();
 			}, time);
@@ -122,6 +126,29 @@ export default {
 				// 我的信息
 				this.$jump(`/pages/my/info`);
 			}
+		},
+		downFile(url) {
+			wx.downloadFile({
+				url,
+				success(res) {
+					let filePath = res.tempFilePath;
+					wx.openDocument({
+						filePath: filePath,
+						success: function(res) {
+							console.log('openDocument sucess')
+						},
+						fail: function(res) {
+							console.log('openDocument fail');
+						},
+						complete: function(res) {
+							console.log('openDocument complete');
+						}
+					});
+				},
+				fail(err) {
+					console.log(err);
+				}
+			});
 		}
 	},
 	onPullDownRefresh() {

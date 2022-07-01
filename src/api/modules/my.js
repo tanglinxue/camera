@@ -27,6 +27,15 @@ export default {
 		})
 		return res
 	},
+	// 历史报价
+	async price_more(data={}) {
+		let res = await request({
+			url: '/api/orders/price_more', 
+			method: 'POST',
+			data
+		})
+		return res
+	}
 }
 
 

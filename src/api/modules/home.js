@@ -99,10 +99,19 @@ export default {
 		})
 		return res
 	},
-	// 预定下单
+	// 创建下单
 	async submit_order(data = {}) {
 		let res = await request({
 			url: '/api/orders/submit_order',
+			method: 'POST',
+			data
+		})
+		return res
+	},
+	// 编辑订单
+	async edit_order(data = {}) {
+		let res = await request({
+			url: '/api/orders/edit_order',
 			method: 'POST',
 			data
 		})

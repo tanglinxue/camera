@@ -1,8 +1,9 @@
 <template>
-	<Order :type="2" :detail="detail" :price_id="detail.price_id"></Order>
+	<Order :type="2" :detail="detail" :price_id="detail.price_id" v-if='showCom'></Order>
 </template>
 
 <script>
+// finish
 import Order from './components/order';
 export default {
 	components: {
@@ -11,7 +12,8 @@ export default {
 	data() {
 		return {
 			order_id: '',
-			detail: {}
+			detail: {},
+			showCom:false
 		};
 	},
 	onLoad(options) {
@@ -23,6 +25,7 @@ export default {
 		async getData() {
 			let { list: detail } = await this.$API.order.getDetail({ order_id: this.order_id });
 			this.detail = detail;
+			this.showCom = true
 			uni.hideLoading();
 		}
 	}
@@ -31,14 +34,15 @@ export default {
 <style lang="scss" scoped>
 @import '@/static/scss/index.scss';
 // 服务状态
-::v-deep .uni-data-checklist .checklist-group .checklist-box .radio__inner {
+
+::v-deep .order .uni-data-checklist .checklist-group .checklist-box .radio__inner {
 	width: 24rpx;
 	height: 24rpx;
 }
-::v-deep .checklist-text {
+::v-deep .order .checklist-text {
 	font-size: 24rpx !important;
 }
-::v-deep .uni-data-checklist .checklist-group .checklist-box {
+::v-deep .order .uni-data-checklist .checklist-group .checklist-box {
 	margin-right: 10rpx;
 }
 // 日期

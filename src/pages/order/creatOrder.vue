@@ -1,8 +1,9 @@
 <template>
-	<Order :price_id='price_id' :detail='detail'/>
+	<Order :price_id='price_id' :detail='detail' v-if='showCom'/>
 </template>
 
 <script>
+	// finish
 import Order from './components/order'
 export default {
 	components:{
@@ -11,12 +12,14 @@ export default {
 	data(){
 		return {
 			price_id:'',
-			detail:{}
+			detail:{},
+			showCom:false
 		}
 	},
 	onLoad(options) {
 		this.price_id = options.id;
 		this.detail = JSON.parse(options.detail)
+		this.showCom = true
 	}
 };
 </script>
