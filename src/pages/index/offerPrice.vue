@@ -45,7 +45,7 @@ import Step2 from './components/step2.vue';
 import Step3 from './components/step3.vue';
 import Step4 from './components/step4.vue';
 import Step5 from './components/step5.vue';
-import { mapActions,mapGetters,mapState } from 'vuex';
+import { mapActions,mapGetters,mapState,mapMutations } from 'vuex';
 export default {
 	components: {
 		Step1,
@@ -70,7 +70,8 @@ export default {
 	},
 	computed:{
 		...mapState('service', ['serviceData']),
-		...mapGetters('service', ['allPro','iner_money']),
+		...mapGetters('service', ['allPro','iner_money','inerAllPro']),
+		...mapMutations('service',['changeAllServiceNum']),
 		navList(){
 			const {allPro} = this;
 			
@@ -132,7 +133,8 @@ export default {
 			this.$jump(`/pages/index/editOfferPrice`);
 		},
 		numAllTap(){
-			
+			console.log(this.inerAllPro)
+			this.changeAllServiceNum(this.inerAllPro)
 		}
 	}
 };

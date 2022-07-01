@@ -13,6 +13,9 @@ export default {
 	updateServiceData(state, serviceData) {
 		state.serviceData = serviceData
 	},
+	changeAllServiceNum(state,obj){
+		
+	},
 	//修改接口的自有服务
 	changeServiceObj(state, obj) {
 		const {
