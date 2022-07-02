@@ -146,6 +146,9 @@ export default {
 		},
 		async submit() {
 			const { query, serviceData, serviceInfo, dynamicInfo, price_id, total_money } = this;
+			if(!total_money){
+				return this.$methods.showToast('请选择项目');
+			}
 			let title = '发布中...';
 			let toast = '发布成功';
 			if (price_id) {

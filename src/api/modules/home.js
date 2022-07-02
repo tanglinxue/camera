@@ -93,7 +93,7 @@ export default {
 	//通过模板id获取用户的模板信息
 	async getTemplateById(data = {}) {
 		let res = await request({
-			url: '/api/orders/getTemplateById',
+			url: '/api/orders/getPriceByTempid',
 			method: 'POST',
 			data
 		})

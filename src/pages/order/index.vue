@@ -56,6 +56,7 @@ import Item from './components/item';
 export default {
 	data() {
 		return {
+			type:1,
 			yearArr: ['全部', '近半年', '近1年'],
 			yearIndex:0,
 			monthArr: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -104,7 +105,15 @@ export default {
 	components: {
 		Item
 	},
-	onLoad() {
+	onLoad(option) {
+		if(option.type){
+			let type = option.type
+			if(type==2){
+				this.query.status = [1]
+			}else if(type==3){
+				this.query.status = [2,3]
+			}
+		}
 		this.getDate()
 		this.getList();
 	},

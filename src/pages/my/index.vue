@@ -17,11 +17,11 @@
 						<view class="text1">报价数</view>
 						<view class="text2">{{ price_count }}</view>
 					</view>
-					<view class="item column-center" @click="jump(1)">
+					<view class="item column-center" @click="jump(2)">
 						<view class="text1">预定数</view>
 						<view class="text2">{{ reserve_count }}</view>
 					</view>
-					<view class="item column-center" @click="jump(1)">
+					<view class="item column-center" @click="jump(3)">
 						<view class="text1">成交数</view>
 						<view class="text2">{{ settled_count }}</view>
 					</view>
@@ -122,6 +122,12 @@ export default {
 			if (type == 1) {
 				// 历史报价记录
 				this.$jump(`/pages/my/historyRecord`);
+			}else if (type == 2) {
+				// 我的订单
+				this.$jump(`/pages/order/index?type=2`, 3);
+			} else if (type == 3) {
+				// 我的订单
+				this.$jump(`/pages/order/index?type=3`, 3);
 			} else if (type == 4) {
 				// 我的信息
 				this.$jump(`/pages/my/info`);
