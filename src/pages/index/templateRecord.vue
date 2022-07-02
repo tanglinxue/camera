@@ -1,6 +1,6 @@
 <template>
 	<view class="main">
-		<view class="list boxOuter" v-for="(item) in list" :key="item.id">
+		<view class="list boxOuter" v-for="(item) in list" :key="item.id" @click='jump(item.id)'>
 			<view class="item">{{ item.template_name }}</view>
 		</view>
 		<uni-load-more :status="status" class="load" v-if="status == 'loading'" />
@@ -51,6 +51,9 @@ export default {
 			} else {
 				this.status = 'noMore';
 			}
+		},
+		jump(id){
+			this.$jump(`/pages/index/priceTemplate?id=${id}`);
 		}
 	},
 	onReachBottom() {

@@ -11,7 +11,7 @@ export default {
 	},
 	// 读取接口的选择变量
 	updateServiceData(state, serviceData) {
-		state.serviceData = serviceData
+		state.serviceData = {...state.serviceData,...serviceData}
 	},
 	changeAllServiceDays(state,{list,days}){
 		console.log(list)

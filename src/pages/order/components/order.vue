@@ -6,12 +6,13 @@
 				<view class="row-start">
 					<view class="left-text">费用总计</view>
 					<view class="row-start">
-						{{ query.real_money || 0 }}
 						<template v-if="type == 1">
+						{{ query.real_money || 0 }}
 							(
 							<text>{{ query.total_money || 0 }}</text>
 							)
 						</template>
+						<template v-else>{{ query.total_money || 0 }}</template>
 						元
 					</view>
 					<view class="red row-start fee" @click="jump">
@@ -172,8 +173,8 @@ export default {
 		console.log('我来了');
 		console.log(this.detail);
 		if (this.type == 2) {
-			const { real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,id } = this.detail;
-			this.query = { real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,order_id:id }
+			const { total_money,real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,id } = this.detail;
+			this.query = { total_money,real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,order_id:id }
 		}else{
 			const {real_money,total_money} = this.detail;
 			this.query.real_money = real_money;

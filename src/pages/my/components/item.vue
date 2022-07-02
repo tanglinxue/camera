@@ -1,5 +1,5 @@
 <template>
-	<view class="boxOuter">
+	<view class="boxOuter" @click='jump(info.id)'>
 		<view class='txt borderbottom'>活动名称：<text>{{info.case_name}}</text></view>
 		<view class='txt'>主办方：<text>{{info.case_host}}</text></view>
 		<view class='txt'>金额：<text>{{info.real_money}}元</text></view>
@@ -15,6 +15,11 @@ export default {
 		info: {
 			type: Object,
 			default: () => {}
+		}
+	},
+	methods:{
+		jump(id){
+			this.$jump(`/pages/index/priceSheet?id=${id}`);
 		}
 	}
 };
