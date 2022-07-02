@@ -71,7 +71,7 @@ export default {
 	computed:{
 		...mapState('service', ['serviceData']),
 		...mapGetters('service', ['allPro','iner_money','inerAllPro']),
-		...mapMutations('service',['changeAllServiceNum']),
+		
 		navList(){
 			const {allPro} = this;
 			
@@ -109,6 +109,7 @@ export default {
 	},
 	methods: {
 		...mapActions('service', ['getInfo']),
+		...mapMutations('service',['changeAllServiceNum']),
 		addItem(){
 			const {info,tabCurrentIndex} = this;
 			// 新增服务项目
@@ -133,7 +134,6 @@ export default {
 			this.$jump(`/pages/index/editOfferPrice`);
 		},
 		numAllTap(){
-			console.log(this.inerAllPro)
 			this.changeAllServiceNum(this.inerAllPro)
 		}
 	}

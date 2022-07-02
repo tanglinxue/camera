@@ -13,8 +13,14 @@ export default {
 	updateServiceData(state, serviceData) {
 		state.serviceData = serviceData
 	},
-	changeAllServiceNum(state,obj){
-		
+	changeAllServiceNum(state,list){
+		console.log(list)
+		// const {unit_price,num} = serviceItem
+		// serviceInfo[item_id] = {
+		// 	...serviceItem,
+		// 	days,
+		// 	price: Math.floor(unit_price * num * days)
+		// }
 	},
 	//修改接口的自有服务
 	changeServiceObj(state, obj) {
