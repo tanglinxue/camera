@@ -13,14 +13,53 @@ export default {
 	updateServiceData(state, serviceData) {
 		state.serviceData = serviceData
 	},
-	changeAllServiceNum(state,list){
+	changeAllServiceDays(state,{list,days}){
 		console.log(list)
-		// const {unit_price,num} = serviceItem
-		// serviceInfo[item_id] = {
-		// 	...serviceItem,
-		// 	days,
-		// 	price: Math.floor(unit_price * num * days)
-		// }
+		state.serviceData.work_day = days
+		list.forEach(item=>{
+			if(item.list.length){
+				item.list.forEach(bitem=>{
+					console.log(bitem)
+					if(!bitem.noDays){
+						const {unit_price,id,num} = bitem
+						state.serviceInfo[id] = {
+							...bitem,
+							days,
+							price: Math.floor(unit_price * num * days)
+						}
+					}
+				})
+			}
+		})	
+	},
+	changeAllServiceNum(state,list){
+		list.forEach(item=>{
+			if(item.list.length){
+				item.list.forEach(bitem=>{
+					if(bitem.node_id){
+						console.log(bitem)
+						const {id,node_id} = bitem;
+						const dynamicArr = state.dynamicInfo[node_id];
+						let findIndex = dynamicArr.findIndex(item => item.id == id)
+						dynamicArr.splice(findIndex, 1, {
+							...item,
+							days:0,
+							num:0,
+							price: 0
+						})			
+						
+					}else{
+						state.serviceInfo[bitem.id] = {
+							...bitem,
+							days:0,
+							num:0,
+							price: 0
+						}
+					}
+					
+				})
+			}
+		})	
 	},
 	//修改接口的自有服务
 	changeServiceObj(state, obj) {

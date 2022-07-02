@@ -20,7 +20,7 @@
 		</swiper>
 		<view class="row-start dayCompute">
 			<text class="txt1">服务天数：</text>
-			<uni-number-box class="num"  :min="1" :max="99" v-model="serviceData.work_day" @input='numAllTap'/>
+			<uni-number-box class="num"  :min="1" :max="99" v-model="serviceData.work_day" @input='daysAllTap'/>
 			<text class="txt2">单个项目的天数可在下一步修改</text>
 		</view>
 		<view class="foot-detail row-between">
@@ -30,7 +30,7 @@
 				<text class="mgl15">(累计总价)</text>
 			</view>
 			<view class="foot-btn row-end">
-				<view class="middle-btn white-middle-btn">重置</view>
+				<view class="middle-btn white-middle-btn" @click='numAllTap'>重置</view>
 				<view class="middle-btn mgl20" @click="nextStep">下一步</view>
 			</view>
 		</view>
@@ -109,7 +109,7 @@ export default {
 	},
 	methods: {
 		...mapActions('service', ['getInfo']),
-		...mapMutations('service',['changeAllServiceNum']),
+		...mapMutations('service',['changeAllServiceNum','changeAllServiceNum']),
 		addItem(){
 			const {info,tabCurrentIndex} = this;
 			// 新增服务项目
@@ -132,6 +132,9 @@ export default {
 				return uni.navigateBack()
 			}
 			this.$jump(`/pages/index/editOfferPrice`);
+		},
+		daysAllTap(days){
+			this.changeAllServiceDays({list:this.inerAllPro,days})
 		},
 		numAllTap(){
 			this.changeAllServiceNum(this.inerAllPro)
