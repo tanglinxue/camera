@@ -1,7 +1,7 @@
 <template>
 	<view class="main column-center">
 		<view class="boxInner box column-center mgb50">
-			<view class="top-title">活动主题：{{ detail.case_name }}</view>
+			<view class="top-title"  v-if="type != 3">活动主题：{{ detail.case_name }}</view>
 			<view class="row-between top-title" v-if="type == 1">
 				<view>合作方：{{ detail.case_host }}</view>
 				<view>联系人：{{ detail.contact_name }}</view>
@@ -27,14 +27,17 @@
 					<view class="price borderbottom red">小计：￥{{ item.price }}</view>
 				</template>
 			</view>
-			<view class="total-price black weight">总计：￥{{ detail.total_money }}</view>
-			<view class="total-price red weight">结算价：￥{{ detail.real_money }}</view>
-			<view class="total-price gray">{{ detail.case_memo }}</view>
-			<view class="total-price gray">{{ detail.company_name }}</view>
+			<template v-if='type!=3'>
+				<view class="total-price black weight">总计：￥{{ detail.total_money }}</view>
+				<view class="total-price red weight">结算价：￥{{ detail.real_money }}</view>
+				<view class="total-price gray">{{ detail.case_memo }}</view>
+				<view class="total-price gray">{{ detail.company_name }}</view>
+			</template>
+			
 		</view>
 		<view class="row-center btn-box">
-			<view class="middle-btn">生成图片</view>
-			<view class="middle-btn mgl30"  @click="nextStep">编辑</view>
+			<view class="middle-btn" v-if="type !=3">生成图片</view>
+			<view class="middle-btn mgl30"  @click="nextStep">{{type==3?"使用模板":"编辑"}}</view>
 			<view class="middle-btn mgl30" v-if="type == 1" @click="jump">预定</view>
 		</view>
 	</view>
@@ -45,7 +48,7 @@ import { mapMutations, mapGetters } from 'vuex';
 export default {
 	data() {
 		return {
-			type: 1,
+			type: 1,//1为报价单，2为费用清单，3为报价模板
 			price_id: '',
 			detail: {
 				case_name: '', //活动主题
@@ -59,11 +62,18 @@ export default {
 		};
 	},
 	onLoad(options) {
-		if (options.type && options.type == 2) {
+		if (options.type) {
 			this.type = options.type;
-			uni.setNavigationBarTitle({
-				title: '费用清单'
-			});
+			if(this.type == 2){
+				uni.setNavigationBarTitle({
+					title: '费用清单'
+				});
+			}else if(this.type == 3){
+				uni.setNavigationBarTitle({
+					title: '报价模板'
+				});
+			}
+			
 		}
 		this.price_id = options.id;
 		this.$methods.showLoading();
@@ -80,37 +90,45 @@ export default {
 			this.$jump(`/pages/order/creatOrder?detail=${detail}&id=${this.price_id}`);
 		},
 		async getData() {
-			let {
-				case_name,
-				case_host,
-				contact_name,
-				real_money,
-				case_memo,
-				company_name,
-				total_money,
-				case_item,
-				dynamic_item,
-				kclz_xxxslk,
-				sp_sszm,
-				sp_tcjr,
-				spzz_djs,
-				work_day,
-				zp_cyzt
-			} = await this.$API.home.getPriceById({ price_id: this.price_id });
-			this.detail = {
-				case_name,
-				case_host,
-				contact_name,
-				real_money,
-				case_memo,
-				company_name,
-				total_money
-			};
-			case_item = JSON.parse(case_item);
-			dynamic_item = JSON.parse(dynamic_item);
-			this.updateServiceInfo(case_item);
-			this.updateDynamicInfo(dynamic_item);
-			this.updateServiceData({ kclz_xxxslk, sp_sszm, sp_tcjr, spzz_djs, work_day, zp_cyzt });
+			const type = this.type
+			if(type==3){
+				let {case_item,work_day} = await this.$API.home.getTemplateById({template_id:this.price_id});
+				case_item = JSON.parse(case_item);
+				this.updateServiceInfo(case_item);
+				this.updateServiceData({ work_day });
+			}else{
+				let {
+					case_name,
+					case_host,
+					contact_name,
+					real_money,
+					case_memo,
+					company_name,
+					total_money,
+					case_item,
+					dynamic_item,
+					kclz_xxxslk,
+					sp_sszm,
+					sp_tcjr,
+					spzz_djs,
+					work_day,
+					zp_cyzt
+				} = await this.$API.home.getPriceById({ price_id: this.price_id });	
+				this.detail = {
+					case_name,
+					case_host,
+					contact_name,
+					real_money,
+					case_memo,
+					company_name,
+					total_money
+				};
+				case_item = JSON.parse(case_item);
+				dynamic_item = JSON.parse(dynamic_item);
+				this.updateServiceInfo(case_item);
+				this.updateDynamicInfo(dynamic_item);
+				this.updateServiceData({ kclz_xxxslk, sp_sszm, sp_tcjr, spzz_djs, work_day, zp_cyzt });
+			}		
 			uni.hideLoading();
 		},
 		nextStep() {

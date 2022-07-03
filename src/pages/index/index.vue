@@ -79,7 +79,7 @@ export default {
 				this.$jump(`/pages/index/priceSheet?id=${id}`);
 			} else if (type == 5) {
 				// 单个报价模板
-				this.$jump(`/pages/index/priceTemplate?id=${id}`);
+				this.$jump(`/pages/index/priceSheet?id=${id}&type=3`);
 			}
 		},
 		// 滑动banner
