@@ -22,6 +22,7 @@ export default function service(options) {
 			},
 			dataType: 'json',
 			success: res => {
+				console.log(res)
 				if (res.statusCode === 200 && res.data.code === 1) {
 					// 请求成功
 					const data = res.data.data
@@ -31,6 +32,7 @@ export default function service(options) {
 					if (res.data.code === 4011) {
 						//登录失败
 						uni.hideLoading()
+						store.dispatch('user/updateToken','')
 						methods.toLogin()
 					} else if (res.data.code === 2) {
 						//其他报错
