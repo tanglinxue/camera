@@ -28,11 +28,12 @@
 				</template>
 			</view>
 			<template v-if='type!=3'>
-				<view class="total-price black weight">总计：￥{{ detail.total_money }}</view>
+				<view class="total-price black weight">总计：￥{{ total_money }}</view>
 				<view class="total-price red weight">结算价：￥{{ detail.real_money }}</view>
 				<view class="total-price gray">{{ detail.case_memo }}</view>
 				<view class="total-price gray">{{ detail.company_name }}</view>
 			</template>
+			<view class="total-price red weight" v-else>总计：￥{{ total_money }}</view>
 			
 		</view>
 		<view class="row-center btn-box">
@@ -80,7 +81,7 @@ export default {
 		this.getData();
 	},
 	computed: {
-		...mapGetters('service', ['allPro'])
+		...mapGetters('service', ['allPro','total_money'])
 	},
 	methods: {
 		...mapMutations('service', ['updateServiceInfo', 'updateDynamicInfo', 'updateServiceData']),
@@ -92,10 +93,13 @@ export default {
 		async getData() {
 			const type = this.type
 			if(type==3){
-				let {case_item,work_day} = await this.$API.home.getTemplateById({template_id:this.price_id});
+				let {item_info} = await this.$API.home.getTemplateById({template_id:this.price_id});
+				let {case_item,dynamic_item,kclz_xxxslk, sp_sszm, sp_tcjr, spzz_djs, work_day, zp_cyzt} =item_info
 				case_item = JSON.parse(case_item);
+				dynamic_item = JSON.parse(dynamic_item);
 				this.updateServiceInfo(case_item);
-				this.updateServiceData({ work_day });
+				this.updateDynamicInfo(dynamic_item);
+				this.updateServiceData({ kclz_xxxslk, sp_sszm, sp_tcjr, spzz_djs, work_day, zp_cyzt });
 			}else{
 				let {
 					case_name,
