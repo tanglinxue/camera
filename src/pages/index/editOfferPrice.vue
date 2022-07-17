@@ -169,6 +169,7 @@ export default {
 			}
 			await API(params);
 			this.$methods.showToast(toast);
+			
 		},
 		goOfferPrice() {
 			this.$jump(`/pages/index/offerPrice?type=2`);

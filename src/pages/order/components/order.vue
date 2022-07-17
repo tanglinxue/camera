@@ -214,6 +214,7 @@ export default {
 			});	
 			this.$methods.showToast(tip);
 			if (type == 1) {		
+				this.$jump(`/pages/order/success`);
 			} else {
 				setTimeout(() => {
 					uni.navigateBack({

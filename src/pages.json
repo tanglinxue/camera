@@ -50,12 +50,6 @@
 			}
 		},
 		{
-			"path": "pages/index/priceTemplate",
-			"style": {
-				"navigationBarTitleText": "报价模板"
-			}
-		},
-		{
 			"path": "pages/order/index",
 			"style": {
 				"navigationBarTitleText": "我的订单",

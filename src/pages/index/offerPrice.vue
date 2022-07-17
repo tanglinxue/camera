@@ -109,7 +109,7 @@ export default {
 	},
 	methods: {
 		...mapActions('service', ['getInfo']),
-		...mapMutations('service',['changeAllServiceNum','changeAllServiceNum']),
+		...mapMutations('service',['changeAllServiceNum','changeAllServiceNum','changeAllServiceDays']),
 		addItem(){
 			const {info,tabCurrentIndex} = this;
 			// 新增服务项目
