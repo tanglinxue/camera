@@ -1,5 +1,5 @@
 <template>
-	<Order :type="2" :detail="detail" :price_id="detail.price_id" v-if='showCom'></Order>
+	<Order :type="2" :detail="detail" :price_id="detail.price_id" :needBack='true' v-if='showCom'></Order>
 </template>
 
 <script>

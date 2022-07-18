@@ -107,6 +107,10 @@
 	//finish
 export default {
 	props: {
+		needBack:{
+			type:Boolean,
+			default:false
+		},
 		type: {
 			type: Number,
 			default: 1 //1是创建订单，2是订单详情
@@ -216,11 +220,14 @@ export default {
 			if (type == 1) {		
 				this.$jump(`/pages/order/success`);
 			} else {
-				setTimeout(() => {
-					uni.navigateBack({
-						delta: 1
-					});
-				}, 1500);
+				if(this.needBack){
+					// 需要回退
+					setTimeout(() => {
+						uni.navigateBack({
+							delta: 1
+						});
+					}, 1500);
+				}
 			}
 		}
 	}
