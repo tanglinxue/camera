@@ -1,6 +1,6 @@
 <template>
 	<view class="main column-center">
-		<view class="banner" >
+		<view class="banner" v-if='false'>
 			<swiper class="swiper" :autoplay="true" :circular="true" @change="swiperChange">
 				<swiper-item v-for="(item, index) in banner_info" :key="index"><img :src="item.bannerpic" class="img" /></swiper-item>
 			</swiper>
