@@ -8,7 +8,7 @@
 </template>
 
 <script>
-// finish
+// finish2
 export default {
 	props: {
 		info: {

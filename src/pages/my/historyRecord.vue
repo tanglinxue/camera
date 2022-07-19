@@ -14,7 +14,7 @@
 				<view class="main-btn" @click="getList(1)">查询</view>
 			</view>
 		</view>
-		<view class="boxOuter row-center price">累计报价：{{ total }}</view>
+		<view class="boxOuter row-center price">累计报价：{{ total }}单</view>
 		<view class="ordeList" v-if="!loading">
 			<Empty v-if="!list.length" text='暂无数据'></Empty>
 			<template v-else>
@@ -27,7 +27,7 @@
 	</view>
 </template>
 <script>
-//finish
+//finish2
 // 入参和返回数据有问题
 import Item from './components/item';
 export default {

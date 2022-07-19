@@ -126,4 +126,13 @@ export default {
 		})
 		return res
 	},
+	// 生成图片
+	async savePic(data = {}) {
+		let res = await request({
+			url: '/api/orders/generate_price',
+			method: 'POST',
+			data
+		})
+		return res
+	}
 }

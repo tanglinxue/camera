@@ -52,10 +52,10 @@ export default {
 			return this.step5.slice(0, 2);
 		},
 		list2() {
-			return this.step5.slice(2, 4);
+			return this.step5.slice(3);
 		},
 		info(){
-			return this.step5[4];
+			return this.step5[2];
 		},
 		currentIndex(){
 			 //"zp_cyzt": 4,照片-冲印状态: 1-无  2-塑封；3-盒装；4-其他  默认

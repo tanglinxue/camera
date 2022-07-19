@@ -3,7 +3,7 @@
 </template>
 
 <script>
-// finish
+// finish2
 import Order from './components/order';
 export default {
 	components: {

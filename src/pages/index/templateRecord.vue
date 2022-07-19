@@ -8,7 +8,7 @@
 </template>
 
 <script>
-// finish
+// finish2
 export default {
 	data() {
 		return {
@@ -53,7 +53,7 @@ export default {
 			}
 		},
 		jump(id){
-			this.$jump(`/pages/index/priceTemplate?id=${id}`);
+			this.$jump(`/pages/index/priceSheet?id=${id}&type=3`);
 		}
 	},
 	onReachBottom() {

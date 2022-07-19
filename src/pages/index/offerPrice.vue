@@ -57,13 +57,13 @@ export default {
 	data() {
 		return {
 			tabCurrentIndex:0,
-			type:1
+			needBack:false
 		};
 	},
 
 	onLoad(option) {
-		if(option.type && option.type==2){
-			return this.type = 2
+		if(option.needBack){
+			return this.needBack = true
 		}
 		this.$methods.showLoading();
 		this.getData();
@@ -104,9 +104,7 @@ export default {
 			]
 		}
 	},
-	onHide(){
-		this.$bus.$emit('closePopup')
-	},
+
 	methods: {
 		...mapActions('service', ['getInfo']),
 		...mapMutations('service',['changeAllServiceNum','changeAllServiceNum','changeAllServiceDays']),
@@ -128,10 +126,18 @@ export default {
 			this.tabCurrentIndex = index;
 		},
 		nextStep() {
-			if(this.type==2){
-				return uni.navigateBack()
+			// 后退
+			if(this.iner_money<=0){
+				return this.$methods.showToast('请先选择项目')
 			}
-			this.$jump(`/pages/index/editOfferPrice`);
+			if(this.needBack){
+				return uni.navigateBack()
+			}else{
+				return this.$jump(`/pages/index/editOfferPrice`,2);
+				
+			}
+			
+			
 		},
 		daysAllTap(days){
 			this.changeAllServiceDays({list:this.inerAllPro,days})

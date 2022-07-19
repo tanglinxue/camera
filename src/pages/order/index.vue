@@ -51,7 +51,7 @@
 	</view>
 </template>
 <script>
-//finish
+//finish2
 import Item from './components/item';
 export default {
 	data() {
@@ -100,6 +100,7 @@ export default {
 				completed_order_sum: 0, //待结款总额
 				completed_order: 0 //待结款订单数
 			},
+			first:true
 		};
 	},
 	components: {
@@ -115,7 +116,15 @@ export default {
 			}
 		}
 		this.getDate()
+		this.$methods.showLoading();
 		this.getList();
+	},
+	onShow(){
+		if(this.first){
+			this.first = false
+		}else{
+			this.getList();
+		}
 	},
 	methods: {
 		getDate(){
@@ -168,6 +177,7 @@ export default {
 			} else {
 				this.list = clist;
 			}
+			
 			this.total = all_count;
 			if (all_count > this.list.length) {
 				this.status = 'more';

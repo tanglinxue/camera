@@ -3,7 +3,7 @@
 		<view class="boxInner box column-center mgb50">
 			<view class="top-title row-start">
 				<view class="label">活动主题：</view>
-				<view class="input-box row-center"><input type="text" placeholder="活动主题" class="input" v-model="query.case_name" /></view>
+				<view class="input-box row-center"><input type="text" placeholder="请输入活动主题" class="input" v-model="query.case_name" /></view>
 			</view>
 			<view class="row-between top-title">
 				<view class="row-start">
@@ -80,7 +80,7 @@
 			</view>
 		</view>
 		<view class="row-center btn-box"><view class="main-btn" @click="submit">保存</view></view>
-		<changePopup />
+		<changePopupEdit />
 	</view>
 </template>
 
@@ -115,10 +115,6 @@ export default {
 			return this.dynamicInfo[8];
 		}
 	},
-	onHide() {
-		console.log('你好');
-		this.$bus.$emit('closePopup');
-	},
 	methods: {
 		numTap(num, info) {
 			const { id, node_id } = info;
@@ -142,13 +138,18 @@ export default {
 		},
 		addItem() {
 			// 新增服务项目
-			this.$bus.$emit('openPopup', { type: 1, nodeid: 8, canConfig: true });
+			this.$bus.$emit('openPopupEdit', { type: 1, nodeid: 8, canConfig: true });
 		},
 		async submit() {
 			const { query, serviceData, serviceInfo, dynamicInfo, price_id, total_money } = this;
+			const {case_name,case_host,contact_name,real_money} = query
 			if(!total_money){
 				return this.$methods.showToast('请选择项目');
 			}
+			if (!case_name) return this.$methods.showToast('请输入活动主题');
+			if (!case_host) return this.$methods.showToast('请输入合作方');
+			if (!contact_name) return this.$methods.showToast('请输入联系人');
+			if (!real_money) return this.$methods.showToast('请输入结算价');
 			let title = '发布中...';
 			let toast = '发布成功';
 			if (price_id) {
@@ -167,13 +168,23 @@ export default {
 			if (price_id) {
 				params.price_id = price_id;
 			}
-			await API(params);
+			const res = await API(params);
 			this.$methods.showToast(toast);
-			return uni.navigateBack()
+			if (price_id) {
+				setTimeout(()=>{
+					uni.navigateBack()
+				},1000)
+			}else{
+				setTimeout(()=>{
+					this.$jump(`/pages/index/priceSheet?id=${res.price_id}`,2);
+				})
+			}
+			
+			return 
 			
 		},
 		goOfferPrice() {
-			this.$jump(`/pages/index/offerPrice?type=2`);
+			this.$jump(`/pages/index/offerPrice?needBack=true`);
 		},
 		openTag(item, id) {
 			const { noNum, noDays } = item;

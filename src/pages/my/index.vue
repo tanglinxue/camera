@@ -76,7 +76,7 @@
 </template>
 
 <script>
-//finish
+//finish2
 export default {
 	data() {
 		return {
@@ -134,9 +134,11 @@ export default {
 			}
 		},
 		downFile(url) {
+			let that = this;
 			wx.downloadFile({
 				url,
 				success(res) {
+					that.$methods.showToast('下载成功');
 					let filePath = res.tempFilePath;
 					wx.openDocument({
 						filePath: filePath,

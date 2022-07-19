@@ -75,8 +75,14 @@ export default {
 			days,
 			updateDay
 		} = obj;
+		if (item_id == 11234 || item_id == 4034) {
+			if (obj.parentId) {
+				item_id = obj.parentId
+			}
+		}
 		const serviceItem = serviceInfo[item_id];
 		if (obj.updateNum) {
+			
 			// 修改的是数量
 			const {
 				serviceData: {
@@ -100,11 +106,8 @@ export default {
 				}
 			}
 
-			if (item_id == 11234 || item_id == 4034) {
-				if (obj.parentId) {
-					item_id = obj.parentId
-				}
-			}
+			
+	
 			// 改变数量
 			serviceInfo[item_id] = {
 				...serviceItem,

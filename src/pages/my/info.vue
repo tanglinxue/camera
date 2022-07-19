@@ -42,7 +42,7 @@
 	</view>
 </template>
 <script>
-// finish
+// finish2
 export default {
 	data() {
 		return {

@@ -36,8 +36,8 @@
 			<view class="total-price red weight" v-else>总计：￥{{ total_money }}</view>
 			
 		</view>
-		<view class="row-center btn-box">
-			<view class="middle-btn" v-if="type !=3">生成图片</view>
+		<view class="row-center btn-box" v-if='!share'>
+			<view class="middle-btn" v-if="type !=3" @click='savePic'>生成图片</view>
 			<view class="middle-btn mgl30"  @click="nextStep">{{type==3?"使用模板":"编辑"}}</view>
 			<view class="middle-btn mgl30" v-if="type == 1" @click="jump">预定</view>
 		</view>
@@ -45,7 +45,7 @@
 </template>
 <script>
 //finisth
-import { mapMutations, mapGetters } from 'vuex';
+import { mapMutations, mapGetters,mapState } from 'vuex';
 export default {
 	data() {
 		return {
@@ -81,7 +81,8 @@ export default {
 		this.getData();
 	},
 	computed: {
-		...mapGetters('service', ['allPro','total_money'])
+		...mapGetters('service', ['allPro','total_money']),
+		...mapState('user',['share'])
 	},
 	methods: {
 		...mapMutations('service', ['updateServiceInfo', 'updateDynamicInfo', 'updateServiceData']),
@@ -136,8 +137,29 @@ export default {
 			uni.hideLoading();
 		},
 		nextStep() {
-			const detail = JSON.stringify(this.detail);
-			this.$jump(`/pages/index/editOfferPrice?detail=${detail}&price_id=${this.price_id}`);
+			if(this.type==3){
+				this.$jump(`/pages/index/editOfferPrice`);
+			}else{
+				const detail = JSON.stringify(this.detail);
+				this.$jump(`/pages/index/editOfferPrice?detail=${detail}&price_id=${this.price_id}`);
+			}
+			
+		},
+		async savePic(){
+			let that = this;
+			this.$methods.showLoading('画图中...');
+			const url = await this.$API.home.savePic({ price_id: this.price_id });	
+			wx.downloadFile({
+				url,
+				success(res) {
+					that.$methods.showToast('下载成功');
+					
+				},
+				fail(err) {
+					console.log(err);
+				}
+			});
+	
 		}
 	}
 };

@@ -5,6 +5,7 @@ const user = {
 	state: {
 		userInfo: {},
 		token: storage.getItem('token'),
+		share:false
 	},
 	mutations: {
 		updateuserInfo(state, userInfo) {
@@ -13,6 +14,9 @@ const user = {
 		updateToken(state, token) {
 			state.token = token
 		},
+		updateShare(state,share){
+			state.share = share
+		}
 	},
 	actions: {
 		// 用户信息更新

@@ -16,6 +16,7 @@
 </template>
 <script>
 // ok
+import { mapState } from 'vuex';
 export default {
 	data() {
 		return {
@@ -29,13 +30,21 @@ export default {
 			}
 		};
 	},
+	computed: {
+		...mapState('user',['share'])
+	},
 	onLoad() {
+
+		if(this.share){
+			wx.hideHomeButton();
+		}
 		this.getData();
 	},
 	methods:{
 		async getData() {
 			const { user_info } = await this.$API.my.getmyinfo();
 			this.form = user_info
+			
 		},
 	}
 };

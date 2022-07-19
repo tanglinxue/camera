@@ -4,7 +4,7 @@
 			<view class="main-title  font36 mgb30">{{ query.case_name }}</view>
 			<view class="mgb30 total-fee row-between">
 				<view class="row-start">
-					<view class="left-text">费用总计</view>
+					<view class="left-text">总费用</view>
 					<view class="row-start">
 						<template v-if="type == 1">
 						{{ query.real_money || 0 }}
@@ -164,7 +164,7 @@ export default {
 				},
 				{
 					text: '已结算',
-					value: 4
+					value: 3
 				},
 				{
 					text: '取消',
@@ -174,15 +174,15 @@ export default {
 		};
 	},
 	mounted() {
-		console.log('我来了');
-		console.log(this.detail);
 		if (this.type == 2) {
-			const { total_money,real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,id } = this.detail;
-			this.query = { total_money,real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,order_id:id }
+			// 订单详情
+			const { case_name,total_money,real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,id } = this.detail;
+			this.query = { case_name,total_money,real_money,end_money,status,book_company, first_money, address, addressX, addressY, people_num, start_time, end_time, work_meal, contact_name, contact_tel, memo,order_id:id }
 		}else{
-			const {real_money,total_money} = this.detail;
+			const {real_money,total_money,case_name} = this.detail;
 			this.query.real_money = real_money;
 			this.query.total_money = total_money;
+			this.query.case_name = case_name
 		}
 	},
 	methods: {
@@ -218,7 +218,7 @@ export default {
 			});	
 			this.$methods.showToast(tip);
 			if (type == 1) {		
-				this.$jump(`/pages/order/success`);
+				this.$jump(`/pages/order/success`,2);
 			} else {
 				if(this.needBack){
 					// 需要回退

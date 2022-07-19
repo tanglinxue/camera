@@ -42,18 +42,16 @@ export default {
 			},
 			canConfig: true,
 			nodeid: -1,
-			first:true,
-			state:'close'
 		};
 	},
 
 	mounted() {
 		console.log('我重新进入了')
 		// 打开弹窗
-		this.$bus.$off('openPopup');
-		this.$bus.$off('closePopup');
-		this.$bus.$on('openPopup', this.openPopup);
-		this.$bus.$on('closePopup', this.close);
+		this.$bus.$off('openPopupEdit');
+		this.$bus.$off('closePopupEdit');
+		this.$bus.$on('openPopupEdit', this.openPopup);
+		this.$bus.$on('closePopupEdit', this.close);
 		
 	},
 
@@ -93,8 +91,7 @@ export default {
 			}
 			this.query = query;
 			
-			console.log('我待了');
-			console.log(this.state)
+	
 			this.$nextTick(()=>{
 				this.$refs.popup.open();
 			})

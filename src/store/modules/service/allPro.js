@@ -87,9 +87,11 @@ export const dynamicInfo = (state) => {
 	return dynamicInfo
 }
 export const iner_money = (state, getter)=> { //总价
+	if(!getter.inerAllPro.length) return 0
 	return getter.inerAllPro.reduce((total, item) => total + item.price, 0)
 }
 export const total_money = (state, getter)=> { //总价
+if(!getter.allPro.length) return 0
 	return getter.allPro.reduce((total, item) => total + item.price, 0)
 }
 

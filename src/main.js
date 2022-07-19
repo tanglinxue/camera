@@ -21,11 +21,14 @@ import reduceCom from '@/components/reduceCom';
 import selectCom from '@/components/selectCom';
 import approachCom from '@/components/approachCom';
 import changePopup from '@/components/changePopup';
+
+import changePopupEdit from '@/components/changePopupEdit';
 Vue.component('Empty', Empty)
 Vue.component('dynamicInfo', dynamicInfo)
 Vue.component('reduceCom', reduceCom)
 Vue.component('selectCom', selectCom)
 Vue.component('approachCom', approachCom)
+Vue.component('changePopupEdit', changePopupEdit)
 Vue.component('changePopup', changePopup)
 const app = new Vue({
 	...App,
