@@ -149,16 +149,20 @@ export default {
 			let that = this;
 			this.$methods.showLoading('画图中...');
 			const url = await this.$API.home.savePic({ price_id: this.price_id });	
-			wx.downloadFile({
-				url,
-				success(res) {
-					that.$methods.showToast('下载成功');
-					
-				},
-				fail(err) {
-					console.log(err);
-				}
+			uni.hideLoading()
+			uni.previewImage({
+			  urls:[url]
 			});
+			// wx.downloadFile({
+			// 	url,
+			// 	success(res) {
+			// 		that.$methods.showToast('生成图片成功');
+					
+			// 	},
+			// 	fail(err) {
+			// 		console.log(err);
+			// 	}
+			// });
 	
 		}
 	}
