@@ -18,6 +18,15 @@ export default {
 		})
 		return res
 	},
+	// 手机号接口
+	async check_phonenum(data = {}) {
+		let res = await request({
+			url: '/api/user/check_phonenum',
+			method: 'POST',
+			data
+		})
+		return res
+	},
 	//获取用户信息
 	async get_userinfo(data = {}) {
 		let res = await request({

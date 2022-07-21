@@ -2,9 +2,11 @@ import config from '@/config'
 import store from '@/store'
 import methods from '@/utils/method.js'
 export default function service(options) {
-	const token = store.state.user.token
+	let token = store.state.user.token;
+	if(options.data.token){
+		token = options.data.token
+	}
 	if(!token){
-		console.log('从接口跑去登录')
 		const res =  methods.toLogin()
 		if(!res) return new Promise(()=>{})
 	}
@@ -42,7 +44,6 @@ export default function service(options) {
 							icon: 'none',
 							duration: 4000
 						})
-						uni.hideLoading()
 						reject(res.data.data)
 					} else {
 						//其他报错
@@ -52,14 +53,12 @@ export default function service(options) {
 							icon: 'none',
 							duration: 2000
 						})
-						uni.hideLoading()
 						reject(res.data.data)
 					}
 
 				}
 			},
 			fail: err => {
-				uni.hideLoading()
 				return uni.showToast({
 					title: res.data.data || '网络错误',
 					icon: 'none',
