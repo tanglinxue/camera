@@ -7,7 +7,7 @@
 		</view>
 		<button @tap="tologin" class="main-btn mgb40" @click="getCode" :disabled="!canclick" open-type="getUserInfo" v-if="status == 1">微信授权</button>
 		<button class="main-btn mgb40" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" v-if="status == 2">获取手机号</button>
-		<view class="bottom-txt">使用影助理，需要您授权微信呢称和头像</view>
+		<view class="bottom-txt">{{text}}</view>
 	</view>
 </template>
 <script>
@@ -18,7 +18,8 @@ export default {
 			canclick: true,
 			code: '',
 			openid: '',
-			status: 1
+			status: 1,
+			text:'使用影助理，需要您授权微信呢称和头像'
 		};
 	},
 	methods: {
@@ -69,7 +70,7 @@ export default {
 		async login(params) {
 			this.$methods.showLoading('授权中...');
 			try {
-				let { userinfo, token, session_key } = await this.$API.home.minilogin({
+				let { userinfo, token, session_key,phone_msg } = await this.$API.home.minilogin({
 					code: this.code
 				});
 				let { xcx_openid } = userinfo;
@@ -83,6 +84,7 @@ export default {
 				});
 				this.openid = xcx_openid;
 				this.$methods.showToast('授权成功');
+				this.text=phone_msg
 				this.status = 2;
 				this.canclick = true
 			} catch (err) {
