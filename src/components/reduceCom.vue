@@ -10,7 +10,7 @@
 				</template>
 			</view>	
 			<view v-if="info.type == 'input' " class='input-box'>
-				<input  :value="info.num" type='number' @input="inputTap" ref="input" />
+				<input  :value="info.num2" type='number' @input="inputTap" ref="input" />
 			</view>	
 			<uni-number-box  :min="0" :max="99" v-model="info.num * 1" v-else-if='!info.noNum' @input='numTap' />
 		</view>
@@ -38,7 +38,8 @@ export default {
 	},
 	data(){
 		return {
-			showPopup:false
+			showPopup:false,
+			num2:this.info.num
 		}
 	},
 	methods: {
@@ -68,10 +69,8 @@ export default {
 			if(parentId){
 				params.parentId = parentId;
 			}
-			console.log()
-			this.$nextTick(()=>{
-				this.$store.commit('service/changeServiceObj',params)
-			})	
+			this.num2 = val
+			this.$store.commit('service/changeServiceObj',params)
 		},
 		numTap(num){
 			const {id,parentId} = this.info;
