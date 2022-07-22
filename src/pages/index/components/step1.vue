@@ -10,7 +10,7 @@
 			</view>
 			<view class="warning mgb30">
 				【温馨提示】第一排椅子数
-				<text class="red">0</text>
+				<text class="red">{{(num).toFixed(0)}}</text>
 				（预估），客户让酒店提供
 			</view>
 			<view class="mgb20" v-for="(item, index) in list2" :key="index">
@@ -41,6 +41,13 @@ export default {
 		...mapGetters('service', ['step1']),
 		list() {
 			return this.step1.slice(0, 2);
+		},
+		num(){
+			try{
+				return this.list2[0].num/30*3.5
+			}catch{
+				return 0
+			}
 		},
 		list2() {
 			return [

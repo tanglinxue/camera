@@ -43,8 +43,12 @@ export default {
 	},
 	methods: {
 		open(){
+			
 			let canConfig = this.deleteIcon ? true:false;
 			const {info,nodeid} = this;
+			if(this.nodeid==8){
+				return this.$bus.$emit('openPopupEdit',{...info,canConfig,nodeid,type:2})
+			}
 			this.$bus.$emit('openPopup',{...info,canConfig,nodeid,type:2})
 		},
 		// 删除
