@@ -25,12 +25,10 @@
       >
         <scroll-view class="list-scroll-content column-center" scroll-y>
           <Step1 v-show="tabCurrentIndex == 0" />
-          <template v-if="showContent">
-            <Step2 v-show="tabCurrentIndex == 1" />
-            <Step3 v-show="tabCurrentIndex == 2" />
-            <Step4 v-show="tabCurrentIndex == 3" />
-            <Step5 v-show="tabCurrentIndex == 4" />
-          </template>
+         <Step2 v-show="tabCurrentIndex == 1" />
+         <Step3 v-show="tabCurrentIndex == 2" />
+         <Step4 v-show="tabCurrentIndex == 3" />
+         <Step5 v-show="tabCurrentIndex == 4" />
 
           <view class="mgauto-box">
             <view class="middle-btn mgauto" @click="addItem">新增服务项目</view>
@@ -84,8 +82,7 @@ export default {
   data() {
     return {
       tabCurrentIndex: 0,
-      needBack: false,
-      showContent: false,
+      needBack: false
     };
   },
 
@@ -155,10 +152,10 @@ export default {
     },
     async getData() {
       await this.getInfo();
-      uni.hideLoading();
-
+      
       setTimeout(() => {
-        this.showContent = true;
+        uni.hideLoading();
+        
       }, 1000);
 
       //   setTimeout(() => {
