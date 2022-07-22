@@ -82,7 +82,7 @@ export default {
 		}
 		const serviceItem = serviceInfo[item_id];
 		if (obj.updateNum) {
-			
+			console.log(serviceItem)
 			// 修改的是数量
 			const {
 				serviceData: {
@@ -94,20 +94,13 @@ export default {
 			} = obj;
 			let days = 0;
 			if (num > 0) {
-				if (serviceItem.noDays) {
-					// 不支持天数
-					days = 1
+				if (serviceItem.price==0) {
+					days = work_day
 				} else {
-					if (num == 1) {
-						days = work_day
-					} else if (num > 1) {
-						days = serviceItem.days
-					}
+					days = serviceItem.days
 				}
 			}
 
-			
-	
 			// 改变数量
 			serviceInfo[item_id] = {
 				...serviceItem,
@@ -115,6 +108,7 @@ export default {
 				days,
 				price: Math.floor(serviceItem.unit_price * num * days)
 			}
+			console.log(serviceInfo[item_id])
 		}else if(updateDay){
 			console.log(serviceItem)
 			console.log(days)
@@ -191,9 +185,9 @@ export default {
 			name,
 			unit_price,
 			unit,
-			price: 0,
+			price: Math.floor(unit_price),
 			id,
-			num: 0,
+			num: 1,
 			days: 1,
 			noDays:true
 		}
